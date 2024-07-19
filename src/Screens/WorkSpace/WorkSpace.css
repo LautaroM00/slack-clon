@@ -1,0 +1,53 @@
+.workspaces-contenedor{
+    background-color: #4A154B;
+    width: 100vw;
+    height: 20vh;
+}
+
+.workspaces-header{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid red;
+    padding: 15px;
+    gap:15px
+}
+
+
+/* Inicio header superior */
+
+.workspaces-header .superior{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.workspaces-header .superior .izquierda{
+    display: flex;
+    align-items: center;
+    border: 1px solid white;
+
+}
+
+.workspaces-header .superior-izquierda{
+    border: 1px solid green;
+    display: flex;
+    align-items: center;
+}
+
+/* Fin header superior */
+
+/* Inicio header inferior */
+
+.workspaces-header .inferior{
+    display: flex;
+    justify-content: space-between;
+}
+
+.workspaces-header .inferior input{
+    width: 80%;
+}
+
+
+.workspaces-header .inferior button{
+    width: 10%;
+}
