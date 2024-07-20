@@ -1,4 +1,4 @@
-.CanalPreview{
+.WorkspacePreview{
     max-width: 1000px;
     padding: 30px;
     margin: 10px;
@@ -8,7 +8,7 @@
     border: 1px solid blue;
 }
 
-.CanalPreview .izquierda{
+.WorkspacePreview .izquierda{
     border: 1px solid red;
     display: flex;
     align-items: center;

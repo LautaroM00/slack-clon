@@ -1,13 +1,13 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-import './CanalPreview.css'
+import './WorkspacePreview.css'
 
-const CanalPreview = ({ titulo, thumbnail, id }) => {
+const WorkspacePreview = ({ titulo, thumbnail, id }) => {
     return (
-        <div className='CanalPreview'>
+        <div className='WorkspacePreview'>
             <div className='izquierda'>
-                <img src={thumbnail} style={{width: '20px'}}/>
+                <img src={thumbnail} style={{width: '60px', borderRadius: '50%'}}/>
                 <h2>{titulo}</h2>
             </div>
             <NavLink to={`/workspace/${id}`}>
@@ -20,4 +20,4 @@ const CanalPreview = ({ titulo, thumbnail, id }) => {
     )
 }
 
-export default CanalPreview
+export default WorkspacePreview

@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { setLS, traerLS, actualizarLS } from '../../FUNCIONES_LOCAL_STORAGE'
-import CanalPreview from '../../Components/CanalPreview/CanalPreview'
+import { WorkspacePreview } from '../index'
 
 import './SelectorWorkspace.css'
 
@@ -25,7 +25,7 @@ const SelectorWorkspace = () => {
                         WORKSPACES.map((workspace, index) => {
                             const { titulo, thumbnail, id } = workspace
                             return(
-                                <CanalPreview titulo={titulo} thumbnail={thumbnail} id={id} key={index}/>
+                                <WorkspacePreview titulo={titulo} thumbnail={thumbnail} id={id} key={index}/>
                             )
                         })
                     }
