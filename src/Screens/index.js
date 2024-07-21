@@ -3,10 +3,11 @@ import WorkspaceHeader from "../PartesDeScreen/Workspace/WorkspaceHeader/Workspa
 import WorkspaceFooter from "../PartesDeScreen/Workspace/WorkspaceFooter/WorkspaceFooter";
 import CanalList from "../Components/CanalList/CanalList";
 import WorkspacePreview from '../Components/WorkspacePreview/WorkspacePreview.jsx'
+import Canal from '../Components/Canal/Canal.jsx'
 
 
 
 
 
 
-export { WorkspaceFooter, WorkspaceList, WorkspaceHeader, CanalList, WorkspacePreview}
+export { WorkspaceFooter, WorkspaceList, WorkspaceHeader, CanalList, WorkspacePreview, Canal}

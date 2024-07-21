@@ -10,7 +10,7 @@ const WorkspacePreview = ({ titulo, thumbnail, id }) => {
                 <img src={thumbnail} style={{width: '60px', borderRadius: '50%'}}/>
                 <h2>{titulo}</h2>
             </div>
-            <NavLink to={`/workspace/${id}`}>
+            <NavLink to={`/workspace/${id}/1`}>
                 <button>
                     Entrar
                 </button>

@@ -9,9 +9,9 @@ const SelectorWorkspace = () => {
 
     setLS()
 
-    const WORKSPACES = traerLS()
-
     actualizarLS()
+
+    const WORKSPACES = traerLS()
 
     return (
         <>

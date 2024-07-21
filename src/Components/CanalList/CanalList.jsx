@@ -2,20 +2,27 @@ import React from 'react'
 import { NavLink, useParams } from 'react-router-dom'
 
 import './CanalList.css'
-import Canal from '../Canal/Canal'
 
 const CanalList = ({ canales, display }) => {
 
+    const idParams = useParams()
+
+    const { id } = idParams
+
     return (
-        <nav style={{display: display}}>
+        <nav style={{ display: display }} className='navCanales'>
             <h1>
                 Canales
             </h1>
             <ul>
                 {canales.map((canal, index) => {
-                    const { titulo } = canal
+                    const { titulo, id_canal } = canal
                     return (
-                        <Canal titulo={titulo} key={index}/>
+                        <NavLink key={index}  to={`/workspace/${id}/${id_canal}`}>
+                            <li>
+                                {`#${titulo}`}
+                            </li>
+                        </NavLink>
                     )
                 })}
             </ul>

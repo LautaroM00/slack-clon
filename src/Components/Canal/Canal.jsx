@@ -1,13 +1,39 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useParams } from 'react-router-dom'
 
-const Canal = ({ titulo }) => {
+import Mensaje from '../Mensaje/Mensaje'
+
+import './Canal.css'
+
+const Canal = ({ canales }) => {
+
+    const idParams = useParams()
+    const { idCanalParams } = idParams
+
+    const canalMostrado = canales.find((canal) => {
+        return (canal.id_canal == Number(idCanalParams))
+    })
+    const { mensajes, titulo, miembros } = canalMostrado
+
+
     return (
-        <NavLink>
-            <li>
-                {`#${titulo}`}
-            </li>
-        </NavLink>
+        <>
+            <h1>{titulo}</h1>
+            <div className='contenedorMensajes'>
+                {mensajes.map((mensaje, index) => {
+
+                    const { autor, texto, hora } = mensaje
+
+                    const thumbnail = miembros.find((miembro) => {
+                        return (autor.toLowerCase() === miembro.nombre.toLowerCase())
+                    }).thumbnail
+
+                    return (
+                        <Mensaje autor={autor} texto={texto} hora={hora} thumbnail={thumbnail} key={index} />
+                    )
+                })}
+            </div>
+        </>
     )
 }
 
