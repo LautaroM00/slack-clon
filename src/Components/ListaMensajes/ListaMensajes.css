@@ -1,0 +1,8 @@
+.contenedorMensajes{
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+    overflow: scroll;
+    border: 1px solid black;
+}

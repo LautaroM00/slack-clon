@@ -1,0 +1,13 @@
+.mensajeForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap:10px;
+}
+
+.mensajeForm textarea{
+    font-size: 20px;
+    width: 90%;
+    height: 50px;
+}

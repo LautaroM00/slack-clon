@@ -60,6 +60,12 @@ const WORKSPACES = [
                         mensajesCanal: '.',
                         id: 9
                     },
+                    {
+                        nombre: 'Lautaro',
+                        thumbnail: '/thumbnails/yo.png',
+                        mensajesCanal: '.',
+                        id: 10
+                    },
                 ],
                 mensajes: [
                     {
@@ -91,20 +97,6 @@ const WORKSPACES = [
             },
             {
                 titulo: 'Nórdicos',
-                miembros: [
-                    {
-                        nombre: 'Kratos',
-                        thumbnail: '.',
-                        mensajesCanal: '.',
-                        id: 1
-                    },
-                    {
-                        nombre: 'Zeus',
-                        thumbnail: '.',
-                        mensajesCanal: '.',
-                        id: 2
-                    },
-                ],
                 miembros: [
                     {
                         nombre: 'Kratos',
@@ -159,6 +151,12 @@ const WORKSPACES = [
                         thumbnail: '/thumbnails/godOfWar/hades.png',
                         mensajesCanal: '.',
                         id: 9
+                    },
+                    {
+                        nombre: 'Lautaro',
+                        thumbnail: '/thumbnails/yo.png',
+                        mensajesCanal: '.',
+                        id: 10
                     },
                 ],
                 mensajes: [
@@ -222,25 +220,31 @@ const WORKSPACES = [
                         nombre: 'Fideo',
                         thumbnail: '/thumbnails/seleccionArgentina/fideo.png',
                         mensajesCanal: '.',
-                        id: 2
+                        id: 3
                     },
                     {
                         nombre: 'Garnacho',
                         thumbnail: '/thumbnails/seleccionArgentina/garnacho.jpg',
                         mensajesCanal: '.',
-                        id: 2
+                        id: 4
                     },
                     {
                         nombre: 'Paredes',
                         thumbnail: '/thumbnails/seleccionArgentina/paredes.jpg',
                         mensajesCanal: '.',
-                        id: 2
+                        id: 5
                     },
                     {
                         nombre: 'Rodrigo',
                         thumbnail: '/thumbnails/seleccionArgentina/rodrigo.jpg',
                         mensajesCanal: '.',
-                        id: 2
+                        id: 6
+                    },
+                    {
+                        nombre: 'Lautaro',
+                        thumbnail: '/thumbnails/yo.png',
+                        mensajesCanal: '.',
+                        id: 7
                     },
                 ],
                 mensajes: [
@@ -290,25 +294,31 @@ const WORKSPACES = [
                         nombre: 'Fideo',
                         thumbnail: '/thumbnails/seleccionArgentina/fideo.png',
                         mensajesCanal: '.',
-                        id: 2
+                        id: 3
                     },
                     {
                         nombre: 'Garnacho',
                         thumbnail: '/thumbnails/seleccionArgentina/garnacho.jpg',
                         mensajesCanal: '.',
-                        id: 2
+                        id: 4
                     },
                     {
                         nombre: 'Paredes',
                         thumbnail: '/thumbnails/seleccionArgentina/paredes.jpg',
                         mensajesCanal: '.',
-                        id: 2
+                        id: 5
                     },
                     {
                         nombre: 'Rodrigo',
                         thumbnail: '/thumbnails/seleccionArgentina/rodrigo.jpg',
                         mensajesCanal: '.',
-                        id: 2
+                        id: 6
+                    },
+                    {
+                        nombre: 'Lautaro',
+                        thumbnail: '/thumbnails/yo.png',
+                        mensajesCanal: '.',
+                        id: 9
                     },
                 ],
                 mensajes: [

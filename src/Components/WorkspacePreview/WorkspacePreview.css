@@ -3,8 +3,10 @@
     padding: 30px;
     margin: 10px;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    gap:10px;
     border: 1px solid blue;
 }
 
@@ -13,4 +15,8 @@
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+.WorkspacePreview button{
+    padding: 10px 25px;
 }

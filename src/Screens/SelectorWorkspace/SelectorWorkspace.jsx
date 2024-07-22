@@ -9,8 +9,6 @@ const SelectorWorkspace = () => {
 
     setLS()
 
-    actualizarLS()
-
     const WORKSPACES = traerLS()
 
     return (
@@ -31,6 +29,9 @@ const SelectorWorkspace = () => {
                     }
                 </nav>
             </main>
+            <footer>
+                <button onClick={actualizarLS}>REINICIAR</button>
+            </footer>
         </>
     )
 }

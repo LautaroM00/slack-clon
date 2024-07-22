@@ -27,4 +27,16 @@ const actualizarLS = () => {
     localStorage.setItem('WORKSPACES', objeto_string)
 }
 
-export { setLS, traerLS, actualizarLS}
+const agregarMensajeLS = (indexWorkspace, indexCanal, mensaje) => {
+    const WORKSPACES = traerLS()
+
+    WORKSPACES[indexWorkspace].canales[indexCanal].mensajes.push(mensaje)
+
+    localStorage.setItem('WORKSPACES', JSON.stringify(WORKSPACES))
+}
+
+
+
+
+
+export { setLS, traerLS, actualizarLS, agregarMensajeLS}

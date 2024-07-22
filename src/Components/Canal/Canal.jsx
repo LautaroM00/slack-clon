@@ -1,38 +1,39 @@
-import React from 'react'
-import { NavLink, useParams } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
-import Mensaje from '../Mensaje/Mensaje'
+import MensajeForm from '../MensajeForm/MensajeForm'
+import ListaMensajes from '../ListaMensajes/ListaMensajes'
 
 import './Canal.css'
 
-const Canal = ({ canales }) => {
+const Canal = ({ canales, indexWorkspace }) => {
+    const [mensajesAcumulados, agregarMensaje] = useState([])
+    const [indexCanal, setIndexCanal] = useState('')
 
     const idParams = useParams()
     const { idCanalParams } = idParams
 
-    const canalMostrado = canales.find((canal) => {
+    const canalMostrado = canales.find((canal, index) => {
         return (canal.id_canal == Number(idCanalParams))
     })
     const { mensajes, titulo, miembros } = canalMostrado
 
+    useEffect(() => {
+        agregarMensaje(mensajes)
+        canales.map((canal, index) => {
+            if (canal.id_canal == Number(idCanalParams)) {
+                setIndexCanal(index)
+            }
+        })
+    },
+        [mensajes]
+    )
 
     return (
         <>
             <h1>{titulo}</h1>
-            <div className='contenedorMensajes'>
-                {mensajes.map((mensaje, index) => {
-
-                    const { autor, texto, hora } = mensaje
-
-                    const thumbnail = miembros.find((miembro) => {
-                        return (autor.toLowerCase() === miembro.nombre.toLowerCase())
-                    }).thumbnail
-
-                    return (
-                        <Mensaje autor={autor} texto={texto} hora={hora} thumbnail={thumbnail} key={index} />
-                    )
-                })}
-            </div>
+            <ListaMensajes mensajesAcumulados={mensajesAcumulados} miembros={miembros}/>
+            <MensajeForm mensajesAcumulados={mensajesAcumulados} agregarMensaje={agregarMensaje} indexCanal={indexCanal} indexWorkspace={indexWorkspace} />
         </>
     )
 }

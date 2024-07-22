@@ -10,6 +10,7 @@ import './WorkSpace.css'
 const WorkSpace = () => {
     const [mostrarCanales, setMostrarCanales] = useState('none')
     const [valueCanalList, setValueCanalList] = useState('Canales')
+    const [indexWorkspace, setIndexWorkspace] = useState('')
 
     const { id } = useParams() // id es un string
 
@@ -21,14 +22,23 @@ const WorkSpace = () => {
     const { titulo, canales, thumbnail } = dataWorkspace
 
     const handleDisplayCanales = () => {
-        if(mostrarCanales === 'none'){
+        if (mostrarCanales === 'none') {
             setMostrarCanales('')
             setValueCanalList('Cerrar')
-        }else{
+        } else {
             setMostrarCanales('none')
             setValueCanalList('Canales')
         }
     }
+
+    useEffect(() => {
+        WORKSPACES.map((workspace,index) => {
+            if(workspace.id == id){
+                setIndexWorkspace(index)
+            }
+        })
+    }, []
+    )
 
     return (
         <>
@@ -42,7 +52,7 @@ const WorkSpace = () => {
                 </div>
                 <button onClick={handleDisplayCanales}>{valueCanalList}</button>
             </div>
-            <Canal canales={canales} />
+            <Canal canales={canales} indexWorkspace={indexWorkspace}/>
         </>
     )
 }
