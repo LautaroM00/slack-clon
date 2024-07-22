@@ -3,7 +3,7 @@ import { useParams, NavLink } from 'react-router-dom'
 
 import { traerLS } from '../../FUNCIONES_LOCAL_STORAGE.js'
 
-import { WorkspaceList, WorkspaceFooter, WorkspaceHeader, CanalList, Canal } from '../index.js'
+import { CanalList, Canal } from '../index.js'
 
 import './WorkSpace.css'
 
