@@ -9,10 +9,11 @@ const ListaMensajes = ({ mensajesAcumulados, miembros}) => {
             {mensajesAcumulados.map((mensaje, index) => {
 
                 const { autor, texto, hora } = mensaje
-
-                const thumbnail = miembros.find((miembro) => {
+                const miembroEncontrado = miembros.find((miembro) => {
                     return (autor.toLowerCase() === miembro.nombre.toLowerCase())
-                }).thumbnail
+                })
+
+                const thumbnail = miembroEncontrado.thumbnail
 
                 return (
                     <Mensaje autor={autor} texto={texto} hora={hora} thumbnail={thumbnail} key={index} />

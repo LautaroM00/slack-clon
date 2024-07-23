@@ -11,6 +11,10 @@ const SelectorWorkspace = () => {
 
     const WORKSPACES = traerLS()
 
+    const handleReiniciar = () => {
+        localStorage.clear()
+    }
+
     return (
         <>
             <header>
@@ -22,15 +26,17 @@ const SelectorWorkspace = () => {
                     {
                         WORKSPACES.map((workspace, index) => {
                             const { titulo, thumbnail, id } = workspace
-                            return(
-                                <WorkspacePreview titulo={titulo} thumbnail={thumbnail} id={id} key={index}/>
+                            return (
+                                <WorkspacePreview titulo={titulo} thumbnail={thumbnail} id={id} key={index} />
                             )
                         })
                     }
                 </nav>
             </main>
             <footer>
-                <button onClick={actualizarLS}>REINICIAR</button>
+                <form onSubmit={handleReiniciar}>
+                    <button type='submit'>REINICIAR</button>
+                </form>
             </footer>
         </>
     )

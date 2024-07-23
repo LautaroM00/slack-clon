@@ -21,10 +21,16 @@ const traerLS = () => {
     return WORKSPACES_objeto
 }
 
-const actualizarLS = () => {
-    const objeto_string = JSON.stringify(WORKSPACES)
+const actualizarLS = (WORKSPACE) => {
+    if(WORKSPACE){
+        const objeto_string = JSON.stringify(WORKSPACE)
 
-    localStorage.setItem('WORKSPACES', objeto_string)
+        localStorage.setItem('WORKSPACES', objeto_string)
+    }else{
+        const objeto_string = JSON.stringify(WORKSPACES)
+
+        localStorage.setItem('WORKSPACES', objeto_string)
+    }
 }
 
 const agregarMensajeLS = (indexWorkspace, indexCanal, mensaje) => {
