@@ -1,5 +1,6 @@
 .navCanales{
-    width: 100%;
+    width: 100vw;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     gap:10px;
@@ -7,4 +8,10 @@
     background-color:GREY;
     border-bottom: 2px solid black;
     border-radius: 0 0 10px 10px;
+}
+
+.displayCanales{
+    position: absolute;
+    left: 82vw;
+    top: 2%;
 }

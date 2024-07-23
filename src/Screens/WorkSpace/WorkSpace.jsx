@@ -8,8 +8,6 @@ import { CanalList, Canal } from '../index.js'
 import './WorkSpace.css'
 
 const WorkSpace = () => {
-    const [mostrarCanales, setMostrarCanales] = useState('none')
-    const [valueCanalList, setValueCanalList] = useState('Canales')
     const [indexWorkspace, setIndexWorkspace] = useState('')
 
     const { id } = useParams() // id es un string
@@ -20,16 +18,6 @@ const WorkSpace = () => {
         return (workspace.id == id)
     })
     const { titulo, canales, thumbnail } = dataWorkspace
-
-    const handleDisplayCanales = () => {
-        if (mostrarCanales === 'none') {
-            setMostrarCanales('')
-            setValueCanalList('Cerrar')
-        } else {
-            setMostrarCanales('none')
-            setValueCanalList('Canales')
-        }
-    }
 
     useEffect(() => {
         WORKSPACES.map((workspace,index) => {
@@ -42,7 +30,7 @@ const WorkSpace = () => {
 
     return (
         <>
-            <CanalList canales={canales} display={mostrarCanales} />
+            <CanalList canales={canales} />
             <div className='workspace-arriba'>
                 <div>
                     <NavLink to={'/'}>
@@ -50,7 +38,6 @@ const WorkSpace = () => {
                     </NavLink>
                     <img src={thumbnail} className='workspaceImg' />
                 </div>
-                <button onClick={handleDisplayCanales}>{valueCanalList}</button>
             </div>
             <Canal canales={canales} indexWorkspace={indexWorkspace}/>
         </>
