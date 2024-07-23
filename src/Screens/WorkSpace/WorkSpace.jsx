@@ -18,7 +18,6 @@ const WorkSpace = () => {
 
     return (
         <>
-            <CanalList canales={canales}/>
             <div className='workspace-arriba'>
                 <div>
                     <NavLink to={'/'}>

@@ -6,21 +6,24 @@ import ListaMensajes from '../ListaMensajes/ListaMensajes'
 
 import './Canal.css'
 import { traerLS } from '../../FUNCIONES_LOCAL_STORAGE'
+import CanalList from '../CanalList/CanalList'
 
 const Canal = () => {
-    const { id, idCanalParams } = useParams()
+    let { id, idCanalParams } = useParams()
 
-    const WORKSPACES = traerLS()
+    let WORKSPACES = traerLS()
 
-    const WORKSPACE = WORKSPACES[id - 1]
+    let WORKSPACE = WORKSPACES[id - 1]
 
-    const canal = WORKSPACE.canales[idCanalParams - 1]
+    let canal = WORKSPACE.canales[idCanalParams - 1]
 
+    const [canalState, setCanalState] = useState(canal)
     const [mensajesAcumulados, agregarMensaje] = useState([])
     const [indexCanal, setIndexCanal] = useState('')
 
-    const { mensajes, titulo, miembros } = canal
-
+    let { mensajes, titulo, miembros } = canalState
+    console.clear()
+    console.log(canal)
     useEffect(() => {
         agregarMensaje(canal.mensajes)
         setIndexCanal(Number(idCanalParams))
@@ -30,6 +33,7 @@ const Canal = () => {
 
     return (
         <>
+            <CanalList canales={WORKSPACE.canales}/>
             <h1>{titulo}</h1>
             <ListaMensajes mensajesAcumulados={mensajesAcumulados} miembros={miembros} />
             <MensajeForm mensajesAcumulados={mensajesAcumulados} agregarMensaje={agregarMensaje} indexCanal={indexCanal - 1} indexWorkspace={id - 1} />

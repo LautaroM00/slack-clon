@@ -5,6 +5,7 @@
     flex-direction: column;
     gap:10px;
     position: absolute;
+    top: 0%;
     background-color:GREY;
     border-bottom: 2px solid black;
     border-radius: 0 0 10px 10px;
