@@ -8,29 +8,17 @@ import { CanalList, Canal } from '../index.js'
 import './WorkSpace.css'
 
 const WorkSpace = () => {
-    const [indexWorkspace, setIndexWorkspace] = useState('')
-
     const { id } = useParams() // id es un string
-
 
     const WORKSPACES = traerLS()
     const dataWorkspace = WORKSPACES.find((workspace) => {
         return (workspace.id == id)
     })
-    const { titulo, canales, thumbnail } = dataWorkspace
-
-    useEffect(() => {
-        WORKSPACES.map((workspace,index) => {
-            if(workspace.id == id){
-                setIndexWorkspace(index)
-            }
-        })
-    }, []
-    )
+    const { canales, thumbnail } = dataWorkspace
 
     return (
         <>
-            <CanalList canales={canales} />
+            <CanalList canales={canales}/>
             <div className='workspace-arriba'>
                 <div>
                     <NavLink to={'/'}>
@@ -39,7 +27,7 @@ const WorkSpace = () => {
                     <img src={thumbnail} className='workspaceImg' />
                 </div>
             </div>
-            <Canal canales={canales} indexWorkspace={indexWorkspace}/>
+            <Canal/>
         </>
     )
 }

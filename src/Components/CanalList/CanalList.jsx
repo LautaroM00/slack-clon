@@ -4,7 +4,7 @@ import { NavLink, useParams } from 'react-router-dom'
 import './CanalList.css'
 import CrearCanal from '../CrearCanal/CrearCanal'
 
-const CanalList = ({ canales, display }) => {
+const CanalList = ({ canales }) => {
     const [mostrarCanales, setMostrarCanales] = useState('none')
     const [valueCanalList, setValueCanalList] = useState('Canales')
 
@@ -40,7 +40,7 @@ const CanalList = ({ canales, display }) => {
                         )
                     })}
                 </ul>
-                <CrearCanal />
+                <CrearCanal/>
             </nav>
             <button onClick={handleDisplayCanales} className='displayCanales'>{valueCanalList}</button>
         </>

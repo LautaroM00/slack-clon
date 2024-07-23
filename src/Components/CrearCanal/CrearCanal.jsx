@@ -21,27 +21,32 @@ const CrearCanal = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        console.log(e)
-        const WORKSPACES_LS = traerLS()
+        const WORKSPACES = traerLS()
 
-        WORKSPACES_LS[Number(id - 1)].canales.push(
+        WORKSPACES[Number(id - 1)].canales.push(
             {
                 titulo: e.target[0].value,
                 miembros: [
                     {
-                        nombre: 'Zeus',
+                        nombre: 'Lautaro',
                         thumbnail: '/thumbnails/yo.png',
                         mensajesCanal: [],
                         id: 1
                     }
                 ],
                 mensajes: [
+                    {
+                        autor: 'Lautaro',
+                        texto: 'HUEVO DIBU HUEVO!',
+                        hora: '19:57',
+                        id: 1
+                    }
                 ],
-                id_canal: WORKSPACES_LS[Number(id - 1)].canales.length + 1
+                id_canal: WORKSPACES[Number(id - 1)].canales.length + 1
             }
         )
 
-        actualizarLS(WORKSPACES_LS)
+        actualizarLS(WORKSPACES)
 
         e.target[0].value = ''
 
