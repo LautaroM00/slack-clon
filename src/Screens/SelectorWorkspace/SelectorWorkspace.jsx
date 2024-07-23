@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { setLS, traerLS } from '../../FUNCIONES_LOCAL_STORAGE'
 import { WorkspacePreview } from '../index'
@@ -7,9 +7,15 @@ import './SelectorWorkspace.css'
 import CrearWorkSpace from '../CrearWorkSpace/CrearWorkSpace'
 
 const SelectorWorkspace = () => {
+    const [WORKSPACES, setWORKSPACES] = useState([])
+
     setLS()
 
-    const WORKSPACES = traerLS()
+    useEffect(() => {
+        if(WORKSPACES.length === 0){
+            setWORKSPACES(traerLS())
+        }
+    },[WORKSPACES])
 
     const handleReiniciar = () => {
         localStorage.clear()
@@ -37,7 +43,7 @@ const SelectorWorkspace = () => {
                         })
                     }
                 </nav>
-                <CrearWorkSpace />
+                <CrearWorkSpace setWORKSPACES={setWORKSPACES}/>
             </main>
             <footer>
                 <form onSubmit={handleReiniciar}>

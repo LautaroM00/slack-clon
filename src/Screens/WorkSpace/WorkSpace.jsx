@@ -14,7 +14,7 @@ const WorkSpace = () => {
     const dataWorkspace = WORKSPACES.find((workspace) => {
         return (workspace.id == id)
     })
-    const { canales, thumbnail } = dataWorkspace
+    const { thumbnail } = dataWorkspace
 
     return (
         <>

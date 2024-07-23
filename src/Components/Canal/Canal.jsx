@@ -17,14 +17,14 @@ const Canal = () => {
 
     let canal = WORKSPACE.canales[idCanalParams - 1]
 
-    const [canalState, setCanalState] = useState(canal)
+    const [canalState, setCanalState] = useState({})
     const [mensajesAcumulados, agregarMensaje] = useState([])
     const [indexCanal, setIndexCanal] = useState('')
 
-    let { mensajes, titulo, miembros } = canalState
-    console.clear()
-    console.log(canal)
+    let { titulo, miembros } = canalState
+
     useEffect(() => {
+        setCanalState(canal)
         agregarMensaje(canal.mensajes)
         setIndexCanal(Number(idCanalParams))
     },
