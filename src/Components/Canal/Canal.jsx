@@ -34,19 +34,19 @@ const Canal = () => {
     },
         [idCanalParams]
     )
-
-    console.log(idCanalState != idCanalParams)
+/*     console.log(` ${idCanalParams} --- ${idCanalState}`) */
 
     return (
         <>
             {
-                idCanalState != idCanalParams ?
-                    <></> :
+                idCanalState == idCanalParams ?
                     <>
                         <CanalList canales={WORKSPACE.canales} />
                         <h1>{titulo}</h1>
                         <ListaMensajes mensajesAcumulados={mensajesAcumulados} miembros={miembros} />
                         <MensajeForm mensajesAcumulados={mensajesAcumulados} agregarMensaje={agregarMensaje} indexCanal={indexCanal - 1} indexWorkspace={id - 1} />
+                    </> :
+                    <>
                     </>
             }
         </>

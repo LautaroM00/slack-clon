@@ -20,8 +20,19 @@ const CrearWorkSpace = ({ setWORKSPACES }) => {
                 canales: [
                     {
                         titulo: e.target['nombreCanal'].value,
-                        miembros: [],
-                        mensajes: [],
+                        miembros: [
+                            {
+                                nombre: 'Lautaro',
+                                thumbnail: '/thumbnails/yo.png',
+                                mensajesCanal: '.',
+                                id: 1
+                            }],
+                        mensajes: [{
+                            autor: 'Lautaro',
+                            texto: 'holaa',
+                            hora: '19:57',
+                            id: 1
+                        }],
                         id_canal: 1
                     },
                 ],
