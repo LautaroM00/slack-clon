@@ -3,18 +3,20 @@ import React from 'react'
 import './CrearWorkSpace.css'
 import { actualizarLS, traerLS } from '../../FUNCIONES_LOCAL_STORAGE'
 import WORKSPACES from '../../WORKSPACES'
+import SelectorWorkspace from '../SelectorWorkspace/SelectorWorkspace'
+import { NavLink } from 'react-router-dom'
 
 const CrearWorkSpace = ({ setWORKSPACES }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        
-        if(!(e.target['nombreWorkspace'].value === '') && !(e.target['nombreCanal'].value === '') ){
+
+        if (!(e.target['nombreWorkspace'].value === '') && !(e.target['nombreCanal'].value === '')) {
             const WORKSPACES = traerLS()
 
             console.log(e.target['nombreWorkspace'].value)
-            
-            WORKSPACES.push(    {
+
+            WORKSPACES.push({
                 titulo: e.target['nombreWorkspace'].value,
                 thumbnail: '/iconos/gowGrecia.png',
                 canales: [
@@ -39,21 +41,35 @@ const CrearWorkSpace = ({ setWORKSPACES }) => {
                 contactos: [],
                 id: WORKSPACES.length + 1
             })
-    
-            setWORKSPACES(WORKSPACES)
-    
+
+            e.target['nombreWorkspace'].value = ''
+            e.target['nombreCanal'].value = ''
+            /*             setWORKSPACES(WORKSPACES) */
+
             actualizarLS(WORKSPACES)
         }
     }
 
     return (
-        <form onSubmit={handleSubmit} className='crearWorkspace'>
-            <label htmlFor='nombreWorkspace'>Nombre Workspace:</label>
-            <input type='text' id='nombreWorkspace' name='nombreWorkspace'/>
-            <label htmlFor='nombreCanal'>Nombre Canal:</label>
-            <input type='text' id='nombreCanal' name='nombreCanal'/>
-            <button>Crear</button>
-        </form>
+        <>
+            <div className='contenedorCW'>
+                <form onSubmit={handleSubmit} className='crearWorkspace'>
+                    <label htmlFor='nombreWorkspace'>Nombre Workspace:</label>
+                    <input type='text' id='nombreWorkspace' name='nombreWorkspace' />
+                    <label htmlFor='nombreCanal'>Nombre Canal:</label>
+                    <input type='text' id='nombreCanal' name='nombreCanal' />
+                    <div className='botones'>
+                        <button type='submit'>Crear</button>
+                        <NavLink to={'/'}>
+                            <span className='salir'>
+                                Salir
+                            </span>
+                        </NavLink>
+                    </div>
+                </form>
+            </div>
+            <SelectorWorkspace />
+        </>
     )
 }
 

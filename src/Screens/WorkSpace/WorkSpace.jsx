@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, NavLink } from 'react-router-dom'
+import { MdOutlineKeyboardBackspace } from "react-icons/md";
+
+
 
 import { traerLS } from '../../FUNCIONES_LOCAL_STORAGE.js'
 
@@ -19,14 +22,12 @@ const WorkSpace = () => {
     return (
         <>
             <div className='workspace-arriba'>
-                <div>
-                    <NavLink to={'/'}>
-                        <span>volver</span>
+                    <NavLink to={'/'} className='navLink'>
+                        <MdOutlineKeyboardBackspace/>
+                        <img src={thumbnail} className='workspaceImg' />
                     </NavLink>
-                    <img src={thumbnail} className='workspaceImg' />
-                </div>
             </div>
-            <Canal/>
+            <Canal />
         </>
     )
 }

@@ -1,23 +1,22 @@
 import React, { useState } from 'react'
 import { NavLink, useParams } from 'react-router-dom'
+import { SlLayers } from "react-icons/sl";
+import { IoMdClose } from "react-icons/io";
 
 import './CanalList.css'
 import CrearCanal from '../CrearCanal/CrearCanal'
 
 const CanalList = ({ canales }) => {
     const [mostrarCanales, setMostrarCanales] = useState('none')
-    const [valueCanalList, setValueCanalList] = useState('Canales')
+    const [display, setDisplay] = useState('')
 
     const handleDisplayCanales = () => {
         if (mostrarCanales === 'none') {
             setMostrarCanales('')
-            setValueCanalList('Cerrar')
         } else {
             setMostrarCanales('none')
-            setValueCanalList('Canales')
         }
     }
-
     const idParams = useParams()
 
     const { id } = idParams
@@ -25,24 +24,35 @@ const CanalList = ({ canales }) => {
     return (
         <>
             <nav style={{ display: mostrarCanales }} className='navCanales'>
-                <h1>
+                <h2>
                     Canales
-                </h1>
+                </h2>
                 <ul>
                     {canales.map((canal, index) => {
                         const { titulo, id_canal } = canal
                         return (
                             <NavLink key={index} to={`/workspace/${id}/${id_canal}`}>
-                                <li>
+                                <li className='canal'>
                                     {`#${titulo}`}
                                 </li>
                             </NavLink>
                         )
                     })}
+                    
                 </ul>
-                <CrearCanal/>
+                <div className='especial'><CrearCanal display={display} setDisplay={setDisplay} /></div>
             </nav>
-            <button onClick={handleDisplayCanales} className='displayCanales'>{valueCanalList}</button>
+            {
+                mostrarCanales ?
+                    <div className='displayCanales'>
+                        <SlLayers onClick={handleDisplayCanales} style={{ width: '30px', height: '30px' }}/>
+                    </div> :
+                    <div className='displayCanales'>
+                        <IoMdClose onClick={handleDisplayCanales} style={{ width: '30px', height: '30px' }} />
+                    </div>
+
+            }
+
         </>
     )
 }

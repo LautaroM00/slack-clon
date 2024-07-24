@@ -5,6 +5,7 @@ import { WorkspacePreview } from '../index'
 
 import './SelectorWorkspace.css'
 import CrearWorkSpace from '../CrearWorkSpace/CrearWorkSpace'
+import { NavLink } from 'react-router-dom'
 
 const SelectorWorkspace = () => {
     const [WORKSPACES, setWORKSPACES] = useState([])
@@ -12,10 +13,10 @@ const SelectorWorkspace = () => {
     setLS()
 
     useEffect(() => {
-        if(WORKSPACES.length === 0){
+        if (WORKSPACES.length === 0) {
             setWORKSPACES(traerLS())
         }
-    },[WORKSPACES])
+    }, [WORKSPACES])
 
     const handleReiniciar = () => {
         localStorage.clear()
@@ -28,7 +29,7 @@ const SelectorWorkspace = () => {
 
     return (
         <>
-            <header>
+            <header className='SW_header'>
                 Bienvenido!
             </header>
             <main className='SW_main'>
@@ -43,14 +44,15 @@ const SelectorWorkspace = () => {
                         })
                     }
                 </nav>
-                <CrearWorkSpace setWORKSPACES={setWORKSPACES}/>
             </main>
-            <footer>
+            <footer className='SW_footer'>
+                <NavLink to={'/workspace/new'}>
+                    <div className='nuevoWS'>
+                        Nuevo Workspace
+                    </div>
+                </NavLink>
                 <form onSubmit={handleReiniciar}>
                     <button type='submit'>REINICIAR</button>
-                </form>
-                <form onSubmit={handleCrearWorkspace}>
-                    <button type='submit'>Nuevo workspace</button>
                 </form>
             </footer>
         </>

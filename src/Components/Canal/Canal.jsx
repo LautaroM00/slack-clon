@@ -18,7 +18,7 @@ const Canal = () => {
     let canal = WORKSPACE.canales[idCanalParams - 1]
 
     const [idCanalState, setIdCanalState] = useState(idCanalParams)
-    const [canalState, setCanalState] = useState({})
+    const [canalState, setCanalState] = useState(canal)
     const [mensajesAcumulados, agregarMensaje] = useState([])
     const [indexCanal, setIndexCanal] = useState('')
 

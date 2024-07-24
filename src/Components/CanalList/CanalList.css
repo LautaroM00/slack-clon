@@ -3,16 +3,76 @@
     padding: 10px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap:10px;
     position: absolute;
     top: 0%;
-    background-color:GREY;
-    border-bottom: 2px solid black;
+    background-color:#247cc0;
+    box-shadow: 0 3px 11px 3px black;
     border-radius: 0 0 10px 10px;
 }
 
 .displayCanales{
     position: absolute;
-    left: 82vw;
-    top: 2%;
+    left: 87vw;
+    top: 1%;
+}
+
+.navCanales h2{
+    width: 200px;
+    background-color: #2710373e;
+    letter-spacing: 1px;
+    text-align: center;
+    color: #e0e0d1;
+    border-radius: 28px;
+    font-size: 50px;
+    font-weight: 550;
+    text-shadow: 
+    1px 1px 0 #000, 
+    -1px -1px 0 #000,  
+    1px -1px 0 #000, 
+    -1px 1px 0 #000;
+}
+
+.navCanales ul{
+    width: 100%;
+    padding: 10px;
+    background-color: #194f79;
+    box-shadow: 0 1px 6px 1px #00000076,
+    0 -1px 6px 1px #00000076,
+    1px 0px 6px 1px #00000076,
+    -1px 0px 6px 1px #00000076;
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    overflow-y: auto;
+    max-height: 600px;
+}
+
+.navCanales .canal{
+    display: flex;
+    align-items: center;
+    height: 50px;
+    padding: 10px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    font-size: 22px;
+    background-color: #e2e2b6;
+    border-radius: 7px;
+}
+
+.navCanales .especial{
+    max-width: 85%;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    padding: 10px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    font-size: 22px;
+    background-color: #e2e2b665;
+    border-radius: 7px;
+    border: 3px black dashed;
 }

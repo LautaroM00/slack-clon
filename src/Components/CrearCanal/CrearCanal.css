@@ -3,3 +3,30 @@
     align-items: center;
     justify-content: center;
 }
+
+.formCrearCanal{
+    display: flex;
+    align-items: center;
+    gap:3px
+}
+
+.formCrearCanal label{
+    color: rgba(0, 0, 0, 0.637);
+}
+
+.formCrearCanal input{
+    width: 75%;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 3px;
+    background-color: #e2e2b6;
+    letter-spacing: 1px;
+    font-weight: 600;
+    font-size: 22px;
+}
+
+.formCrearCanal button{
+    padding: 3px;
+    background-color: transparent;
+    border: none;
+}

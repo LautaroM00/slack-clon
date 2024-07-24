@@ -13,3 +13,8 @@
     position: relative;
     z-index: 100;
 }
+
+.workspace-arriba .navLink{
+    display: flex;
+    align-items: center;
+}
