@@ -7,10 +7,9 @@ import { actualizarLS, traerLS } from '../index.js'
 
 import './CrearCanal.css'
 
-const CrearCanal = ({  setDisplay }) => {
+const CrearCanal = ({  setDisplay, setCanalesState }) => {
     const [mostrarInput, setMostrarInput] = useState('none')
     const [mostrarLabel, setMostrarLabel] = useState('')
-
     const handleMostrarInput = () => {
         if(mostrarInput){
             setMostrarInput('')
@@ -41,24 +40,18 @@ const CrearCanal = ({  setDisplay }) => {
                         }
                     ],
                     mensajes: [
-                        {
-                            autor: 'Lautaro',
-                            texto: 'HUEVO DIBU HUEVO!',
-                            hora: '19:57',
-                            id: 1
-                        }
                     ],
                     id_canal: WORKSPACES[Number(id - 1)].canales.length + 1
                 }
             )
     
             actualizarLS(WORKSPACES)
-    
+            setCanalesState(WORKSPACES[Number(id - 1)].canales)
             e.target[0].value = ''
     
             setDisplay('none')
             setMostrarInput('none')
-            setMostrarLabel('')
+            setMostrarLabel('');
         }
     }
 

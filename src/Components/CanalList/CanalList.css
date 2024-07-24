@@ -15,7 +15,7 @@
 .displayCanales{
     position: absolute;
     left: 87vw;
-    top: 1%;
+    top: 15px;
 }
 
 .navCanales h2{
@@ -62,7 +62,7 @@
 }
 
 .navCanales .especial{
-    max-width: 85%;
+    max-width: 95%;
     margin-top: 20px;
     display: flex;
     align-items: center;

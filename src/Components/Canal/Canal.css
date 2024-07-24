@@ -1,0 +1,12 @@
+.canalTitulo{
+    text-align: center;
+    letter-spacing: 2px;
+    color: rgb(191, 146, 63);
+    font-size: 40px;
+    font-weight: 500;
+    text-shadow: 
+    1px 1px 0 #000, 
+    -1px -1px 0 #000,  
+    1px -1px 0 #000, 
+    -1px 1px 0 #000;
+}

@@ -2,7 +2,7 @@
     padding: 5px;
     border: 2px solid grey;
     border-radius: 5px;
-    background-color: rgb(190, 189, 189);
+    background-color: #6fb8ef;
     display: flex;
     flex-direction: column;
 }

@@ -18,17 +18,14 @@ const Canal = () => {
     let canal = WORKSPACE.canales[idCanalParams - 1]
 
     const [idCanalState, setIdCanalState] = useState(idCanalParams)
-    const [canalState, setCanalState] = useState(canal)
+    const [canalesState, setCanalesState] = useState(WORKSPACE.canales)
     const [mensajesAcumulados, agregarMensaje] = useState([])
     const [indexCanal, setIndexCanal] = useState('')
 
-    let { titulo, miembros } = canalState
-
-
+    let { titulo, miembros } = canal
 
     useEffect(() => {
         setIdCanalState(idCanalParams)
-        setCanalState(canal)
         agregarMensaje(canal.mensajes)
         setIndexCanal(Number(idCanalParams))
     },
@@ -41,8 +38,8 @@ const Canal = () => {
             {
                 idCanalState == idCanalParams ?
                     <>
-                        <CanalList canales={WORKSPACE.canales} />
-                        <h1>{titulo}</h1>
+                        <CanalList canales={canalesState} setCanalesState={setCanalesState}/>
+                        <h2 className='canalTitulo'>{titulo}</h2>
                         <ListaMensajes mensajesAcumulados={mensajesAcumulados} miembros={miembros} />
                         <MensajeForm mensajesAcumulados={mensajesAcumulados} agregarMensaje={agregarMensaje} indexCanal={indexCanal - 1} indexWorkspace={id - 1} />
                     </> :

@@ -6,7 +6,7 @@ import { IoMdClose } from "react-icons/io";
 import './CanalList.css'
 import CrearCanal from '../CrearCanal/CrearCanal'
 
-const CanalList = ({ canales }) => {
+const CanalList = ({ canales, setCanalesState }) => {
     const [mostrarCanales, setMostrarCanales] = useState('none')
     const [display, setDisplay] = useState('')
 
@@ -40,15 +40,15 @@ const CanalList = ({ canales }) => {
                     })}
                     
                 </ul>
-                <div className='especial'><CrearCanal display={display} setDisplay={setDisplay} /></div>
+                <div className='especial'><CrearCanal display={display} setDisplay={setDisplay} setCanalesState={setCanalesState}/></div>
             </nav>
             {
                 mostrarCanales ?
                     <div className='displayCanales'>
-                        <SlLayers onClick={handleDisplayCanales} style={{ width: '30px', height: '30px' }}/>
+                        <SlLayers onClick={handleDisplayCanales} style={{ width: '30px', height: '30px', color: 'whitesmoke' }}/>
                     </div> :
                     <div className='displayCanales'>
-                        <IoMdClose onClick={handleDisplayCanales} style={{ width: '30px', height: '30px' }} />
+                        <IoMdClose onClick={handleDisplayCanales} style={{ width: '30px', height: '30px', color: 'whitesmoke' }} />
                     </div>
 
             }

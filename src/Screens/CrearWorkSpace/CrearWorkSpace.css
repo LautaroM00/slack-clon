@@ -38,9 +38,10 @@
 }
 
 .crearWorkspace button {
+    border-radius: 5px;
     padding: 10px 20px;
     color: rgb(8, 18, 36);
-    background-color: #2aeb18;
+    background-color: #00B98E;
     border: 1px solid rgb(182, 182, 207);
     font-size: 20px;
     font-weight: 600;
@@ -48,11 +49,12 @@
 }
 
 .crearWorkspace .salir {
+    border-radius: 5px;
     display: flex;
     align-items: center;
     padding: 10px 20px;
     color: rgb(8, 18, 36);
-    background-color: #FF0000;
+    background-color: #FF3D31;
     border: 1px solid rgb(182, 182, 207);
     font-size: 20px;
     font-weight: 600;

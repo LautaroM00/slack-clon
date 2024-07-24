@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, NavLink } from 'react-router-dom'
 import { MdOutlineKeyboardBackspace } from "react-icons/md";
+import { TfiViewListAlt } from "react-icons/tfi";
 
 
 
@@ -20,15 +21,15 @@ const WorkSpace = () => {
     const { thumbnail } = dataWorkspace
 
     return (
-        <>
+        <div className='workspace'>
             <div className='workspace-arriba'>
                     <NavLink to={'/'} className='navLink'>
-                        <MdOutlineKeyboardBackspace/>
-                        <img src={thumbnail} className='workspaceImg' />
+                        <MdOutlineKeyboardBackspace className='workspaceImg'/>
+                        <TfiViewListAlt className='workspaceImg'/>
                     </NavLink>
             </div>
             <Canal />
-        </>
+        </div>
     )
 }
 
