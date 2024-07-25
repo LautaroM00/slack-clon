@@ -4,7 +4,7 @@ import { VscSend } from "react-icons/vsc";
 
 
 import { agregarMensajeLS } from '../../FUNCIONES_LOCAL_STORAGE'
-import { horas, minutos, segundos } from './tiempo';
+import { horas, minutos } from './tiempo';
 
 
 import './MensajeForm.css'
@@ -23,7 +23,7 @@ const MensajeForm = ({ mensajesAcumulados, agregarMensaje, indexCanal, indexWork
             {
                 autor: 'Lautaro',
                 texto: textoMensaje,
-                hora: `${horas}:${minutos}:${segundos}`,
+                hora: `${horas}:${minutos}`,
                 id: mensajesAcumulados.length + 1
             }]
             )
@@ -31,7 +31,7 @@ const MensajeForm = ({ mensajesAcumulados, agregarMensaje, indexCanal, indexWork
             agregarMensajeLS(indexWorkspace, indexCanal, {
                 autor: 'Lautaro',
                 texto: textoMensaje,
-                hora: `${horas}:${minutos}:${segundos}`,
+                hora: `${horas}:${minutos}`,
                 id: mensajesAcumulados.length + 1
             })
 
