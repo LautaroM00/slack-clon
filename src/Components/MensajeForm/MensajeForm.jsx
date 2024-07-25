@@ -4,6 +4,7 @@ import { VscSend } from "react-icons/vsc";
 
 
 import { agregarMensajeLS } from '../../FUNCIONES_LOCAL_STORAGE'
+import { horas, minutos, segundos } from './tiempo';
 
 
 import './MensajeForm.css'
@@ -22,7 +23,7 @@ const MensajeForm = ({ mensajesAcumulados, agregarMensaje, indexCanal, indexWork
             {
                 autor: 'Lautaro',
                 texto: textoMensaje,
-                hora: '19:57',
+                hora: `${horas}:${minutos}:${segundos}`,
                 id: mensajesAcumulados.length + 1
             }]
             )
@@ -30,7 +31,7 @@ const MensajeForm = ({ mensajesAcumulados, agregarMensaje, indexCanal, indexWork
             agregarMensajeLS(indexWorkspace, indexCanal, {
                 autor: 'Lautaro',
                 texto: textoMensaje,
-                hora: '19:57',
+                hora: `${horas}:${minutos}:${segundos}`,
                 id: mensajesAcumulados.length + 1
             })
 
@@ -41,7 +42,7 @@ const MensajeForm = ({ mensajesAcumulados, agregarMensaje, indexCanal, indexWork
     return (
         <form onSubmit={handleSubmit} className='mensajeForm'>
             <textarea placeholder='Escribe tu mensaje' ></textarea>
-            <button><VscSend style={{width: '25px',height: '25px'}} className='icono' /></button>
+            <button><VscSend style={{ width: '25px', height: '25px' }} className='icono' /></button>
         </form>
     )
 }
