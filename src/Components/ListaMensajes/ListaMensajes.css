@@ -2,10 +2,30 @@
     box-shadow: inset 0px 0px 6px 5px rgba(0, 0, 0, 0.464);
     background-color: #e2e2b6;
     padding: 10px;
-    height: 550px;
+    height: 500px;
     display: flex;
     flex-direction: column;
     gap:20px;
-    overflow: scroll;
+    overflow-y: scroll;
     border: 1px solid black;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+
+    background-color: rgba(0, 0, 0, 0.355);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.747);
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
 }

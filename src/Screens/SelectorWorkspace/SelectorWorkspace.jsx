@@ -33,7 +33,7 @@ const SelectorWorkspace = () => {
                 Bienvenido!
             </header>
             <main className='SW_main'>
-                Seleccionar
+            NATALIA CUERNO
                 <nav className='SW_nav'>
                     {
                         WORKSPACES.map((workspace, index) => {
