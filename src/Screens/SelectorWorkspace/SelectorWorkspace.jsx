@@ -20,13 +20,12 @@ const SelectorWorkspace = () => {
         }
     }, [WORKSPACES])
 
-    const handleReiniciar = () => {
-        localStorage.clear()
-    }
-
-    const handleCrearWorkspace = (e) => {
+    const handleReiniciar = (e) => {
         e.preventDefault()
-
+        localStorage.clear()
+        setLS()
+        let WORKSPACESLS = traerLS()
+        setWORKSPACES(WORKSPACESLS)
     }
 
     return (

@@ -52,23 +52,27 @@ const CrearWorkSpace = ({ setWORKSPACES }) => {
 
     return (
         <>
-            <div className='contenedorCW'>
-                <form onSubmit={handleSubmit} className='crearWorkspace'>
-                    <label htmlFor='nombreWorkspace'>Nombre Workspace:</label>
-                    <input type='text' id='nombreWorkspace' name='nombreWorkspace' />
-                    <label htmlFor='nombreCanal'>Nombre Canal:</label>
-                    <input type='text' id='nombreCanal' name='nombreCanal' />
-                    <div className='botones'>
-                        <button type='submit'>Crear</button>
-                        <NavLink to={'/'}>
-                            <span className='salir'>
-                                Salir
-                            </span>
-                        </NavLink>
-                    </div>
-                </form>
+            <div className='scroll'>
+                <div className='contenedorCW'>
+                    <form onSubmit={handleSubmit} className='crearWorkspace'>
+                        <label htmlFor='nombreWorkspace'>Nombre Workspace:</label>
+                        <input type='text' id='nombreWorkspace' name='nombreWorkspace' />
+                        <label htmlFor='nombreCanal'>Nombre Canal:</label>
+                        <input type='text' id='nombreCanal' name='nombreCanal' />
+                        <div className='botones'>
+                            <button type='submit'>Crear</button>
+                            <NavLink to={'/'}>
+                                <span className='salir'>
+                                    Salir
+                                </span>
+                            </NavLink>
+                        </div>
+                    </form>
+                </div>
+                <div className='sombra'>
+                </div>
+                <SelectorWorkspace />
             </div>
-            <SelectorWorkspace />
         </>
     )
 }
