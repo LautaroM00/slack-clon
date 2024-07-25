@@ -38,18 +38,10 @@ const MensajeForm = ({ mensajesAcumulados, agregarMensaje, indexCanal, indexWork
         }
     }
 
-/*     const handleEnter = (e) => {
-        if(e.key === 'Enter'){
-            console.log(e.target[0].value)
-
-        }
-    } */
-
     return (
-        <form onSubmit={handleSubmit} className='mensajeForm'/*  onKeyDown={handleEnter} */>
+        <form onSubmit={handleSubmit} className='mensajeForm'>
             <textarea placeholder='Escribe tu mensaje' ></textarea>
-            <button><VscSend style={{width: '25px',height: '25px'}} className='icono' />
-            </button>
+            <button><VscSend style={{width: '25px',height: '25px'}} className='icono' /></button>
         </form>
     )
 }

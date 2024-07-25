@@ -6,6 +6,8 @@ import { WorkspacePreview } from '../index'
 import './SelectorWorkspace.css'
 import CrearWorkSpace from '../CrearWorkSpace/CrearWorkSpace'
 import { NavLink } from 'react-router-dom'
+import { VscDebugRestart } from "react-icons/vsc";
+
 
 const SelectorWorkspace = () => {
     const [WORKSPACES, setWORKSPACES] = useState([])
@@ -29,11 +31,10 @@ const SelectorWorkspace = () => {
 
     return (
         <>
-            <header className='SW_header'>
-                Bienvenido!
-            </header>
             <main className='SW_main'>
-            NATALIA CUERNO
+            <h1>
+                Workspaces
+            </h1>
                 <nav className='SW_nav'>
                     {
                         WORKSPACES.map((workspace, index) => {
@@ -51,8 +52,8 @@ const SelectorWorkspace = () => {
                         Nuevo Workspace
                     </div>
                 </NavLink>
-                <form onSubmit={handleReiniciar}>
-                    <button type='submit'>REINICIAR</button>
+                <form onSubmit={handleReiniciar} className='reiniciar'>
+                    <button type='submit' className='boton'><VscDebugRestart style={{width: '30px', height: '30px'}}/></button>
                 </form>
             </footer>
         </>

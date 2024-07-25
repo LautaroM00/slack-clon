@@ -1,24 +1,25 @@
 .WorkspacePreview{
+    width: 80vw;
     max-width: 1000px;
-    padding: 30px;
+    padding: 20px;
     margin: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap:10px;
-    border: 1px solid blue;
+    justify-content: space-between;
+    background-color: #FFF5E1;
+    border-radius: 5px;
 }
 
 .WorkspacePreview .izquierda{
-    width: 190px;
     overflow-wrap: break-word;
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: space-between;
 }
 
 .WorkspacePreview .izquierda h2{
-    text-align: center;
+    margin-left: 10px;
 }
 
 .WorkspacePreview button{

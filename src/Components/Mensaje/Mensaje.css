@@ -5,6 +5,7 @@
     background-color: #6fb8ef;
     display: flex;
     flex-direction: column;
+    gap:5px;
 }
 
 .mensajeContenedor .arriba{
@@ -21,4 +22,11 @@
 
 .mensajeContenedor .texto{
     overflow-wrap: break-word;
+}
+
+.mensajeContenedor .nombre-hora{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
 }
