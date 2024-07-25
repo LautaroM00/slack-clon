@@ -32,9 +32,9 @@ const SelectorWorkspace = () => {
     return (
         <>
             <main className='SW_main'>
-            <h1>
-                Workspaces
-            </h1>
+                <h1>
+                    Workspaces
+                </h1>
                 <nav className='SW_nav'>
                     {
                         WORKSPACES.map((workspace, index) => {
@@ -45,17 +45,17 @@ const SelectorWorkspace = () => {
                         })
                     }
                 </nav>
+                <div className='SW_footer'>
+                    <NavLink to={'/workspace/new'}>
+                        <div className='nuevoWS'>
+                            Nuevo Workspace
+                        </div>
+                    </NavLink>
+                    <form onSubmit={handleReiniciar} className='reiniciar'>
+                        <button type='submit' className='boton'><VscDebugRestart style={{ width: '30px', height: '30px' }} /></button>
+                    </form>
+                </div>
             </main>
-            <footer className='SW_footer'>
-                <NavLink to={'/workspace/new'}>
-                    <div className='nuevoWS'>
-                        Nuevo Workspace
-                    </div>
-                </NavLink>
-                <form onSubmit={handleReiniciar} className='reiniciar'>
-                    <button type='submit' className='boton'><VscDebugRestart style={{width: '30px', height: '30px'}}/></button>
-                </form>
-            </footer>
         </>
     )
 }
