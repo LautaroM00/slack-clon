@@ -17,6 +17,7 @@ const CanalList = ({ canales, setCanalesState }) => {
             setMostrarCanales('none')
         }
     }
+
     const idParams = useParams()
 
     const { id } = idParams
@@ -38,21 +39,18 @@ const CanalList = ({ canales, setCanalesState }) => {
                             </NavLink>
                         )
                     })}
-                    
                 </ul>
                 <div className='especial'><CrearCanal display={display} setDisplay={setDisplay} setCanalesState={setCanalesState}/></div>
             </nav>
             {
                 mostrarCanales ?
                     <div className='displayCanales'>
-                        <SlLayers onClick={handleDisplayCanales} style={{ width: '30px', height: '30px', color: 'whitesmoke' }}/>
+                        <SlLayers onClick={handleDisplayCanales} style={{ width: '30px', height: '30px', color: 'whitesmoke' }} className='botones'/>
                     </div> :
                     <div className='displayCanales'>
-                        <IoMdClose onClick={handleDisplayCanales} style={{ width: '30px', height: '30px', color: 'whitesmoke' }} />
+                        <IoMdClose onClick={handleDisplayCanales} style={{ width: '30px', height: '30px', color: 'whitesmoke' }} className='botones' />
                     </div>
-
             }
-
         </>
     )
 }

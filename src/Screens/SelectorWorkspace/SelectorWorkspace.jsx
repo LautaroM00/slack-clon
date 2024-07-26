@@ -32,7 +32,7 @@ const SelectorWorkspace = () => {
         <>
             <main className='SW_main'>
                 <h1>
-                    Workspaces
+                    Bienvenido a Slack!
                 </h1>
                 <nav className='SW_nav'>
                     {

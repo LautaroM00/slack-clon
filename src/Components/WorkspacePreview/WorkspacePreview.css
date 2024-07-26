@@ -9,6 +9,7 @@
     justify-content: space-between;
     background-color: #FFF5E1;
     border-radius: 5px;
+    box-shadow: 0 0 7px 1px rgba(0, 0, 0, 0.671);
 }
 
 .WorkspacePreview .izquierda{

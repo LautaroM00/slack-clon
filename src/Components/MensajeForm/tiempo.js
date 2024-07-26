@@ -1,7 +1,6 @@
 var ahora
 var horas
 var minutos
-var segundos
 
 setInterval(() => {
     ahora = new Date()

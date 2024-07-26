@@ -76,3 +76,13 @@
     border-radius: 7px;
     border: 3px black dashed;
 }
+
+@media (min-width:800px){
+    .displayCanales{
+        display: none;
+    }
+
+    .navCanales{
+        display: ''
+    }
+}

@@ -4,6 +4,7 @@
     align-items: center;
     justify-content: center;
     gap:10px;
+    height: 15vh;
 }
 
 .mensajeForm textarea{
