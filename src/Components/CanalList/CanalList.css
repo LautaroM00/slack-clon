@@ -81,8 +81,11 @@
     .displayCanales{
         display: none;
     }
-
     .navCanales{
-        display: ''
+        position: inherit;
+        box-shadow: 0 0 0 0 ;
+        border-radius: 0px;
+        width: 400px;
+        height: 100%;
     }
 }

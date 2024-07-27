@@ -10,3 +10,14 @@
     1px -1px 0 #000, 
     -1px 1px 0 #000;
 }
+
+@media (min-width:800px){
+    .contenedorWorkspace{
+        display: flex;
+        height: 100%;
+    }
+
+    .mensajes-mensajeForm{
+        width: 100%;
+    }
+}

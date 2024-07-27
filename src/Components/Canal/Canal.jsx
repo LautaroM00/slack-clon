@@ -31,18 +31,20 @@ const Canal = () => {
     },
         [idCanalParams]
     )
-/*     console.log(` ${idCanalParams} --- ${idCanalState}`) */
+    /*     console.log(` ${idCanalParams} --- ${idCanalState}`) */
 
     return (
         <>
             {
                 idCanalState == idCanalParams ?
-                    <>
-                        <CanalList canales={canalesState} setCanalesState={setCanalesState}/>
-                        <h2 className='canalTitulo'>{titulo}</h2>
-                        <ListaMensajes mensajesAcumulados={mensajesAcumulados} miembros={miembros} />
-                        <MensajeForm mensajesAcumulados={mensajesAcumulados} agregarMensaje={agregarMensaje} indexCanal={indexCanal - 1} indexWorkspace={id - 1} />
-                    </> :
+                    <div className='contenedorWorkspace'>
+                        <CanalList canales={canalesState} setCanalesState={setCanalesState} />
+                        <div className='mensajes-mensajeForm'>
+                            <h2 className='canalTitulo'>{titulo}</h2>
+                            <ListaMensajes mensajesAcumulados={mensajesAcumulados} miembros={miembros} />
+                            <MensajeForm mensajesAcumulados={mensajesAcumulados} agregarMensaje={agregarMensaje} indexCanal={indexCanal - 1} indexWorkspace={id - 1} />
+                        </div>
+                    </div> :
                     <>
                     </>
             }

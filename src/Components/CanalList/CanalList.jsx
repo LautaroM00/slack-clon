@@ -7,14 +7,14 @@ import './CanalList.css'
 import CrearCanal from '../CrearCanal/CrearCanal'
 
 const CanalList = ({ canales, setCanalesState }) => {
-    const [mostrarCanales, setMostrarCanales] = useState('none')
+    const [mostrarCanales, setMostrarCanales] = useState('')
     const [display, setDisplay] = useState('')
 
     const handleDisplayCanales = () => {
-        if (mostrarCanales === 'none') {
-            setMostrarCanales('')
-        } else {
+        if (mostrarCanales === '') {
             setMostrarCanales('none')
+        } else {
+            setMostrarCanales('')
         }
     }
 
