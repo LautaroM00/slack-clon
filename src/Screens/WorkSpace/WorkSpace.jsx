@@ -18,7 +18,6 @@ const WorkSpace = () => {
     const dataWorkspace = WORKSPACES.find((workspace) => {
         return (workspace.id == id)
     })
-    const { thumbnail } = dataWorkspace
 
     return (
         <div className='workspace'>

@@ -11,8 +11,6 @@ import './MensajeForm.css'
 
 const MensajeForm = ({ mensajesAcumulados, agregarMensaje, indexCanal, indexWorkspace }) => {
 
-    const { id, idCanalParams } = useParams()
-
     const handleSubmit = (e) => {
         e.preventDefault()
 
@@ -41,7 +39,7 @@ const MensajeForm = ({ mensajesAcumulados, agregarMensaje, indexCanal, indexWork
 
     return (
         <form onSubmit={handleSubmit} className='mensajeForm'>
-            <textarea placeholder='Escribe tu mensaje' ></textarea>
+            <textarea placeholder='Escribe tu mensaje'></textarea>
             <button><VscSend style={{ width: '25px', height: '25px' }} className='icono' /></button>
         </form>
     )
