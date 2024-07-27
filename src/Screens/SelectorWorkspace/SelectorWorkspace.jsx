@@ -6,10 +6,12 @@ import { WorkspacePreview } from '../index'
 import './SelectorWorkspace.css'
 import { NavLink } from 'react-router-dom'
 import { VscDebugRestart } from "react-icons/vsc";
+import FiltrarArray from '../../Components/FiltrarArray/FiltrarArray'
 
 
 const SelectorWorkspace = () => {
     const [WORKSPACES, setWORKSPACES] = useState([])
+    const [workspacesFiltrados, setWorkspacesFiltrados] = useState([])
 
     setLS()
 
@@ -17,6 +19,7 @@ const SelectorWorkspace = () => {
         if (WORKSPACES.length === 0) {
             setWORKSPACES(traerLS())
         }
+        setWorkspacesFiltrados(WORKSPACES)
     }, [WORKSPACES])
 
     const handleReiniciar = (e) => {
@@ -35,14 +38,19 @@ const SelectorWorkspace = () => {
                 </h1>
                 <nav className='SW_nav'>
                     {
-                        WORKSPACES.map((workspace, index) => {
-                            const { titulo, thumbnail, id } = workspace
-                            return (
-                                <WorkspacePreview titulo={titulo} thumbnail={thumbnail} id={id} key={index} />
-                            )
-                        })
+                        workspacesFiltrados.length === 0 ?
+                            <span className='workspaceNotFound'>
+                                No se encontraron resultados
+                            </span> :
+                            workspacesFiltrados.map((workspace, index) => {
+                                const { titulo, thumbnail, id } = workspace
+                                return (
+                                    <WorkspacePreview titulo={titulo} thumbnail={thumbnail} id={id} key={index} />
+                                )
+                            })
                     }
                 </nav>
+                <FiltrarArray setArrayFiltrado={setWorkspacesFiltrados} array={WORKSPACES} />
                 <div className='SW_footer'>
                     <NavLink to={'/workspace/new'}>
                         <div className='nuevoWS'>

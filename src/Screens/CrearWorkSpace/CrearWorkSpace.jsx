@@ -11,15 +11,18 @@ const CrearWorkSpace = ({ setWORKSPACES }) => {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        if (!(e.target['nombreWorkspace'].value === '') && !(e.target['nombreCanal'].value === '')) {
+        let nombreWorkspace = e.target['nombreWorkspace'].value
+        let nombreCanal = e.target['nombreCanal'].value
+
+        if (nombreWorkspace !== '' && nombreCanal !== '' && nombreWorkspace.length < 15 && nombreCanal.length < 15) {
             const WORKSPACES = traerLS()
 
             WORKSPACES.push({
-                titulo: e.target['nombreWorkspace'].value,
+                titulo: nombreWorkspace,
                 thumbnail: '/iconos/workspacePredeterminado.png',
                 canales: [
                     {
-                        titulo: e.target['nombreCanal'].value,
+                        titulo: nombreCanal,
                         miembros: [
                             {
                                 nombre: 'Lautaro',

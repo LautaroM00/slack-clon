@@ -18,7 +18,7 @@ const MensajeForm = ({ mensajesAcumulados, agregarMensaje, indexCanal, indexWork
 
         const textoMensaje = e.target[0].value
 
-        if (textoMensaje) {
+        if (textoMensaje && textoMensaje.length < 2000) {
             agregarMensaje([...mensajesAcumulados,
             {
                 autor: 'Lautaro',

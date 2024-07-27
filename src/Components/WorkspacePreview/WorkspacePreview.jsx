@@ -2,8 +2,6 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { RxEnter } from "react-icons/rx";
 
-import { cortarPalabra } from '../../Screens/CrearWorkSpace';
-
 import './WorkspacePreview.css'
 
 const WorkspacePreview = ({ titulo, thumbnail, id }) => {

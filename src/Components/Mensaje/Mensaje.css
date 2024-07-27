@@ -37,7 +37,7 @@
 
 @media (min-width: 700px){
     .mensajeContenedor{
-        height: 120px;
+        padding: 10px;
     }
 
     .mensajeContenedor img{
@@ -51,6 +51,7 @@
 
     .mensajeContenedor .texto{
         font-size: 20px;
+        max-width: 65vw;
     }
 
     .mensajeContenedor .nombre-hora span{

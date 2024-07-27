@@ -37,6 +37,7 @@
 @media (min-width: 700px){
     .mensajeForm textarea{
         height: 60%;
+        font-size: 30px;
     }
     .mensajeForm{
         height: 25%;

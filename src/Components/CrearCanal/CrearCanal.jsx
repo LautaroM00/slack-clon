@@ -27,12 +27,14 @@ const CrearCanal = ({ setDisplay, setCanalesState }) => {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        if (e.target[0].value) {
+        let nombreCanal = e.target[0].value
+
+        if (nombreCanal && nombreCanal.length < 15) {
             const WORKSPACES = traerLS()
 
             WORKSPACES[Number(id - 1)].canales.push(
                 {
-                    titulo: e.target[0].value,
+                    titulo: nombreCanal,
                     miembros: [
                         {
                             nombre: 'Lautaro',
