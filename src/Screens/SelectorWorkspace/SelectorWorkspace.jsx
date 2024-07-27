@@ -4,7 +4,6 @@ import { setLS, traerLS } from '../../FUNCIONES_LOCAL_STORAGE'
 import { WorkspacePreview } from '../index'
 
 import './SelectorWorkspace.css'
-import CrearWorkSpace from '../CrearWorkSpace/CrearWorkSpace'
 import { NavLink } from 'react-router-dom'
 import { VscDebugRestart } from "react-icons/vsc";
 
@@ -50,10 +49,10 @@ const SelectorWorkspace = () => {
                             Nuevo Workspace
                         </div>
                     </NavLink>
-                    <form onSubmit={handleReiniciar} className='reiniciar'>
-                        <button type='submit' className='boton'><VscDebugRestart style={{ width: '30px', height: '30px' }} /></button>
-                    </form>
                 </div>
+                <form onSubmit={handleReiniciar} className='reiniciar'>
+                    <button type='submit' className='boton'><VscDebugRestart style={{ width: '60px', height: '60px' }} /></button>
+                </form>
             </main>
         </>
     )

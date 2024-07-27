@@ -11,7 +11,7 @@
     -1px 1px 0 #000;
 }
 
-@media (min-width:800px){
+@media (min-width:700px){
     .contenedorWorkspace{
         display: flex;
         height: 95%;
@@ -19,5 +19,9 @@
 
     .mensajes-mensajeForm{
         width: 100%;
+    }
+
+    .canalTitulo{
+        display: none;
     }
 }

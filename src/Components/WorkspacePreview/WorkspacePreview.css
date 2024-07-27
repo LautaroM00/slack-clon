@@ -26,3 +26,30 @@
 .WorkspacePreview button{
     padding: 10px 25px;
 }
+
+.iconoEntrar{
+    width: 30px;
+    height: 30px;
+}
+
+@media (min-width: 600px){
+    .iconoEntrar{
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media (min-width: 1000px){
+    .WorkspacePreview .izquierda h2{
+        font-size: 30px;
+    }
+
+    .WorkspacePreview button{
+        width: 90px;
+    }
+    
+    .iconoEntrar{
+        width: 50px;
+        height: 50px;
+    }
+}

@@ -34,7 +34,7 @@
     padding: 6px 4px 4px 6px;
 }
 
-@media (min-width: 800px){
+@media (min-width: 700px){
     .mensajeForm textarea{
         height: 60%;
     }

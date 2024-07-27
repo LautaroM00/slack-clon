@@ -5,7 +5,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
     background-color: #B43F3F;
 }
 
@@ -53,16 +53,24 @@
 }
 
 .reiniciar{
+    position: absolute;
+    top: 95vh;
     padding: 5px;
     display: flex;
     align-items: end;
     justify-content: end;
     width: 100vw;
-    height: 100%;
+    height: 5%
 }
 
 .reiniciar .boton{
     display: flex;
     background-color: transparent;
     border-radius: 50%;
+}
+
+@media (min-width: 800px){
+    .SW_main h1{
+        font-size: 5em;
+    }
 }

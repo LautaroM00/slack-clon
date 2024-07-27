@@ -20,7 +20,13 @@ const CanalList = ({ canales, setCanalesState }) => {
 
     const idParams = useParams()
 
-    const { id } = idParams
+    const { id, idCanalParams } = idParams
+
+    const canalActual = canales.find((canal) => {
+        return (canal.id_canal === Number(idCanalParams))
+    })
+
+
 
     return (
         <>
@@ -33,9 +39,15 @@ const CanalList = ({ canales, setCanalesState }) => {
                         const { titulo, id_canal } = canal
                         return (
                             <NavLink key={index} to={`/workspace/${id}/${id_canal}`}>
+                                {
+                                    canalActual.id_canal === canal.id_canal ? 
+                                <li className='canal' style={{backgroundColor: '#dfdf72'}}>
+                                    {`#${titulo}`}
+                                </li> :
                                 <li className='canal'>
                                     {`#${titulo}`}
                                 </li>
+                                }
                             </NavLink>
                         )
                     })}

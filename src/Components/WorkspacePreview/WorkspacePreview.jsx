@@ -11,11 +11,11 @@ const WorkspacePreview = ({ titulo, thumbnail, id }) => {
         <>
             <div className='WorkspacePreview'>
                 <div className='izquierda'>
-                    <img src={thumbnail} style={{ width: '60px', borderRadius: '50%' }} />
+                    <img src={thumbnail} style={{ width: '60px' }} />
                     <h2>{titulo}</h2>
                 </div>
                 <NavLink to={`/workspace/${id}/1`} className={'navLink'}>
-                    <RxEnter style={{ width: '30px', height: '30px' }} />
+                    <RxEnter className='iconoEntrar' />
                 </NavLink>
             </div>
         </>

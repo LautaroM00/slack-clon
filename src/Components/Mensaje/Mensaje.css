@@ -30,3 +30,31 @@
     justify-content: space-between;
     width: 100%;
 }
+
+.mensajeContenedor .nombre-hora span{
+    font-weight: 500;
+}
+
+@media (min-width: 700px){
+    .mensajeContenedor{
+        height: 120px;
+    }
+
+    .mensajeContenedor img{
+        height: 60px;
+        width: 60px;
+    }
+
+    .mensajeContenedor h3{
+        font-size: 25px;
+    }
+
+    .mensajeContenedor .texto{
+        font-size: 20px;
+    }
+
+    .mensajeContenedor .nombre-hora span{
+        font-size: 20px;
+        font-weight: 500;
+    }
+}

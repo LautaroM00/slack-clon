@@ -14,11 +14,9 @@ const CrearWorkSpace = ({ setWORKSPACES }) => {
         if (!(e.target['nombreWorkspace'].value === '') && !(e.target['nombreCanal'].value === '')) {
             const WORKSPACES = traerLS()
 
-            console.log(e.target['nombreWorkspace'].value)
-
             WORKSPACES.push({
                 titulo: e.target['nombreWorkspace'].value,
-                thumbnail: '/iconos/gowGrecia.png',
+                thumbnail: '/iconos/workspacePredeterminado.png',
                 canales: [
                     {
                         titulo: e.target['nombreCanal'].value,
@@ -64,12 +62,11 @@ const CrearWorkSpace = ({ setWORKSPACES }) => {
                     </div>
                     <div className='botones'>
                         <button type='submit'>Crear</button>
-                        <NavLink to={'/'}>
-                            <span className='salir'>
+                        <NavLink to={'/'} className='salir'>
                                 Salir
-                            </span>
                         </NavLink>
                     </div>
+                    
                 </form>
             </div>
             <div className='sombra'>
