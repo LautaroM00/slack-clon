@@ -9,13 +9,13 @@
 }
 
 .crearWorkspace {
+    width: 90%;
     padding: 15px;
     background-color: #247cc0;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    align-items: baseline;
     gap: 10px;
 
     box-shadow: 0px 0px 20px 5px rgb(0, 0, 0);
@@ -60,26 +60,56 @@
     font-weight: 600;
 }
 
-.crearWorkspace .botones{
+.crearWorkspace .botones {
     display: flex;
-    gap:10px
+    gap: 10px
+}
+
+.crearWorkspace .label-input{
+    display: flex;
+    flex-direction: column;
+    justify-content: baseline;
 }
 
 
 
 
-
-.sombra{
+.sombra {
     position: absolute;
-    top:100%;
+    top: 100%;
     z-index: 100;
     height: 55px;
     width: 100vw;
     background-color: rgba(0, 0, 0, 0.867);
 }
 
-@media (min-width: 500px){
-    .sombra{
+
+@media (min-width: 500px) {
+    .sombra {
         display: none;
+    }
+}
+
+@media (min-width: 800px) {
+    .crearWorkspace {
+        width: 60%;
+        height: 60%;
+        align-items: baseline;
+    }
+
+    .crearWorkspace input {
+        width: 70%;
+    }
+
+    .crearWorkspace .botones {
+        width: 100%;
+    }
+
+    .crearWorkspace .salir {
+        width: 15vw;
+    }
+
+    .crearWorkspace button {
+        width: 15vw;
     }
 }

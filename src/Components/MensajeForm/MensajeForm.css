@@ -33,3 +33,13 @@
     width: 5px 100px;
     padding: 6px 4px 4px 6px;
 }
+
+@media (min-width: 800px){
+    .mensajeForm textarea{
+        height: 60%;
+    }
+    .mensajeForm{
+        height: 25%;
+        padding: 15px;
+    }
+}

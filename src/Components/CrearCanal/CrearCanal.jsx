@@ -7,17 +7,19 @@ import { actualizarLS, traerLS } from '../index.js'
 
 import './CrearCanal.css'
 
-const CrearCanal = ({  setDisplay, setCanalesState }) => {
+const CrearCanal = ({ setDisplay, setCanalesState }) => {
     const [mostrarInput, setMostrarInput] = useState('none')
     const [mostrarLabel, setMostrarLabel] = useState('')
     const handleMostrarInput = () => {
-        if(mostrarInput){
+        if (mostrarInput) {
             setMostrarInput('')
             setMostrarLabel('none')
-        }else{
-            setMostrarInput('none')
-            setMostrarLabel('')
         }
+    }
+
+    const handleCerrarInput = () => {
+        setMostrarInput('none')
+        setMostrarLabel('')
     }
 
     const { id } = useParams()
@@ -25,7 +27,7 @@ const CrearCanal = ({  setDisplay, setCanalesState }) => {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        if(e.target[0].value){
+        if (e.target[0].value) {
             const WORKSPACES = traerLS()
 
             WORKSPACES[Number(id - 1)].canales.push(
@@ -44,11 +46,11 @@ const CrearCanal = ({  setDisplay, setCanalesState }) => {
                     id_canal: WORKSPACES[Number(id - 1)].canales.length + 1
                 }
             )
-    
+
             actualizarLS(WORKSPACES)
             setCanalesState(WORKSPACES[Number(id - 1)].canales)
             e.target[0].value = ''
-    
+
             setDisplay('none')
             setMostrarInput('none')
             setMostrarLabel('');
@@ -56,14 +58,14 @@ const CrearCanal = ({  setDisplay, setCanalesState }) => {
     }
 
     return (
-        <>
-            <form className='formCrearCanal'  onSubmit={handleSubmit}>
-                <label style={{display: mostrarLabel}} onClick={handleMostrarInput}>Crear canal</label>
-                <input type='text' placeholder='#nuevo-canal' style={{ display: mostrarInput }}/>
+        <div className='especial' onClick={handleMostrarInput}>
+            <form className='formCrearCanal' onSubmit={handleSubmit}>
+                <label style={{ display: mostrarLabel, cursor: 'pointer' }}>Crear canal</label>
+                <input type='text' placeholder='#nuevo-canal' style={{ display: mostrarInput }} />
                 <button type='submit' style={{ display: mostrarInput }}><GrAdd style={{ width: '20px', height: '20px' }} /></button>
             </form>
-            {!mostrarInput && <IoMdClose style={{ width: '20px', height: '20px' }} onClick={handleMostrarInput}/>}
-        </>
+            {!mostrarInput && <IoMdClose style={{ width: '20px', height: '20px' }} onClick={handleCerrarInput} />}
+        </div>
     )
 }
 

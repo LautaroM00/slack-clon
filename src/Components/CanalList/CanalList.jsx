@@ -40,12 +40,12 @@ const CanalList = ({ canales, setCanalesState }) => {
                         )
                     })}
                 </ul>
-                <div className='especial'><CrearCanal display={display} setDisplay={setDisplay} setCanalesState={setCanalesState}/></div>
+                <CrearCanal display={display} setDisplay={setDisplay} setCanalesState={setCanalesState} />
             </nav>
             {
                 mostrarCanales ?
                     <div className='displayCanales'>
-                        <SlLayers onClick={handleDisplayCanales} style={{ width: '30px', height: '30px', color: 'whitesmoke' }} className='botones'/>
+                        <SlLayers onClick={handleDisplayCanales} style={{ width: '30px', height: '30px', color: 'whitesmoke' }} className='botones' />
                     </div> :
                     <div className='displayCanales'>
                         <IoMdClose onClick={handleDisplayCanales} style={{ width: '30px', height: '30px', color: 'whitesmoke' }} className='botones' />

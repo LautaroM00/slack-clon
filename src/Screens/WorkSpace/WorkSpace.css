@@ -29,3 +29,11 @@
     display: flex;
     align-items: center;
 }
+
+@media (min-width: 800px){
+    .workspace-arriba{
+        position: relative;
+        z-index: 3;
+        height: 5%;
+    }
+}

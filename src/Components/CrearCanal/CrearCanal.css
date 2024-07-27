@@ -7,7 +7,7 @@
 .formCrearCanal{
     display: flex;
     align-items: center;
-    gap:3px
+    gap:3px;
 }
 
 .formCrearCanal label{
@@ -29,4 +29,27 @@
     padding: 3px;
     background-color: transparent;
     border: none;
+}
+
+.navCanales .especial {
+    max-width: 95%;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    padding: 10px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    font-size: 22px;
+    background-color: #e2e2b665;
+    border-radius: 7px;
+    border: 3px black dashed;
+    cursor: pointer;
+}
+
+@media (min-width: 800px){
+    .navCanales .especial {
+        width: 100%;
+    }
 }

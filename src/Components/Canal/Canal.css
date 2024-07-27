@@ -14,7 +14,7 @@
 @media (min-width:800px){
     .contenedorWorkspace{
         display: flex;
-        height: 100%;
+        height: 95%;
     }
 
     .mensajes-mensajeForm{
