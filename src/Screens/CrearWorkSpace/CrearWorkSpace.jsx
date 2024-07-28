@@ -14,7 +14,7 @@ const CrearWorkSpace = ({ setWORKSPACES }) => {
         let nombreWorkspace = e.target['nombreWorkspace'].value
         let nombreCanal = e.target['nombreCanal'].value
 
-        if (nombreWorkspace !== '' && nombreCanal !== '' && nombreWorkspace.length < 15 && nombreCanal.length < 15) {
+        if (nombreWorkspace !== '' && nombreCanal !== '' && nombreWorkspace.length < 20 && nombreCanal.length < 15) {
             const WORKSPACES = traerLS()
 
             WORKSPACES.push({
