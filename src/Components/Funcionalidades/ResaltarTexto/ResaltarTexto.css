@@ -1,0 +1,6 @@
+.filtroMensajes{
+    display: flex;
+    align-items: baseline;
+    background-color: grey;
+    height: 10vh;
+}

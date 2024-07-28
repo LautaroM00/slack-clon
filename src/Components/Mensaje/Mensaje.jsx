@@ -1,8 +1,9 @@
 import React from 'react'
 
 import './Mensaje.css'
+import ResaltarTexto from '../Funcionalidades/ResaltarTexto/ResaltarTexto'
 
-const Mensaje = ({ autor, texto, hora, thumbnail}) => {
+const Mensaje = ({ autor, texto, hora, thumbnail, textoFiltro}) => {
     return (
         <div className='mensajeContenedor'>
             <div className='arriba'>
@@ -18,7 +19,11 @@ const Mensaje = ({ autor, texto, hora, thumbnail}) => {
             </div>
             <div className='abajo'>
                 <p className='texto'>
-                    {texto}
+                    {
+                        textoFiltro ?
+                        <ResaltarTexto texto={texto} textoFiltro={textoFiltro} /> :
+                        texto
+                    }
                 </p>
             </div>
         </div>

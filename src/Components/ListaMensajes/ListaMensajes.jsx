@@ -3,7 +3,8 @@ import Mensaje from '../Mensaje/Mensaje'
 
 import './ListaMensajes.css'
 
-const ListaMensajes = ({ mensajesAcumulados, miembros}) => {
+const ListaMensajes = ({ mensajesAcumulados, miembros, textoFiltro}) => {
+    console.clear()
     return (
         <div className='contenedorMensajes'>
             {mensajesAcumulados.map((mensaje, index) => {
@@ -16,7 +17,7 @@ const ListaMensajes = ({ mensajesAcumulados, miembros}) => {
                 const thumbnail = miembroEncontrado.thumbnail
 
                 return (
-                    <Mensaje autor={autor} texto={texto} hora={hora} thumbnail={thumbnail} key={index} />
+                    <Mensaje autor={autor} texto={texto} hora={hora} thumbnail={thumbnail} key={index} textoFiltro={textoFiltro}/>
                 )
             })}
         </div>

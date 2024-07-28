@@ -7,6 +7,7 @@ import ListaMensajes from '../ListaMensajes/ListaMensajes'
 import './Canal.css'
 import { traerLS } from '../../FUNCIONES_LOCAL_STORAGE'
 import CanalList from '../CanalList/CanalList'
+import InputFiltroTexto from '../InputFiltroTexto/InputFiltroTexto';
 
 const Canal = () => {
     let { id, idCanalParams } = useParams()
@@ -21,6 +22,7 @@ const Canal = () => {
     const [canalesState, setCanalesState] = useState(WORKSPACE.canales)
     const [mensajesAcumulados, agregarMensaje] = useState([])
     const [indexCanal, setIndexCanal] = useState('')
+    const [textoFiltro, setTextoFiltro] = useState('')
 
     let { titulo, miembros } = canal
 
@@ -41,7 +43,8 @@ const Canal = () => {
                         <CanalList canales={canalesState} setCanalesState={setCanalesState} />
                         <div className='mensajes-mensajeForm'>
                             <h2 className='canalTitulo'>{titulo}</h2>
-                            <ListaMensajes mensajesAcumulados={mensajesAcumulados} miembros={miembros} />
+                            <ListaMensajes mensajesAcumulados={mensajesAcumulados} miembros={miembros} textoFiltro={textoFiltro}/>
+                            <InputFiltroTexto setTextoFiltro={setTextoFiltro} />
                             <MensajeForm mensajesAcumulados={mensajesAcumulados} agregarMensaje={agregarMensaje} indexCanal={indexCanal - 1} indexWorkspace={id - 1} />
                         </div>
                     </div> :

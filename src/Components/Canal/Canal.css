@@ -11,6 +11,26 @@
     -1px 1px 0 #000;
 }
 
+.filtrarTexto{
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    width: 60%;
+    background-color: blue;
+}
+
+.lupitaMensajes{
+    color: white;
+    width: 30px;
+    height: 30px;
+}
+
+.mensajes-mensajeForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
 @media (min-width:700px){
     .contenedorWorkspace{
         display: flex;

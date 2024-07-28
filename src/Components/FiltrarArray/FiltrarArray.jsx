@@ -30,7 +30,7 @@ const FiltrarArray = ({ setArrayFiltrado, array}) => {
             <div className='lupita-input'>
                 <IoSearchSharp style={{ width: '20px', height: '20px', cursor: 'pointer' }} onClick={handleDisplayInput}/>
                 <div style={{ display: mostrarInput }} className='input'>
-                    <input id='filtroCanales' className='inputFiltroCanales' onChange={handleFiltro} />
+                    <input id='filtro' className='inputFiltro' onChange={handleFiltro} />
                     <IoMdClose onClick={handleCloseInput} style={{cursor:'pointer'}}/>
                 </div>
             </div>
