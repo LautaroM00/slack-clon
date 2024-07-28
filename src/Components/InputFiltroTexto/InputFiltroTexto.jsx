@@ -13,6 +13,7 @@ const InputFiltroTexto = ({ setTextoFiltro, texto }) => {
 
     const handleCloseInput = () => {
         setMostrarInput('none')
+        setTextoFiltro('')
     }
 
     const handleInput = (e) => {
