@@ -4,7 +4,6 @@ import Mensaje from '../Mensaje/Mensaje'
 import './ListaMensajes.css'
 
 const ListaMensajes = ({ mensajesAcumulados, miembros, textoFiltro}) => {
-    console.clear()
     return (
         <div className='contenedorMensajes'>
             {mensajesAcumulados.map((mensaje, index) => {

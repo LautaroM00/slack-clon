@@ -1,23 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import { useParams, NavLink } from 'react-router-dom'
+import React from 'react'
+import { NavLink } from 'react-router-dom'
 import { MdOutlineKeyboardBackspace } from "react-icons/md";
 import { TfiViewListAlt } from "react-icons/tfi";
 
-
-
-import { traerLS } from '../../FUNCIONES_LOCAL_STORAGE.js'
-
-import { CanalList, Canal } from '../index.js'
+import { Canal } from '../index.js'
 
 import './WorkSpace.css'
 
 const WorkSpace = () => {
-    const { id } = useParams() // id es un string
-
-    const WORKSPACES = traerLS()
-    const dataWorkspace = WORKSPACES.find((workspace) => {
-        return (workspace.id == id)
-    })
 
     return (
         <div className='workspace'>
