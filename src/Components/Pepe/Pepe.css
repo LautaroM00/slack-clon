@@ -1,0 +1,30 @@
+.pepe {
+    display: none;
+}
+
+@media (min-width: 700px) {
+    .pepe {
+        position: absolute;
+        height: 100%;
+        width: 40%;
+        right: 60%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        color: white;
+        text-shadow:
+            1px 1px 2px #000,
+            -1px -1px 2px #000,
+            1px -1px 2px #000,
+            -1px 1px 2px #000;
+    }
+}
+
+@media (min-width: 1300px) {
+    .pepe{
+        right: 70%;
+        width: 30%;
+    }
+}

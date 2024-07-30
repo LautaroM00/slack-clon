@@ -22,8 +22,8 @@ const CrearWorkSpace = ({ setWORKSPACES }) => {
             nombreCanal !== ''          &&
             nombreWorkspace.length < 20 &&
             nombreWorkspace.length > 5  &&
-            nombreCanal.length < 15     &&
-            nombreCanal.length >= 3) {
+            nombreCanal.length < 24     &&
+            nombreCanal.length > 2) {
 
             setInputInvalido('')
             setDisplayCondiciones('none')
@@ -84,7 +84,11 @@ const CrearWorkSpace = ({ setWORKSPACES }) => {
                         <InformacionInput setCondiciones={setDisplayCondiciones} displayCondiciones={displayCondiciones}/>
                     </div>
                 </form>
-                <ListaCondiciones displayCondiciones={displayCondiciones} />
+                <ListaCondiciones displayCondiciones={displayCondiciones} 
+                condiciones={[
+                    'Workspace: entre 5 y 20 caracteres',
+                    'Canal: entre 3 y 23 caracteres'
+                ]} />
             </div>
             <div className='sombra'>
             </div>

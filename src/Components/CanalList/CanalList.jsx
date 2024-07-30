@@ -6,9 +6,10 @@ import { IoMdClose } from "react-icons/io";
 import './CanalList.css'
 import CrearCanal from '../CrearCanal/CrearCanal'
 import FiltrarArray from '../FiltrarArray/FiltrarArray';
+import Pepe from '../Pepe/Pepe';
 
 const CanalList = ({ canales, setCanalesState, setTextoFiltro }) => {
-    const [mostrarCanales, setMostrarCanales] = useState('')
+    const [mostrarCanales, setMostrarCanales] = useState('none')
     const [display, setDisplay] = useState('')
     const [canalesFiltrados, setCanalesFiltrados] = useState([])
 
@@ -18,6 +19,18 @@ const CanalList = ({ canales, setCanalesState, setTextoFiltro }) => {
         return (canal.id_canal === Number(idCanalParams))
     })
 
+    useEffect(() => {
+        setCanalesFiltrados(canales)
+        window.innerWidth >= 700 ?
+            setMostrarCanales('') :
+            ''
+    }
+        ,
+        [canales, mostrarCanales])
+
+    const resetTextoFiltro = () => {
+        setTextoFiltro('')
+    }
 
     const handleDisplayCanales = () => {
         if (mostrarCanales === '') {
@@ -25,16 +38,6 @@ const CanalList = ({ canales, setCanalesState, setTextoFiltro }) => {
         } else {
             setMostrarCanales('')
         }
-    }
-
-    useEffect(() => {
-        setCanalesFiltrados(canales)
-    }
-        ,
-        [canales])
-
-    const resetTextoFiltro = () => {
-        setTextoFiltro('')
     }
 
     return (
@@ -46,26 +49,26 @@ const CanalList = ({ canales, setCanalesState, setTextoFiltro }) => {
                 <FiltrarArray setArrayFiltrado={setCanalesFiltrados} array={canales} />
                 <ul>
                     {canalesFiltrados.length === 0 ?
-                    <span className='canalNotFound'>
-                        No se encontraron resultados
-                    </span> :
-                    canalesFiltrados.map((canal, index) => {
-                        const { titulo, id_canal } = canal
-                        return (
-                            <NavLink key={index} to={`/workspace/${id}/${id_canal}`}>
-                                {
-                                    canalActual.id_canal === canal.id_canal ?
-                                        <li className='canal' style={{ backgroundColor: '#dfdf72' }}>
-                                            {`#${titulo}`}
-                                        </li> :
-                                        <li className='canal' onClick={resetTextoFiltro}>
-                                            {`#${titulo}`}
-                                        </li>
-                                }
-                            </NavLink>
-                        )
-                    })    
-                }
+                        <span className='canalNotFound'>
+                            No se encontraron resultados
+                        </span> :
+                        canalesFiltrados.map((canal, index) => {
+                            const { titulo, id_canal } = canal
+                            return (
+                                <NavLink key={index} to={`/workspace/${id}/${id_canal}`}>
+                                    {
+                                        canalActual.id_canal === canal.id_canal ?
+                                            <li className='canal' style={{ backgroundColor: '#dfdf72' }}>
+                                                {`#${titulo}`}
+                                            </li> :
+                                            <li className='canal' onClick={resetTextoFiltro}>
+                                                {`#${titulo}`}
+                                            </li>
+                                    }
+                                </NavLink>
+                            )
+                        })
+                    }
                 </ul>
                 <CrearCanal display={display} setDisplay={setDisplay} setCanalesState={setCanalesState} />
             </nav>
@@ -78,6 +81,7 @@ const CanalList = ({ canales, setCanalesState, setTextoFiltro }) => {
                         <IoMdClose onClick={handleDisplayCanales} style={{ width: '30px', height: '30px', color: 'whitesmoke' }} className='botones' />
                     </div>
             }
+            <Pepe display={mostrarCanales} setMostrarCanales={setMostrarCanales}/>
         </>
     )
 }

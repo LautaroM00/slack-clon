@@ -32,7 +32,6 @@ const Canal = () => {
     },
         [idCanalParams]
     )
-    /*     console.log(` ${idCanalParams} --- ${idCanalState}`) */ //Con esto solucioné un bug
 
     return (
         <>
