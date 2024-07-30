@@ -29,7 +29,9 @@ const CrearCanal = ({ setDisplay, setCanalesState }) => {
 
         let nombreCanal = e.target[0].value
 
-        if (nombreCanal && nombreCanal.length < 15) {
+        if (nombreCanal &&
+            nombreCanal.length < 15 &&
+            nombreCanal.length > 3) {
             const WORKSPACES = traerLS()
 
             WORKSPACES[Number(id - 1)].canales.push(
@@ -37,8 +39,8 @@ const CrearCanal = ({ setDisplay, setCanalesState }) => {
                     titulo: nombreCanal,
                     miembros: [
                         {
-                            nombre: 'Lautaro',
-                            thumbnail: '/thumbnails/yo.png',
+                            nombre: 'Tú',
+                            thumbnail: '/thumbnails/chad.png',
                             mensajesCanal: [],
                             id: 1
                         }

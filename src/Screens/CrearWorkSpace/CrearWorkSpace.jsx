@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import './CrearWorkSpace.css'
 import { actualizarLS, traerLS } from '../../FUNCIONES_LOCAL_STORAGE'
@@ -29,7 +29,6 @@ const CrearWorkSpace = ({ setWORKSPACES }) => {
             setDisplayCondiciones('none')
 
             const WORKSPACES = traerLS()
-
             WORKSPACES.push({
                 titulo: nombreWorkspace,
                 thumbnail: '/iconos/workspacePredeterminado.png',
@@ -38,13 +37,13 @@ const CrearWorkSpace = ({ setWORKSPACES }) => {
                         titulo: nombreCanal,
                         miembros: [
                             {
-                                nombre: 'Lautaro',
-                                thumbnail: '/thumbnails/yo.png',
+                                nombre: 'Tú',
+                                thumbnail: '/thumbnails/chad.png',
                                 mensajesCanal: '.',
                                 id: 1
                             }],
                         mensajes: [{
-                            autor: 'Lautaro',
+                            autor: 'Tú',
                             texto: 'holaa',
                             hora: '19:57',
                             id: 1
@@ -55,11 +54,10 @@ const CrearWorkSpace = ({ setWORKSPACES }) => {
                 contactos: [],
                 id: WORKSPACES.length + 1
             })
-
             e.target['nombreWorkspace'].value = ''
             e.target['nombreCanal'].value = ''
-
             actualizarLS(WORKSPACES)
+
         }else{
             setInputInvalido('4px solid red')
             setDisplayCondiciones('')

@@ -19,7 +19,7 @@ const MensajeForm = ({ mensajesAcumulados, agregarMensaje, indexCanal, indexWork
         if (textoMensaje && textoMensaje.length < 2000) {
             agregarMensaje([...mensajesAcumulados,
             {
-                autor: 'Lautaro',
+                autor: 'Tú',
                 texto: textoMensaje,
                 hora: `${horas}:${minutos}`,
                 id: mensajesAcumulados.length + 1
@@ -27,7 +27,7 @@ const MensajeForm = ({ mensajesAcumulados, agregarMensaje, indexCanal, indexWork
             )
 
             agregarMensajeLS(indexWorkspace, indexCanal, {
-                autor: 'Lautaro',
+                autor: 'Tú',
                 texto: textoMensaje,
                 hora: `${horas}:${minutos}`,
                 id: mensajesAcumulados.length + 1

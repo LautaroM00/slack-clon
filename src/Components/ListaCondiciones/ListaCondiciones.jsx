@@ -10,7 +10,7 @@ const ListaCondiciones = ({ displayCondiciones }) => {
                 Workspace: mas de 5 caracteres y menos de 20
             </span>
             <span>
-                Canal: mas de 3 caracteres y menos de 15
+                Canal: mas de 2 caracteres y menos de 15
             </span>
         </div>
     )

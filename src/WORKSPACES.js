@@ -66,6 +66,13 @@ const WORKSPACES = [
                         mensajesCanal: '.',
                         id: 10
                     },
+                    {
+                        nombre: 'Tú',
+                        thumbnail: '/thumbnails/chad.png',
+                        mensajesCanal: '.',
+                        id: 11
+                    },
+
                 ],
                 mensajes: [
                     {
@@ -158,6 +165,12 @@ const WORKSPACES = [
                         mensajesCanal: '.',
                         id: 10
                     },
+                    {
+                        nombre: 'Tú',
+                        thumbnail: '/thumbnails/chad.png',
+                        mensajesCanal: '.',
+                        id: 11
+                    },
                 ],
                 mensajes: [
                     {
@@ -246,6 +259,12 @@ const WORKSPACES = [
                         mensajesCanal: '.',
                         id: 7
                     },
+                    {
+                        nombre: 'Tú',
+                        thumbnail: '/thumbnails/chad.png',
+                        mensajesCanal: '.',
+                        id: 8
+                    },
                 ],
                 mensajes: [
                     {
@@ -319,6 +338,12 @@ const WORKSPACES = [
                         thumbnail: '/thumbnails/yo.png',
                         mensajesCanal: '.',
                         id: 9
+                    },
+                    {
+                        nombre: 'Tú',
+                        thumbnail: '/thumbnails/chad.png',
+                        mensajesCanal: '.',
+                        id: 10
                     },
                 ],
                 mensajes: [
