@@ -1,0 +1,16 @@
+.listaCondiciones{
+    color: white;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background-color: red;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+@media (min-width: 800px){
+    .listaCondiciones{
+        width: 60%;
+    }
+}

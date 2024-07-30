@@ -1,0 +1,31 @@
+.contenedorQuestion {
+    color: white;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.contenedorQuestion .question {
+    width: 30px;
+    height: 30px;
+}
+
+
+
+
+
+@media (min-width: 800px) {
+    .contenedorQuestion .question {
+        width: 45px;
+        height: 45px;
+        ;
+    }
+}
+
+@media (min-width: 1000px) {
+    .contenedorQuestion .question {
+        width: 60px;
+        height: 60px;
+        ;
+    }
+}

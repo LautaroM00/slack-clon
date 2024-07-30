@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import './CrearWorkSpace.css'
 import { actualizarLS, traerLS } from '../../FUNCIONES_LOCAL_STORAGE'
 import WORKSPACES from '../../WORKSPACES'
 import SelectorWorkspace from '../SelectorWorkspace/SelectorWorkspace'
 import { NavLink } from 'react-router-dom'
+import InformacionInput from '../../Components/InformacionInput/InformacionInput'
+import ListaCondiciones from '../../Components/ListaCondiciones/ListaCondiciones'
 
 const CrearWorkSpace = ({ setWORKSPACES }) => {
+    const [displayCondiciones, setDisplayCondiciones] = useState('none')
+    const [inputInvalido, setInputInvalido] = useState('')
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -14,7 +18,16 @@ const CrearWorkSpace = ({ setWORKSPACES }) => {
         let nombreWorkspace = e.target['nombreWorkspace'].value
         let nombreCanal = e.target['nombreCanal'].value
 
-        if (nombreWorkspace !== '' && nombreCanal !== '' && nombreWorkspace.length < 20 && nombreCanal.length < 15) {
+        if (nombreWorkspace !== ''      &&
+            nombreCanal !== ''          &&
+            nombreWorkspace.length < 20 &&
+            nombreWorkspace.length > 5  &&
+            nombreCanal.length < 15     &&
+            nombreCanal.length >= 3) {
+
+            setInputInvalido('')
+            setDisplayCondiciones('none')
+
             const WORKSPACES = traerLS()
 
             WORKSPACES.push({
@@ -45,9 +58,11 @@ const CrearWorkSpace = ({ setWORKSPACES }) => {
 
             e.target['nombreWorkspace'].value = ''
             e.target['nombreCanal'].value = ''
-            /*             setWORKSPACES(WORKSPACES) */
 
             actualizarLS(WORKSPACES)
+        }else{
+            setInputInvalido('4px solid red')
+            setDisplayCondiciones('')
         }
     }
 
@@ -57,20 +72,21 @@ const CrearWorkSpace = ({ setWORKSPACES }) => {
                 <form onSubmit={handleSubmit} className='crearWorkspace'>
                     <div className='label-input'>
                         <label htmlFor='nombreWorkspace'>Nombre Workspace:</label>
-                        <input type='text' id='nombreWorkspace' name='nombreWorkspace' />
+                        <input type='text' id='nombreWorkspace' name='nombreWorkspace' style={{border: inputInvalido}} />
                     </div>
                     <div className='label-input'>
                         <label htmlFor='nombreCanal'>Nombre Canal:</label>
-                        <input type='text' id='nombreCanal' name='nombreCanal' />
+                        <input type='text' id='nombreCanal' name='nombreCanal' style={{border: inputInvalido}}/>
                     </div>
                     <div className='botones'>
                         <button type='submit'>Crear</button>
                         <NavLink to={'/'} className='salir'>
-                                Salir
+                            Salir
                         </NavLink>
+                        <InformacionInput setCondiciones={setDisplayCondiciones} displayCondiciones={displayCondiciones}/>
                     </div>
-                    
                 </form>
+                <ListaCondiciones displayCondiciones={displayCondiciones} />
             </div>
             <div className='sombra'>
             </div>
