@@ -11,7 +11,13 @@ const CanalList = ({ canales, setCanalesState, setTextoFiltro }) => {
     const [mostrarCanales, setMostrarCanales] = useState('')
     const [display, setDisplay] = useState('')
     const [canalesFiltrados, setCanalesFiltrados] = useState([])
-    const [filtroArray, setFiltroArray] = useState()
+
+    const idParams = useParams()
+    const { id, idCanalParams } = idParams
+    const canalActual = canales.find((canal) => {
+        return (canal.id_canal === Number(idCanalParams))
+    })
+
 
     const handleDisplayCanales = () => {
         if (mostrarCanales === '') {
@@ -20,14 +26,6 @@ const CanalList = ({ canales, setCanalesState, setTextoFiltro }) => {
             setMostrarCanales('')
         }
     }
-
-    const idParams = useParams()
-
-    const { id, idCanalParams } = idParams
-
-    const canalActual = canales.find((canal) => {
-        return (canal.id_canal === Number(idCanalParams))
-    })
 
     useEffect(() => {
         setCanalesFiltrados(canales)
@@ -45,7 +43,7 @@ const CanalList = ({ canales, setCanalesState, setTextoFiltro }) => {
                 <h2>
                     Canales
                 </h2>
-                <FiltrarArray setArrayFiltrado={setCanalesFiltrados} array={canales} filtroArray={filtroArray}/>
+                <FiltrarArray setArrayFiltrado={setCanalesFiltrados} array={canales} />
                 <ul>
                     {canalesFiltrados.length === 0 ?
                     <span className='canalNotFound'>

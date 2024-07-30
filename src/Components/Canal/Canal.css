@@ -37,10 +37,16 @@
     }
 
     .mensajes-mensajeForm{
-        width: 100%;
+        width: 60%;
     }
 
     .canalTitulo{
         display: none;
+    }
+}
+
+@media (min-width:1300px){
+    .mensajes-mensajeForm{
+        width: 70%;
     }
 }

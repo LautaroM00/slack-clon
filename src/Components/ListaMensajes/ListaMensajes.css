@@ -33,6 +33,7 @@
 @media (min-width: 700px){
     .contenedorMensajes{
         height: 70%;
+        width: 100%;
     }
     
 }

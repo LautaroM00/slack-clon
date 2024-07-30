@@ -50,7 +50,7 @@ const SelectorWorkspace = () => {
                             })
                     }
                 </nav>
-                <FiltrarArray setArrayFiltrado={setWorkspacesFiltrados} array={WORKSPACES} />
+                <FiltrarArray setArrayFiltrado={setWorkspacesFiltrados} array={WORKSPACES}/>
                 <div className='SW_footer'>
                     <NavLink to={'/workspace/new'}>
                         <div className='nuevoWS'>
