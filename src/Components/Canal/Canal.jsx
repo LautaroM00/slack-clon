@@ -13,10 +13,10 @@ const Canal = () => {
     let { id, idCanalParams } = useParams()
 
     let WORKSPACES = traerLS()
-
     let WORKSPACE = WORKSPACES[id - 1]
-
     let canal = WORKSPACE.canales[idCanalParams - 1]
+    let { titulo, miembros } = canal
+
 
     const [idCanalState, setIdCanalState] = useState(idCanalParams)
     const [canalesState, setCanalesState] = useState(WORKSPACE.canales)
@@ -24,7 +24,6 @@ const Canal = () => {
     const [indexCanal, setIndexCanal] = useState('')
     const [textoFiltro, setTextoFiltro] = useState('')
 
-    let { titulo, miembros } = canal
 
     useEffect(() => {
         setIdCanalState(idCanalParams)
@@ -33,18 +32,18 @@ const Canal = () => {
     },
         [idCanalParams]
     )
-    /*     console.log(` ${idCanalParams} --- ${idCanalState}`) */
+    /*     console.log(` ${idCanalParams} --- ${idCanalState}`) */ //Con esto solucioné un bug
 
     return (
         <>
             {
                 idCanalState == idCanalParams ?
                     <div className='contenedorWorkspace'>
-                        <CanalList canales={canalesState} setCanalesState={setCanalesState} />
+                        <CanalList canales={canalesState} setCanalesState={setCanalesState} setTextoFiltro={setTextoFiltro}/>
                         <div className='mensajes-mensajeForm'>
                             <h2 className='canalTitulo'>{titulo}</h2>
                             <ListaMensajes mensajesAcumulados={mensajesAcumulados} miembros={miembros} textoFiltro={textoFiltro}/>
-                            <InputFiltroTexto setTextoFiltro={setTextoFiltro} />
+                            <InputFiltroTexto setTextoFiltro={setTextoFiltro} textoFiltro={textoFiltro}/>
                             <MensajeForm mensajesAcumulados={mensajesAcumulados} agregarMensaje={agregarMensaje} indexCanal={indexCanal - 1} indexWorkspace={id - 1} />
                         </div>
                     </div> :

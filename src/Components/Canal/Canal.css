@@ -28,7 +28,6 @@
 .mensajes-mensajeForm{
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
 }
 
 @media (min-width:700px){

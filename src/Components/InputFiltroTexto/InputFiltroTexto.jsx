@@ -4,7 +4,7 @@ import { TbMessageCircleSearch } from "react-icons/tb";
 import './InputFiltroTexto.css'
 import { IoMdClose } from 'react-icons/io';
 
-const InputFiltroTexto = ({ setTextoFiltro, texto }) => {
+const InputFiltroTexto = ({ setTextoFiltro, texto, textoFiltro }) => {
     const [mostrarInput, setMostrarInput] = useState('none')
 
     const handleDisplayInput = () => {
@@ -25,7 +25,7 @@ const InputFiltroTexto = ({ setTextoFiltro, texto }) => {
             <div className='lupita-input'>
                 <TbMessageCircleSearch className='lupitaTexto' onClick={handleDisplayInput}/>
                 <div style={{ display: mostrarInput }} className='input'>
-                    <input id='filtro' className='inputFiltro' onChange={handleInput} />
+                    <input id='filtro' className='inputFiltro' onChange={handleInput} value={textoFiltro} />
                     <IoMdClose onClick={handleCloseInput} style={{ cursor: 'pointer' }} />
                 </div>
             </div>

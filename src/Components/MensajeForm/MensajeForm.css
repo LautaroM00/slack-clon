@@ -1,10 +1,7 @@
 .mensajeForm{
-    padding: 20px;
+    padding: 0 20px;
     display: flex;
-    align-items: center;
-    justify-content: center;
     gap:10px;
-    height: 15vh;
 }
 
 .mensajeForm textarea{
@@ -35,13 +32,27 @@
     padding: 6px 4px 4px 6px;
 }
 
+.mensajeForm .contenedorIcono{
+    display: flex;
+    align-items: end;
+}
+
+.mensajeForm .sendIcono{
+    width: 25px;
+    height: 25px;
+}
+
 @media (min-width: 700px){
     .mensajeForm textarea{
-        height: 60%;
+        height: 100%;
         font-size: 30px;
     }
     .mensajeForm{
-        height: 20%;
-        padding: 15px;
+        height: 18%;
+        padding: 0 15px;
+    }
+    .mensajeForm .sendIcono{
+        width: 40px;
+        height: 40px;
     }
 }

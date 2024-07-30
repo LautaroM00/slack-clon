@@ -7,11 +7,11 @@ import './CanalList.css'
 import CrearCanal from '../CrearCanal/CrearCanal'
 import FiltrarArray from '../FiltrarArray/FiltrarArray';
 
-const CanalList = ({ canales, setCanalesState }) => {
+const CanalList = ({ canales, setCanalesState, setTextoFiltro }) => {
     const [mostrarCanales, setMostrarCanales] = useState('')
     const [display, setDisplay] = useState('')
     const [canalesFiltrados, setCanalesFiltrados] = useState([])
-    const [textoFiltro, setTextoFiltro] = useState()
+    const [filtroArray, setFiltroArray] = useState()
 
     const handleDisplayCanales = () => {
         if (mostrarCanales === '') {
@@ -35,13 +35,17 @@ const CanalList = ({ canales, setCanalesState }) => {
         ,
         [canales])
 
+    const resetTextoFiltro = () => {
+        setTextoFiltro('')
+    }
+
     return (
         <>
             <nav style={{ display: mostrarCanales }} className='navCanales'>
                 <h2>
                     Canales
                 </h2>
-                <FiltrarArray setArrayFiltrado={setCanalesFiltrados} array={canales} textoFiltro={textoFiltro}/>
+                <FiltrarArray setArrayFiltrado={setCanalesFiltrados} array={canales} filtroArray={filtroArray}/>
                 <ul>
                     {canalesFiltrados.length === 0 ?
                     <span className='canalNotFound'>
@@ -56,7 +60,7 @@ const CanalList = ({ canales, setCanalesState }) => {
                                         <li className='canal' style={{ backgroundColor: '#dfdf72' }}>
                                             {`#${titulo}`}
                                         </li> :
-                                        <li className='canal'>
+                                        <li className='canal' onClick={resetTextoFiltro}>
                                             {`#${titulo}`}
                                         </li>
                                 }

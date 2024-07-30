@@ -1,5 +1,5 @@
 .contenedorFilterTexto{
-    padding: 5px 20px;
+    padding: 10px 20px;
     display: flex;
     width: 100%;
 }
@@ -9,7 +9,7 @@
     display: flex;
     align-items: center;
     justify-content: baseline;
-    background-color: #144469;
+    background-color: #247cc0;
     border-radius: 25px;
     gap: 5px;
 }
@@ -19,7 +19,7 @@
     height: 20px;
     width: 80%;
     font-size: 15px;
-    background-color: #2473b0;
+    background-color: #247cc0;
     border-radius: 5px;
     color: whitesmoke;
 }
@@ -34,4 +34,8 @@
     width: 20px;
     height: 20px;
     cursor: pointer;
+}
+
+@media (min-width: 700px){
+
 }

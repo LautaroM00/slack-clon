@@ -13,6 +13,7 @@
     background-color: #194f79;
     border-radius: 25px;
     gap: 5px;
+    color:white;
 }
 
 .inputFiltro{
@@ -21,6 +22,7 @@
     width: 80%;
     background-color: #2473b0;
     border-radius: 5px;
+    color: white;
 }
 
 .contenedorFilter .input{

@@ -6,13 +6,9 @@ import './ResaltarTexto.css'
 const ResaltarTexto = ({ texto, textoFiltro }) => {
     const [textoState] = useState(texto)
 
-    let regexp = new RegExp(textoFiltro, 'gi')
+    let regexp = new RegExp(`(${textoFiltro})`, 'gi')
 
-    let coincidenciasMarcadas = texto.replace(regexp, `¨${textoFiltro}¨`)
-
-    let textoFiltrado = coincidenciasMarcadas.split('¨')
-
-    console.log(textoFiltrado)
+    let letrasMensaje = texto.split(regexp)
 
     return (
         <>
@@ -20,11 +16,11 @@ const ResaltarTexto = ({ texto, textoFiltro }) => {
                 (textoFiltro && textoState.toLowerCase().includes(textoFiltro.toLowerCase())) ?
                     <>
                         {
-                            textoFiltrado.map((elemento, index) => {
+                            letrasMensaje.map((letra, index) => {
                                 return (
-                                    elemento.includes(textoFiltro) ?
-                                        <mark key={index}>{elemento}</mark> :
-                                        elemento
+                                    letra.toLowerCase() === textoFiltro.toLowerCase() ?
+                                        <mark key={index}>{letra}</mark> :
+                                        letra
                                 )
                             })
                         }
