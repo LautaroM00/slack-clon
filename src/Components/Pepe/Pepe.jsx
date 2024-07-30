@@ -13,7 +13,7 @@ const Pepe = ({ display, setMostrarCanales }) => {
             <h2 style={{textAlign: 'center'}}>
                 Con que jugando con el responsive...
             </h2>
-            <img src='/imagenes/pepe.png' style={{width: '50px', height: '50px'}}/>
+            <img src='/thumbnails/pepe.png' style={{width: '50px', height: '50px'}}/>
             <button onClick={handleMostrarCanales}>
                 Mostrar canalList
             </button>
