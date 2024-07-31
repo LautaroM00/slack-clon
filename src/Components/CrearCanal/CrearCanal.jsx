@@ -13,22 +13,30 @@ const CrearCanal = ({ setDisplay, setCanalesState }) => {
     const [mostrarLabel, setMostrarLabel] = useState('')
     const [bordeInput, setBordeInput] = useState('')
     const [displayCondiciones, setDisplayCondiciones] = useState('none')
+    const [errorNombreRepetido, setErrorNombreRepetido] = useState('')
+    const [errorLongitudNombre, setErrorLongitudNombre] = useState('')
+
 
     const { id } = useParams()
 
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        let nombreCanal = e.target[0].value
+        const WORKSPACES = traerLS()
 
-        if (nombreCanal &&
-            nombreCanal.length < 24 &&
-            nombreCanal.length > 2) {
-            const WORKSPACES = traerLS()
+        let nombreCanalNuevo = e.target[0].value
+
+        let estaRepetido = WORKSPACES[Number(id - 1)].canales.find((canal) => {
+            return (nombreCanalNuevo === canal.titulo)
+        })
+
+        if (nombreCanalNuevo &&
+            nombreCanalNuevo.length < 24 &&
+            nombreCanalNuevo.length > 2 && !estaRepetido) {
 
             WORKSPACES[Number(id - 1)].canales.push(
                 {
-                    titulo: nombreCanal,
+                    titulo: nombreCanalNuevo,
                     miembros: [
                         {
                             nombre: 'Tú',
@@ -52,9 +60,20 @@ const CrearCanal = ({ setDisplay, setCanalesState }) => {
             setMostrarLabel('');
             setBordeInput('')
             setDisplayCondiciones('none')
-        }else{
+            setErrorNombreRepetido('')
+            setErrorLongitudNombre('')
+        } else {
             setBordeInput('3px solid red')
             setDisplayCondiciones('')
+            if (nombreCanalNuevo.length > 23 ||
+                nombreCanalNuevo.length < 3) {
+                setErrorLongitudNombre('El nombre ingresado debe tener entre 3 y 23 (inclusive) caracteres.')
+                setErrorNombreRepetido('')
+            }
+            if (estaRepetido) {
+                setErrorNombreRepetido('EL NOMBRE INGRESADO PERTENECE A UN CANAL EXISTENTE')
+                setErrorLongitudNombre('')
+            }
         }
     }
 
@@ -69,11 +88,13 @@ const CrearCanal = ({ setDisplay, setCanalesState }) => {
     const handleCerrarInput = () => {
         setMostrarInput('none')
         setMostrarLabel('')
+        setDisplayCondiciones('none')
+        setBordeInput('')
     }
 
     return (
         <>
-            <div className='especial' onClick={handleMostrarInput} style={mostrarInput ? {cursor: 'pointer'} :  {cursor: ''}}>
+            <div className='especial' onClick={handleMostrarInput} style={mostrarInput ? { cursor: 'pointer' } : { cursor: '' }}>
                 <form className='formCrearCanal' onSubmit={handleSubmit}>
                     <label style={{ display: mostrarLabel, cursor: 'pointer' }}>Crear canal</label>
                     <input type='text' placeholder='#nuevo-canal' style={{ display: mostrarInput, border: bordeInput }} />
@@ -81,7 +102,7 @@ const CrearCanal = ({ setDisplay, setCanalesState }) => {
                 </form>
                 {!mostrarInput && <IoMdClose style={{ width: '20px', height: '20px', cursor: 'pointer' }} onClick={handleCerrarInput} />}
             </div>
-            <ListaCondiciones displayCondiciones={displayCondiciones} condiciones={['Entre 3 y 23 caracteres']} />
+            <ListaCondiciones displayCondiciones={displayCondiciones} condiciones={[errorLongitudNombre, errorNombreRepetido]} />
         </>
     )
 }

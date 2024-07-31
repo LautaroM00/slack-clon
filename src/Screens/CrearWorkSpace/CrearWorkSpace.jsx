@@ -1,36 +1,42 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import './CrearWorkSpace.css'
 import { actualizarLS, traerLS } from '../../FUNCIONES_LOCAL_STORAGE'
-import WORKSPACES from '../../WORKSPACES'
 import SelectorWorkspace from '../SelectorWorkspace/SelectorWorkspace'
 import { NavLink } from 'react-router-dom'
 import InformacionInput from '../../Components/InformacionInput/InformacionInput'
 import ListaCondiciones from '../../Components/ListaCondiciones/ListaCondiciones'
 
-const CrearWorkSpace = ({ setWORKSPACES }) => {
+const CrearWorkSpace = () => {
     const [displayCondiciones, setDisplayCondiciones] = useState('none')
     const [inputInvalido, setInputInvalido] = useState('')
+    const [errorNombreRepetido, setErrorNombreRepetido] = useState('')
+    const [errorLongitudNombreWorkspace, setErrorLongitudNombreWorkspace] = useState('')
+    const [errorLongitudNombreCanal, setErrorLongitudNombreCanal] = useState('')
 
     const handleSubmit = (e) => {
         e.preventDefault()
 
+        const WORKSPACES = traerLS()
+
         let nombreWorkspace = e.target['nombreWorkspace'].value
         let nombreCanal = e.target['nombreCanal'].value
 
+        let estaRepetido = WORKSPACES.find((workspace) => {
+            return (workspace.titulo === nombreWorkspace)
+        })
 
-
-        if (nombreWorkspace !== ''       &&
-            nombreCanal !== ''           &&
+        if (nombreWorkspace !== '' &&
+            nombreCanal !== '' &&
             nombreWorkspace.length <= 20 &&
-            nombreWorkspace.length >= 5  &&
-            nombreCanal.length <= 23     &&
-            nombreCanal.length >= 3) {
+            nombreWorkspace.length >= 5 &&
+            nombreCanal.length <= 23 &&
+            nombreCanal.length >= 3 &&
+            !estaRepetido) {
 
             setInputInvalido('')
             setDisplayCondiciones('none')
 
-            const WORKSPACES = traerLS()
             WORKSPACES.push({
                 titulo: nombreWorkspace,
                 thumbnail: '/iconos/workspacePredeterminado.png',
@@ -59,11 +65,33 @@ const CrearWorkSpace = ({ setWORKSPACES }) => {
             e.target['nombreWorkspace'].value = ''
             e.target['nombreCanal'].value = ''
             actualizarLS(WORKSPACES)
+            setErrorNombreRepetido('')
+            setErrorLongitudNombreCanal('')
+            setErrorLongitudNombreWorkspace('')
+            setDisplayCondiciones('none')
 
-        }else{
+        } else {
             setInputInvalido('4px solid red')
             setDisplayCondiciones('')
-            console.log(nombreWorkspace.length)
+            if (nombreWorkspace.length > 20 ||
+                nombreWorkspace.length < 5) {
+                setErrorLongitudNombreWorkspace('El nombre del WORKSPACE debe tener entre 5 y 20 caracteres inclusive.')
+            } else {
+                setErrorLongitudNombreWorkspace('')
+            }
+
+            if (nombreCanal.length > 23 ||
+                nombreCanal.length < 3) {
+                setErrorLongitudNombreCanal('El nombre del CANAL debe tener entre 3 y 23 caracteres inclusive.')
+            } else {
+                setErrorLongitudNombreCanal('')
+            }
+
+            if (estaRepetido) {
+                setErrorNombreRepetido('Ya existe un workspace con el nombre que intenta ingresar.')
+            } else {
+                setErrorNombreRepetido('')
+            }
         }
     }
 
@@ -73,25 +101,31 @@ const CrearWorkSpace = ({ setWORKSPACES }) => {
                 <form onSubmit={handleSubmit} className='crearWorkspace'>
                     <div className='label-input'>
                         <label htmlFor='nombreWorkspace'>Nombre Workspace:</label>
-                        <input type='text' id='nombreWorkspace' name='nombreWorkspace' style={{border: inputInvalido}} />
+                        <input type='text' id='nombreWorkspace' name='nombreWorkspace' style={{ border: inputInvalido }} />
                     </div>
                     <div className='label-input'>
                         <label htmlFor='nombreCanal'>Nombre Canal:</label>
-                        <input type='text' id='nombreCanal' name='nombreCanal' style={{border: inputInvalido}}/>
+                        <input type='text' id='nombreCanal' name='nombreCanal' style={{ border: inputInvalido }} />
                     </div>
                     <div className='botones'>
                         <button type='submit'>Crear</button>
                         <NavLink to={'/'} className='salir'>
                             Salir
                         </NavLink>
-                        <InformacionInput setCondiciones={setDisplayCondiciones} displayCondiciones={displayCondiciones}/>
+                        <InformacionInput setCondiciones={setDisplayCondiciones} displayCondiciones={displayCondiciones} />
                     </div>
                 </form>
-                <ListaCondiciones displayCondiciones={displayCondiciones} 
-                condiciones={[
-                    'Workspace: entre 5 y 20 caracteres',
-                    'Canal: entre 3 y 23 caracteres'
-                ]} />
+                <ListaCondiciones displayCondiciones={displayCondiciones}
+                    condiciones={(errorLongitudNombreCanal || errorLongitudNombreWorkspace || errorNombreRepetido) ?
+                        [
+                            errorNombreRepetido,
+                            errorLongitudNombreWorkspace,
+                            errorLongitudNombreCanal
+                        ] :
+                        ['El nombre del WORKSPACE debe tener entre 5 y 20 caracteres inclusive.',
+                            'El nombre del CANAL debe tener entre 3 y 23 caracteres inclusive.'
+                        ]
+                    } />
             </div>
             <div className='sombra'>
             </div>
