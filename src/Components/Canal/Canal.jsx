@@ -42,7 +42,7 @@ const Canal = () => {
                         <div className='mensajes-mensajeForm'>
                             <h2 className='canalTitulo'>{titulo}</h2>
                             <ListaMensajes mensajesAcumulados={mensajesAcumulados} miembros={miembros} textoFiltro={textoFiltro}/>
-                            <InputFiltroTexto setTextoFiltro={setTextoFiltro} textoFiltro={textoFiltro}/>
+                            <InputFiltroTexto setTextoFiltro={setTextoFiltro} textoFiltro={textoFiltro} id={'filtroTextoMensajes'}/>
                             <MensajeForm mensajesAcumulados={mensajesAcumulados} agregarMensaje={agregarMensaje} indexCanal={indexCanal - 1} indexWorkspace={id - 1} />
                         </div>
                     </div> :

@@ -96,8 +96,8 @@ const CrearCanal = ({ setDisplay, setCanalesState }) => {
         <>
             <div className='especial' onClick={handleMostrarInput} style={mostrarInput ? { cursor: 'pointer' } : { cursor: '' }}>
                 <form className='formCrearCanal' onSubmit={handleSubmit}>
-                    <label style={{ display: mostrarLabel, cursor: 'pointer' }}>Crear canal</label>
-                    <input type='text' placeholder='#nuevo-canal' style={{ display: mostrarInput, border: bordeInput }} />
+                    <label style={{ display: mostrarLabel, cursor: 'pointer' }} htmlFor='nuevoCanal'>Crear canal</label>
+                    <input type='text' placeholder='#nuevo-canal' style={{ display: mostrarInput, border: bordeInput }} id='nuevoCanal' name='nuevoCanal'/>
                     <button type='submit' style={{ display: mostrarInput, cursor: 'pointer' }}><GrAdd style={{ width: '20px', height: '20px' }} /></button>
                 </form>
                 {!mostrarInput && <IoMdClose style={{ width: '20px', height: '20px', cursor: 'pointer' }} onClick={handleCerrarInput} />}

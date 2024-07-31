@@ -39,7 +39,7 @@ const MensajeForm = ({ mensajesAcumulados, agregarMensaje, indexCanal, indexWork
 
     return (
         <form onSubmit={handleSubmit} className='mensajeForm'>
-            <textarea placeholder='Escribe tu mensaje'></textarea>
+            <textarea placeholder='Escribe tu mensaje' id='mensajeNuevo' name='mensajeNuevo'></textarea>
             <div className='contenedorIcono'>
                 <button><VscSend className='sendIcono' /></button>
             </div>
