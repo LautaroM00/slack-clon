@@ -114,8 +114,7 @@ const CrearWorkSpace = () => {
                         </NavLink>
                         <InformacionInput setCondiciones={setDisplayCondiciones} displayCondiciones={displayCondiciones} />
                     </div>
-                </form>
-                <ListaCondiciones displayCondiciones={displayCondiciones}
+                    <ListaCondiciones displayCondiciones={displayCondiciones}
                     condiciones={(errorLongitudNombreCanal || errorLongitudNombreWorkspace || errorNombreRepetido) ?
                         [
                             errorNombreRepetido,
@@ -126,6 +125,7 @@ const CrearWorkSpace = () => {
                             'El nombre del CANAL debe tener entre 3 y 23 caracteres inclusive.'
                         ]
                     } />
+                </form>
             </div>
             <div className='sombra'>
             </div>
