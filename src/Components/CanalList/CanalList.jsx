@@ -58,7 +58,7 @@ const CanalList = ({ canales, setCanalesState, setTextoFiltro }) => {
                                 <NavLink key={index} to={`/workspace/${id}/${id_canal}`}>
                                     {
                                         canalActual.id_canal === canal.id_canal ?
-                                            <li className='canal' style={{ backgroundColor: '#dfdf72' }}>
+                                            <li className='canal' style={{ backgroundColor: '#dfdf72' }} onClick={resetTextoFiltro}>
                                                 {`#${titulo}`}
                                             </li> :
                                             <li className='canal' onClick={resetTextoFiltro}>

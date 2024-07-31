@@ -8,6 +8,13 @@ const FiltrarArray = ({ setArrayFiltrado, array }) => {
     const [mostrarInput, setMostrarInput] = useState('none')
     const [letrasFiltro, setLetrasFiltro] = useState('')
 
+    useEffect(() => {
+        if (mostrarInput === 'none') {
+            setLetrasFiltro('')
+        }
+    },
+        [mostrarInput])
+
     const handleDisplayInput = () => {
         setMostrarInput('')
     }
@@ -29,20 +36,13 @@ const FiltrarArray = ({ setArrayFiltrado, array }) => {
         setArrayFiltrado(arrayFiltrado)
     }
 
-    useEffect(() => {
-        if(mostrarInput === 'none'){
-            setLetrasFiltro('')
-        }
-    },
-[mostrarInput])
-
     return (
         <div className='contenedorFilter'>
             <div className='lupita-input'>
-                <IoSearchSharp style={{ width: '20px', height: '20px', cursor: 'pointer' }} onClick={handleDisplayInput}/>
+                <IoSearchSharp style={{ width: '20px', height: '20px', cursor: 'pointer' }} onClick={handleDisplayInput} />
                 <div style={{ display: mostrarInput }} className='input'>
                     <input id='filtro' className='inputFiltro' onChange={handleFiltro} />
-                    <IoMdClose onClick={handleCloseInput} style={{cursor:'pointer'}} value={letrasFiltro}/>
+                    <IoMdClose onClick={handleCloseInput} style={{ cursor: 'pointer' }} value={letrasFiltro} />
                 </div>
             </div>
         </div>

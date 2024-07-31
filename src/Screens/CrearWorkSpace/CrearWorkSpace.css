@@ -110,9 +110,8 @@
 
 @media (min-width: 800px) {
     .crearWorkspace {
-        padding: 50px;
+        padding: 20px;
         width: 60%;
-        height: 60%;
         align-items: baseline;
         justify-content: space-around;
     }
@@ -127,7 +126,6 @@
     }
 
     .crearWorkspace .botones {
-
         gap:20px;
     }
 

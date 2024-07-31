@@ -63,6 +63,7 @@ const CrearCanal = ({ setDisplay, setCanalesState }) => {
             setMostrarInput('')
             setMostrarLabel('none')
         }
+
     }
 
     const handleCerrarInput = () => {
