@@ -58,7 +58,8 @@ const CanalList = ({ canales, setCanalesState, setTextoFiltro }) => {
                                 <NavLink key={index} to={`/workspace/${id}/${id_canal}`}>
                                     {
                                         canalActual.id_canal === canal.id_canal ?
-                                            <li className='canal' style={{ backgroundColor: '#dfdf72' }} onClick={resetTextoFiltro}>
+                                            <li className='canal' style={{
+                                                backgroundColor: '#dfdf72'}} onClick={resetTextoFiltro}>
                                                 {`#${titulo}`}
                                             </li> :
                                             <li className='canal' onClick={resetTextoFiltro}>
@@ -81,7 +82,7 @@ const CanalList = ({ canales, setCanalesState, setTextoFiltro }) => {
                         <IoMdClose onClick={handleDisplayCanales} style={{ width: '30px', height: '30px', color: 'whitesmoke' }} className='botones' />
                     </div>
             }
-            <Pepe display={mostrarCanales} setMostrarCanales={setMostrarCanales}/>
+            <Pepe display={mostrarCanales} setMostrarCanales={setMostrarCanales} />
         </>
     )
 }

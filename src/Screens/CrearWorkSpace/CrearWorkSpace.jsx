@@ -18,12 +18,14 @@ const CrearWorkSpace = ({ setWORKSPACES }) => {
         let nombreWorkspace = e.target['nombreWorkspace'].value
         let nombreCanal = e.target['nombreCanal'].value
 
-        if (nombreWorkspace !== ''      &&
-            nombreCanal !== ''          &&
-            nombreWorkspace.length < 20 &&
-            nombreWorkspace.length > 5  &&
-            nombreCanal.length < 24     &&
-            nombreCanal.length > 2) {
+
+
+        if (nombreWorkspace !== ''       &&
+            nombreCanal !== ''           &&
+            nombreWorkspace.length <= 20 &&
+            nombreWorkspace.length >= 5  &&
+            nombreCanal.length <= 23     &&
+            nombreCanal.length >= 3) {
 
             setInputInvalido('')
             setDisplayCondiciones('none')
@@ -61,6 +63,7 @@ const CrearWorkSpace = ({ setWORKSPACES }) => {
         }else{
             setInputInvalido('4px solid red')
             setDisplayCondiciones('')
+            console.log(nombreWorkspace.length)
         }
     }
 
