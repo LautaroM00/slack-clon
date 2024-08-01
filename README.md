@@ -48,7 +48,7 @@ Algo que tuve a mi favor durante todo el desarrollo y que considero que es una d
 
 ## Guía para entender el código
 
-El código se resume en dos carpetas de componentes: **Screens** y **Components**.
+El código se resume en dos carpetas de componentes: **Screens** y **Components**. Recomiendo tener a mano el excalidraw como acompañamiento visual para comprender mejor el siguiente desarrollo.
 
 ### Screen
 
@@ -60,11 +60,30 @@ Acá hay 3 componentes, por lo tanto hay tres **Screen** las cuales son:
 
 Voy a ir por partes explicando como funciona cada una.
 
-#### SelectorWorkspace:
+#### SelectorWorkspace
 
 Contiene tres funcionalidades:
 
-    1. Desplegar una lista de workspaces (2 por defecto) para que el usuario pueda seleccionar e ingresar, y al hacerlo cambia la ruta de '/' a '/workspace/:id/:idCanalParams'. 'id' repre
+    1. Desplegar una lista de WorkspacePreview (2 por defecto) para que el usuario pueda seleccionar e ingresar, y al hacerlo cambia la ruta de '/' a '/workspace/:idWorkspace/:idCanalParams' llevando al usuario al Workspace seleccionado. 
+    La idea de ingresar los id como parámetro de ruta es capturarlo con useParams dentro del componente que renderiza esa ruta para, a través del metodo de arrays 'find', traer la información que le corresponde a ese id e inyectarla en los elementos subsiguientes.
+
+    2. Contener el botón que redirecciona la ruta hacia la screen de CrearWorkspace.
+
+    3. Contener un botón que de la opcion al usuario de reiniciar los datos ingresados por este.
+
+#### CrearWorkspace
+
+Contiene un formulario con dos inputs para que el usuario cree un **workspace** y un **canal** con los nombres que quiera pero cumpliendo ciertas condiciones:
+
+1. El nombre del workspace no puede ser idéntico al de alguno existente y debe tener una cantidad de caracteres mínima y máxima.
+
+2. El nombre del canal debe tener una cantidad de caracteres mínima y máxima.
+
+Como detalle de diseño y accesibilidad para el usuario agregué un boton que tiene la figura de signo de pregunta para que pueda ver las condiciones de aceptabilidad de nombre. Cuando una de las condiciones es corregida, dejará de mostrarse como error y pasarán a verse dos, así hasta que se cumplan todas y se cree el workspace nuevo.
+
+#### Workspace
+
+Acá est
 
 
 
@@ -73,4 +92,8 @@ Contiene tres funcionalidades:
 
 
 
-<!-- #*---CONTINUARÁ...* -->
+
+
+
+
+# *CONTINUARÁ...*
