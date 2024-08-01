@@ -21,9 +21,9 @@ const traerLS = () => {
     return WORKSPACES_objeto
 }
 
-const actualizarLS = (WORKSPACE) => {
-    if(WORKSPACE){
-        const objeto_string = JSON.stringify(WORKSPACE)
+const actualizarLS = (WORKSPACES) => {
+    if(WORKSPACES){
+        const objeto_string = JSON.stringify(WORKSPACES)
 
         localStorage.setItem('WORKSPACES', objeto_string)
     }else{
