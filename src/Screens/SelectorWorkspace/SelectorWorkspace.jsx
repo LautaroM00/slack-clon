@@ -7,6 +7,7 @@ import './SelectorWorkspace.css'
 import { NavLink } from 'react-router-dom'
 import { VscDebugRestart } from "react-icons/vsc";
 import FiltrarArray from '../../Components/FiltrarArray/FiltrarArray'
+import ListaWorkspacesPreview from '../../Components/ListaWorkspacesPreview/ListaWorkspacesPreview'
 
 
 const SelectorWorkspace = () => {
@@ -36,20 +37,7 @@ const SelectorWorkspace = () => {
                 <h1>
                     Bienvenido a Slack!
                 </h1>
-                <nav className='SW_nav'>
-                    {
-                        workspacesFiltrados.length === 0 ?
-                            <span className='workspaceNotFound'>
-                                No se encontraron resultados
-                            </span> :
-                            workspacesFiltrados.map((workspace, index) => {
-                                const { titulo, thumbnail, id } = workspace
-                                return (
-                                    <WorkspacePreview titulo={titulo} thumbnail={thumbnail} id={id} key={index} />
-                                )
-                            })
-                    }
-                </nav>
+                <ListaWorkspacesPreview workspacesFiltrados={workspacesFiltrados}/>
                 <FiltrarArray setArrayFiltrado={setWorkspacesFiltrados} array={WORKSPACES}/>
                 <div className='SW_footer'>
                     <NavLink to={'/workspace/new'}>
