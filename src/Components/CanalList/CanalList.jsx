@@ -14,7 +14,7 @@ const CanalList = ({ canales, setCanalesState, setTextoFiltro }) => {
     const [canalesFiltrados, setCanalesFiltrados] = useState([])
 
     const idParams = useParams()
-    const { id, idCanalParams } = idParams
+    const { idWorkspace, idCanalParams } = idParams
     const canalActual = canales.find((canal) => {
         return (canal.id_canal === Number(idCanalParams))
     })
@@ -55,7 +55,7 @@ const CanalList = ({ canales, setCanalesState, setTextoFiltro }) => {
                         canalesFiltrados.map((canal, index) => {
                             const { titulo, id_canal } = canal
                             return (
-                                <NavLink key={index} to={`/workspace/${id}/${id_canal}`}>
+                                <NavLink key={index} to={`/workspace/${idWorkspace}/${id_canal}`}>
                                     {
                                         canalActual.id_canal === canal.id_canal ?
                                             <li className='canal' style={{

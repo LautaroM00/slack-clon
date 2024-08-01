@@ -10,9 +10,9 @@ const ListaWorkspacesPreview = ({ workspacesFiltrados }) => {
                     No se encontraron resultados
                 </span> :
                 workspacesFiltrados.map((workspace, index) => {
-                    const { titulo, thumbnail, id } = workspace
+                    const { titulo, thumbnail, idWorkspace } = workspace
                     return (
-                        <WorkspacePreview titulo={titulo} thumbnail={thumbnail} id={id} key={index} />
+                        <WorkspacePreview titulo={titulo} thumbnail={thumbnail} idWorkspace={idWorkspace} key={index} />
                     )
                 })
         }

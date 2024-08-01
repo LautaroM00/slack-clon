@@ -4,7 +4,7 @@ import { RxEnter } from "react-icons/rx";
 
 import './WorkspacePreview.css'
 
-const WorkspacePreview = ({ titulo, thumbnail, id }) => {
+const WorkspacePreview = ({ titulo, thumbnail, idWorkspace }) => {
     return (
         <>
             <div className='WorkspacePreview'>
@@ -12,7 +12,7 @@ const WorkspacePreview = ({ titulo, thumbnail, id }) => {
                     <img src={thumbnail} />
                     <h2>{titulo}</h2>
                 </div>
-                <NavLink to={`/workspace/${id}/1`} className={'navLink'}>
+                <NavLink to={`/workspace/${idWorkspace}/1`} className={'navLink'}>
                     Entrar
                 </NavLink>
             </div>

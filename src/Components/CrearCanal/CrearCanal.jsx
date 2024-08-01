@@ -17,7 +17,7 @@ const CrearCanal = ({ setDisplay, setCanalesState }) => {
     const [errorLongitudNombre, setErrorLongitudNombre] = useState('')
 
 
-    const { id } = useParams()
+    const { idWorkspace } = useParams()
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -26,7 +26,7 @@ const CrearCanal = ({ setDisplay, setCanalesState }) => {
 
         let nombreCanalNuevo = e.target[0].value
 
-        let estaRepetido = WORKSPACES[Number(id - 1)].canales.find((canal) => {
+        let estaRepetido = WORKSPACES[Number(idWorkspace - 1)].canales.find((canal) => {
             return (nombreCanalNuevo === canal.titulo)
         })
 
@@ -34,7 +34,7 @@ const CrearCanal = ({ setDisplay, setCanalesState }) => {
             nombreCanalNuevo.length < 24 &&
             nombreCanalNuevo.length > 2 && !estaRepetido) {
 
-            WORKSPACES[Number(id - 1)].canales.push(
+            WORKSPACES[Number(idWorkspace - 1)].canales.push(
                 {
                     titulo: nombreCanalNuevo,
                     miembros: [
@@ -47,12 +47,12 @@ const CrearCanal = ({ setDisplay, setCanalesState }) => {
                     ],
                     mensajes: [
                     ],
-                    id_canal: WORKSPACES[Number(id - 1)].canales.length + 1
+                    id_canal: WORKSPACES[Number(idWorkspace - 1)].canales.length + 1
                 }
             )
 
             actualizarLS(WORKSPACES)
-            setCanalesState(WORKSPACES[Number(id - 1)].canales)
+            setCanalesState(WORKSPACES[Number(idWorkspace - 1)].canales)
             e.target[0].value = ''
 
             setDisplay('none')

@@ -60,7 +60,7 @@ const CrearWorkSpace = () => {
                     },
                 ],
                 contactos: [],
-                id: WORKSPACES.length + 1
+                idWorkspace: WORKSPACES.length + 1
             })
             e.target['nombreWorkspace'].value = ''
             e.target['nombreCanal'].value = ''

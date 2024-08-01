@@ -208,7 +208,7 @@ const WORKSPACES = [
                 id_canal: 1
             }
         ],
-        id: 1
+        idWorkspace: 1
     },
     {
         titulo: 'Selección argentina',
@@ -382,7 +382,7 @@ const WORKSPACES = [
                 id: 1
             }
         ],
-        id: 2
+        idWorkspace: 2
     }
 ]
 
