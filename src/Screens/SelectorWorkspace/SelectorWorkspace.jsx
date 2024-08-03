@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
 import { setLS, traerLS } from '../../FUNCIONES_LOCAL_STORAGE'
-import { WorkspacePreview } from '../index'
 
 import './SelectorWorkspace.css'
 import { NavLink } from 'react-router-dom'

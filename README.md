@@ -3,7 +3,6 @@ Hola! El objetivo de este 'readme' es realizar una explicación textual del desa
 
 - Orden de prioridades
 - Guía para entender el código
-- Ése bug en particular
 
 Decidí seguir la propuesta de mi profesor de hacer el **clon de Slack** porque quise enfrentarme al desafío de desarrollar un proyecto enteramente solo sin recibir ninguna ayuda (como las dadas en el proyecto de Whatsapp que, si bien lo desarrollé también solo, sentía que era un proyecto 'hecho en clase').
 
@@ -83,17 +82,13 @@ Como detalle de diseño y accesibilidad para el usuario agregué un boton que ti
 
 #### Workspace
 
-Acá est
+En este componente se encuentra todo el canal, tanto estructura como funcionalidades.  
 
+    Lo que puede hacerse en cada canal es:
+    1. Enviar mensajes.
+    2. Crear canales.
+    3. Filtrar lista de canales por texto.
+    4. Buscar mensajes que contengan texto coincidente con el ingresado en un imput.
 
-
-
-
-
-
-
-
-
-
-
-# *CONTINUARÁ...*
+---
+# Espero que el desarrollo haya sido de utilidad!

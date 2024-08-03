@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { RxEnter } from "react-icons/rx";
 
 import './WorkspacePreview.css'
 

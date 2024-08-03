@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 
-import { Workspace, SelectorWorkspace, CrearWorkSpace, Canal  } from './index.js'
+import { Workspace, SelectorWorkspace, CrearWorkSpace  } from './index.js'
 
 function App() {
     return (

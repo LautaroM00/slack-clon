@@ -50,12 +50,7 @@ const CrearWorkSpace = () => {
                                 mensajesCanal: '.',
                                 id: 1
                             }],
-                        mensajes: [{
-                            autor: 'Tú',
-                            texto: 'holaa',
-                            hora: '19:57',
-                            id: 1
-                        }],
+                        mensajes: [],
                         id_canal: 1
                     },
                 ],

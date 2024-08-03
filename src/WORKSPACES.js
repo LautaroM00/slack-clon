@@ -72,7 +72,6 @@ const WORKSPACES = [
                         mensajesCanal: '.',
                         id: 11
                     },
-
                 ],
                 mensajes: [
                     {
@@ -199,13 +198,6 @@ const WORKSPACES = [
                     }
                 ],
                 id_canal: 2
-            }
-        ],
-        contactos: [
-            {
-                nombre: 'maria',
-                thumbnail: '',
-                id_canal: 1
             }
         ],
         idWorkspace: 1
@@ -373,13 +365,6 @@ const WORKSPACES = [
                     }
                 ],
                 id_canal: 2
-            }
-        ],
-        contactos: [
-            {
-                nombre: 'Pablo',
-                thumbnail: '',
-                id: 1
             }
         ],
         idWorkspace: 2
