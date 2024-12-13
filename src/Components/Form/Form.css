@@ -1,0 +1,97 @@
+.formContainer{
+    width: 100vw;
+    height: 100vh;
+    background-color: #B43F3F;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.formContainer .verification{
+    width: 80%;
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: wheat;
+    padding: 30px 40px;
+    border-radius: 30px;
+    box-shadow: 0 0 20px 1px black;
+}
+
+.formContainer form{
+    width: 80%;
+    background-color: wheat;
+    border-radius: 10px;
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+    box-shadow: 0 0 20px 1px black;
+    border: 1px solid rgb(70, 68, 68);
+
+    & h1{
+        text-shadow: 
+        1px 1px 1px black, 
+        -1px -1px 1px black,  
+        1px -1px 1px black,  
+        -1px 1px 1px black,  
+        0px 1px 1px black,  
+        0px -1px 1px black,  
+        1px 0px 1px black,  
+        -1px 0px 1px black; /* Borde negro */
+        color: white;
+    }
+}
+
+.formContainer .block{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.formContainer .block input{
+    padding: 6px;
+    border-radius: 10px;
+}
+
+.formContainer .childrenDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    & a{
+        font-size: 15px;
+        color: rgb(139, 24, 24);;
+    }
+
+    a:hover{
+        color: black;
+    }
+}
+
+.formContainer button {
+    background-color: #2493ee;
+    width: 70%;
+    height: 40px;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+    margin-bottom: 10px;
+    text-shadow: 
+    1px 1px 0 black, 
+    -1px -1px 0 black,  
+    1px -1px 0 black,  
+    -1px 1px 0 black,  
+    0px 1px 0 black,  
+    0px -1px 0 black,  
+    1px 0px 0 black,  
+    -1px 0px 0 black; /* Borde negro */
+}
+
+.formContainer button:hover{
+    background-color: #1d77c0;
+}
