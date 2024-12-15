@@ -31,7 +31,7 @@ const FiltrarArray = ({ setArrayFiltrado, array }) => {
         setLetrasFiltro(textoFiltro)
 
         const arrayFiltrado = array.filter((elemento) => {
-            return (elemento.titulo.toLowerCase().includes(textoFiltro.toLowerCase()))
+            return (elemento.name.toLowerCase().includes(textoFiltro.toLowerCase()))
         })
         setArrayFiltrado(arrayFiltrado)
     }

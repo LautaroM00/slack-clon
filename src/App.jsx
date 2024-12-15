@@ -18,7 +18,7 @@ function App() {
                 <Route path='/workspace/:idWorkspace/:idCanalParams' element={<Workspace />} />
                 <Route path='/workspace/new' element={<CrearWorkSpace />} />
             </Route>
-        </Routes>
+        </Routes >
     )
 }
 

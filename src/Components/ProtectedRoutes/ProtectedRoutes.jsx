@@ -1,15 +1,18 @@
 import React from 'react'
 import { useAuthContext } from '../../Context/AuthenticationContext'
 import { Navigate, Outlet } from 'react-router-dom'
+import WorkspaceProvider from '../../Context/WorkspaceContext'
 
 const ProtectedRoutes = () => {
-    
+
     const { isAuthenticated } = useAuthContext()
 
     return (
-        isAuthenticated ? 
-        <Outlet /> :
-        <Navigate to={'/login'} />
+        isAuthenticated ?
+            <WorkspaceProvider>
+                <Outlet />
+            </WorkspaceProvider> :
+            <Navigate to={'/login'} />
     )
 }
 
