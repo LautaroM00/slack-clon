@@ -1,8 +1,5 @@
 import React from 'react'
 import { VscSend } from "react-icons/vsc";
-
-
-import { agregarMensajeLS } from '../../FUNCIONES_LOCAL_STORAGE'
 import { horas, minutos } from './tiempo';
 
 

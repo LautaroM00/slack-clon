@@ -5,7 +5,6 @@ import MensajeForm from '../MensajeForm/MensajeForm'
 import ListaMensajes from '../ListaMensajes/ListaMensajes'
 
 import './Canal.css'
-import { traerLS } from '../../FUNCIONES_LOCAL_STORAGE'
 import CanalList from '../CanalList/CanalList'
 import InputFiltroTexto from '../InputFiltroTexto/InputFiltroTexto';
 

@@ -2,32 +2,34 @@ import React from 'react'
 
 const useFetch = () => {
 
-    const fetchFunctions = async (endpoint, method, body) => {
+    const customFetch = async (endpoint, method, body) => {
 
-        const authorizationheader = 'Bearer ' + sessionStorage.getItem('accessToken')
+        const authorizationHeader = 'Bearer ' + sessionStorage.getItem('accessToken')
 
         const reqInit = method === 'GET' || method === 'DELETE' ? {
             method: method,
             headers: {
-                'Authorization': authorizationheader
+                'Authorization': authorizationHeader
             }
         } :
             {
                 method: method,
                 headers: {
                     'Content-type': 'application/json',
-                    'Authorization': authorizationheader
+                    'Authorization': authorizationHeader
                 },
                 body: JSON.stringify(body)
             }
 
+        const responseHTTP = await fetch(`${import.meta.env.VITE_API_URL}${endpoint}`, reqInit)
 
-        return fetch(`${import.meta.env.VITE_API_URL}${endpoint}`, reqInit)
-
+        const responseServer = await responseHTTP.json()
+        
+        return responseServer
     }
 
-    return {
-        fetchFunctions
+    return  {
+        customFetch
     }
 }
 

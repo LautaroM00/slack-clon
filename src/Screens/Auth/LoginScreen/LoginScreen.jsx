@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom'
 import { Form } from '../../../Components/Form/Form'
 
 const LoginScreen = () => {
-    const {fetchFunctions} = useFetch()
+    const { customFetch } = useFetch()
 
     const { login } = useAuthContext()
 
@@ -39,13 +39,11 @@ const LoginScreen = () => {
 
     const loginAction = async (formState) => {
 
-        const resHTTP = await fetchFunctions('/api/auth/login', 'POST', formState)
-
-        const serverResponse = await resHTTP.json()
+        const serverResponse = await customFetch('/api/auth/login', 'POST', formState)
 
         if (serverResponse.ok) {
             login(serverResponse.payload.accessToken)
-        }else{
+        } else {
             alert(serverResponse.message)
         }
     }

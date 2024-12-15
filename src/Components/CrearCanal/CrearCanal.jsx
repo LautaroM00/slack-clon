@@ -3,8 +3,6 @@ import { useParams } from 'react-router-dom'
 import { IoMdClose } from "react-icons/io";
 import { GrAdd } from "react-icons/gr";
 
-import { actualizarLS, traerLS } from '../index.js'
-
 import './CrearCanal.css'
 import ListaCondiciones from '../ListaCondiciones/ListaCondiciones.jsx';
 

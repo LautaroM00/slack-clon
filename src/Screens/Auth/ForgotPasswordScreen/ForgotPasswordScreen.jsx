@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { Form } from '../../../Components/Form/Form'
 
 const ForgotPasswordScreen = () => {
-    const { fetchFunctions } = useFetch()
+    const { customFetch } = useFetch()
 
     const formData = {
         title: 'Olvidé mi contraseña',
@@ -25,9 +25,7 @@ const ForgotPasswordScreen = () => {
 
     const forgotPasswordAction = async (formState) => {
 
-        const resHTTP = await fetchFunctions('/api/auth/forgot-password', 'POST', formState)
-
-        const serverResponse = await resHTTP.json()
+        const serverResponse = await customFetch('/api/auth/forgot-password', 'POST', formState)
 
         if (serverResponse.ok) {
             return alert('Se ha enviado un correo de recuperación de contraseña.')

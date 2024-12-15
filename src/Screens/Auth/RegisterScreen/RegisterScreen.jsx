@@ -4,7 +4,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { Form } from '../../../Components/Form/Form'
 
 const RegisterScreen = () => {
-    const { fetchFunctions } = useFetch()
+    const { customFetch } = useFetch()
 
     const navigate = useNavigate()
 
@@ -64,9 +64,7 @@ const RegisterScreen = () => {
             return
         }
 
-        const resHTTP = await fetchFunctions('/api/auth/register', 'POST', formState)
-
-        const serverResponse = await resHTTP.json()
+        const serverResponse = await customFetch('/api/auth/register', 'POST', formState)
 
         if (serverResponse.ok) {
             alert('Se ha enviado un email de validación de usuario.')

@@ -6,14 +6,13 @@ import useCountdown from '../../../Hooks/useCountdown'
 const VerifyEmailScreen = () => {
     const [verificationResult, setVerificationResult] = useState('Cargando...')
     const { verificationToken } = useParams()
-    const { fetchFunctions } = useFetch()
+    const { customFetch } = useFetch()
     const { countdown } = useCountdown(3)
 
 
     const verifyEmail = async (formState) => {
 
-        const resHTTP = await fetchFunctions('/api/auth/verification/' + verificationToken, 'GET', formState)
-        const serverResponse = await resHTTP.json()
+        const serverResponse = await customFetch('/api/auth/verification/' + verificationToken, 'GET', formState)
         return serverResponse
     }
 

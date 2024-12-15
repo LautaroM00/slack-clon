@@ -4,7 +4,7 @@ import { NavLink, useNavigate, useParams } from 'react-router-dom'
 import { Form } from '../../../Components/Form/Form'
 
 const ResetPasswordScreen = () => {
-    const {fetchFunctions} = useFetch()
+    const {customFetch} = useFetch()
     const { validationToken } = useParams()
     const navigate = useNavigate()
 
@@ -38,9 +38,7 @@ const ResetPasswordScreen = () => {
 
     const resetPasswordAction = async (formState) => {
 
-        const resHTTP = await fetchFunctions('/api/auth/reset-password/' + validationToken, 'PUT', formState)
-
-        const serverResponse = await resHTTP.json()
+        const serverResponse = await customFetch('/api/auth/reset-password/' + validationToken, 'PUT', formState)
 
         if (serverResponse.ok) {
             alert('Contraseña modificada con éxito.')

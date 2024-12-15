@@ -1,34 +1,27 @@
 import React, { useEffect, useState } from 'react'
 
-import { setLS, traerLS } from '../../FUNCIONES_LOCAL_STORAGE'
 
 import './SelectorWorkspace.css'
 import { NavLink } from 'react-router-dom'
 import { VscDebugRestart } from "react-icons/vsc";
 import FiltrarArray from '../../Components/FiltrarArray/FiltrarArray'
 import ListaWorkspacesPreview from '../../Components/ListaWorkspacesPreview/ListaWorkspacesPreview'
+import useFetch from '../../Hooks/useFetch';
 
 
 const SelectorWorkspace = () => {
     const [WORKSPACES, setWORKSPACES] = useState([])
     const [workspacesFiltrados, setWorkspacesFiltrados] = useState([])
+    const {customFetch} = useFetch()
 
-    setLS()
+    const getUserWorkspaces = async () => {
 
-    useEffect(() => {
-        if (WORKSPACES.length === 0) {
-            setWORKSPACES(traerLS())
-        }
-        setWorkspacesFiltrados(WORKSPACES)
-    }, [WORKSPACES])
+        const serverResponse = await customFetch('/api/workspace/', 'GET')
 
-    const handleReiniciar = (e) => {
-        e.preventDefault()
-        localStorage.clear()
-        setLS()
-        let WORKSPACESLS = traerLS()
-        setWORKSPACES(WORKSPACESLS)
+        console.log(serverResponse)
     }
+
+    getUserWorkspaces()
 
     return (
         <>
@@ -45,9 +38,6 @@ const SelectorWorkspace = () => {
                         </div>
                     </NavLink>
                 </div>
-                <form onSubmit={handleReiniciar} className='reiniciar'>
-                    <button type='submit' className='boton'><VscDebugRestart style={{ width: '60px', height: '60px' }} /></button>
-                </form>
             </main>
         </>
     )

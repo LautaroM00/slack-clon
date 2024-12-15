@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 
 import './CrearWorkSpace.css'
-import { actualizarLS, traerLS } from '../../FUNCIONES_LOCAL_STORAGE'
 import SelectorWorkspace from '../SelectorWorkspace/SelectorWorkspace'
 import { NavLink } from 'react-router-dom'
 import InformacionInput from '../../Components/InformacionInput/InformacionInput'
