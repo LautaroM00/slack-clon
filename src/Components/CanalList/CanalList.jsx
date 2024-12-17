@@ -7,30 +7,20 @@ import './CanalList.css'
 import CrearCanal from '../CrearCanal/CrearCanal'
 import FiltrarArray from '../FiltrarArray/FiltrarArray';
 import Pepe from '../Pepe/Pepe';
+import useFetch from '../../Hooks/useFetch';
 
-const CanalList = ({ canales, setCanalesState, setTextoFiltro }) => {
+const CanalList = ({ channels, setChannels }) => {
     const [mostrarCanales, setMostrarCanales] = useState('none')
     const [display, setDisplay] = useState('')
-    const [canalesFiltrados, setCanalesFiltrados] = useState([])
-
-    const idParams = useParams()
-    const { idWorkspace, idCanalParams } = idParams
-    const canalActual = canales.find((canal) => {
-        return (canal.id_canal === Number(idCanalParams))
-    })
+    const [filteredChannels, setCanalesFiltrados] = useState()
 
     useEffect(() => {
-        setCanalesFiltrados(canales)
         window.innerWidth >= 700 ?
             setMostrarCanales('') :
             ''
     }
         ,
-        [canales, mostrarCanales])
-
-    const resetTextoFiltro = () => {
-        setTextoFiltro('')
-    }
+        [mostrarCanales])
 
     const handleDisplayCanales = () => {
         if (mostrarCanales === '') {
@@ -46,38 +36,37 @@ const CanalList = ({ canales, setCanalesState, setTextoFiltro }) => {
                 <h2>
                     Canales
                 </h2>
-                <FiltrarArray setArrayFiltrado={setCanalesFiltrados} array={canales} />
-                <ul>
-                    {canalesFiltrados.length === 0 ?
-                        <span className='canalNotFound'>
-                            No se encontraron resultados
-                        </span> :
-                        canalesFiltrados.map((canal, index) => {
-                            const { titulo, id_canal } = canal
-                            return (
-                                <NavLink key={index} to={`/workspace/${idWorkspace}/${id_canal}`}>
-                                    {
-                                        canalActual.id_canal === canal.id_canal ?
-                                            <li className='canal' style={{
-                                                backgroundColor: '#dfdf72'}} onClick={resetTextoFiltro}>
-                                                {`#${titulo}`}
-                                            </li> :
-                                            <li className='canal' onClick={resetTextoFiltro}>
-                                                {`#${titulo}`}
-                                            </li>
-                                    }
-                                </NavLink>
-                            )
-                        })
-                    }
-                </ul>
-                <CrearCanal display={display} setDisplay={setDisplay} setCanalesState={setCanalesState} />
-            </nav>
+                <div className='contenedorFilter'>
+                    <FiltrarArray setArrayFiltrado={setCanalesFiltrados} array={channels} />
+                </div>
+                {
+                    !channels ?
+                        <ul className='canalNotFound'>
+                            Cargando...
+                        </ul> :
+                        <ul>
+                            {
+                                channels.length > 0 ?
+                                    filteredChannels ?
+                                        filteredChannels.length > 0 ?
+                                            <CanalMap channels={filteredChannels} /> :
+                                            <span className='canalNotFound'>
+                                                No se encontraron resultados.
+                                            </span> :
+                                        <CanalMap channels={channels} /> :
+                                    <span className='canalNotFound'>
+                                        Este workspace no contiene canales.
+                                    </span>
+                            }
+                        </ul>}
+                <CrearCanal display={display} setDisplay={setDisplay} setChannels={setChannels} />
+            </nav >
             {
                 mostrarCanales ?
                     <div className='displayCanales'>
-                        <SlLayers onClick={handleDisplayCanales} style={{ width: '30px', height: '30px', color: 'whitesmoke' }} className='botones' />
-                    </div> :
+                        < SlLayers onClick={handleDisplayCanales} style={{ width: '30px', height: '30px', color: 'whitesmoke' }
+                        } className='botones' />
+                    </div > :
                     <div className='displayCanales'>
                         <IoMdClose onClick={handleDisplayCanales} style={{ width: '30px', height: '30px', color: 'whitesmoke' }} className='botones' />
                     </div>
@@ -88,3 +77,41 @@ const CanalList = ({ canales, setCanalesState, setTextoFiltro }) => {
 }
 
 export default CanalList
+
+
+
+
+
+const CanalMap = ({ channels }) => {
+
+    const { workspaceName, idCanal } = useParams()
+    const {customFetch} = useFetch()
+
+    const handleDeleteChannel = async (name, id) => {
+        if(confirm(`¿Realmente quiere eliminar el canal '${name.toUpperCase()}?'`)){
+
+        const serverResponse = await customFetch(`/api/channel/delete/${workspaceName}/${id}`, 'PUT')
+
+        if(serverResponse.ok){
+            return alert(serverResponse.message)
+        }
+        }
+    }
+
+
+    return (
+        channels.map((canal, index) => {
+            const { name, id } = canal
+            return (
+                <li  key={index} className='canal' style={{ backgroundColor: Number(idCanal) === canal.id ? '#dfdf72' : '#e2e2b6' }} >
+                    <NavLink to={`/workspace/${workspaceName}/${id}`}>
+                        {`#${name}`}
+                    </NavLink>
+                    <span className='delete' onClick={() => handleDeleteChannel(name, id)}>
+                        x
+                    </span>
+                </li>
+            )
+        })
+    )
+}

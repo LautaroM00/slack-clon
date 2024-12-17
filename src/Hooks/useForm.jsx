@@ -13,8 +13,6 @@ const useForm = (initialFormState) => {
             return ({ ...prevFormState, [field_name]: field_value })
         })
     }
-
-
     return {
         formState,
         handleChange

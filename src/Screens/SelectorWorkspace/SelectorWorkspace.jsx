@@ -9,14 +9,16 @@ import { useWorkspaceContext } from '../../Context/WorkspaceContext'
 
 
 const SelectorWorkspace = () => {
-    const {workspaces} = useWorkspaceContext()
+    const { workspaces, adminWorkspaces } = useWorkspaceContext()
     const [workspacesFiltrados, setWorkspacesFiltrados] = useState(workspaces)
 
     useEffect(() => {
         setWorkspacesFiltrados(workspaces)
     },
-[workspaces]
-)
+        [workspaces]
+    )
+
+    console.log(workspaces)
 
     return (
         <>
@@ -24,14 +26,35 @@ const SelectorWorkspace = () => {
                 <h1>
                     Bienvenido a Slack!
                 </h1>
-                <ListaWorkspacesPreview workspacesFiltrados={workspacesFiltrados}/>
-                <FiltrarArray setArrayFiltrado={setWorkspacesFiltrados} array={workspaces}/>
+                <ListaWorkspacesPreview workspacesFiltrados={workspacesFiltrados} workspaces={workspaces} />
+                <div className='filtro'>
+                    <FiltrarArray setArrayFiltrado={setWorkspacesFiltrados} array={workspaces} />
+                </div>
                 <div className='SW_footer'>
                     <NavLink to={'/workspace/new'}>
-                        <div className='nuevoWS'>
+                        <div className='buttonWS'>
                             Nuevo Workspace
                         </div>
                     </NavLink>
+                    {adminWorkspaces ?
+                        adminWorkspaces.length > 0 ?
+                            <>
+                                <NavLink to={'/workspace/delete'}>
+                                    <div className='buttonWS' style={{backgroundColor: '#cc2e2ea4'}}>
+                                        Eliminar Workspace
+                                    </div>
+                                </NavLink>
+                                <NavLink to={'/workspace/addMember'} >
+                                    <div className='buttonWS' style={{backgroundColor: 'green'}}>
+                                        Agregar Miembros
+                                    </div>
+                                </NavLink>
+                            </> :
+                            <></>
+                        :
+                        <></>
+
+                    }
                 </div>
             </main>
         </>

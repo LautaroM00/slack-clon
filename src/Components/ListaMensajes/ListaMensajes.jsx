@@ -1,24 +1,40 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Mensaje from '../Mensaje/Mensaje'
 
 import './ListaMensajes.css'
+import { useWorkspaceContext } from '../../Context/WorkspaceContext'
 
-const ListaMensajes = ({ mensajesAcumulados, miembros, textoFiltro}) => {
+const ListaMensajes = ({ idCanal, textoFiltro }) => {
+
+    const { getMessages } = useWorkspaceContext()
+    const [messages, setMessages] = useState()
+
+    useEffect(() => {
+
+
+        getMessages(idCanal)
+            .then((messages) => {
+                setMessages(() => messages)
+            });
+
+    },
+        [idCanal]
+    )
+
     return (
         <div className='contenedorMensajes'>
-            {mensajesAcumulados.map((mensaje, index) => {
+            {
+                messages ?
+                    messages.map((mensaje, index) => {
 
-                const { autor, texto, hora } = mensaje
-                const miembroEncontrado = miembros.find((miembro) => {
-                    return (autor.toLowerCase() === miembro.nombre.toLowerCase())
-                })
+                        const { sender_id, content, sent_at, name } = mensaje
 
-                const thumbnail = miembroEncontrado.thumbnail
-
-                return (
-                    <Mensaje autor={autor} texto={texto} hora={hora} thumbnail={thumbnail} key={index} textoFiltro={textoFiltro}/>
-                )
-            })}
+                        return (
+                            <Mensaje name={name} content={content} sent_at={sent_at} key={index} textoFiltro={textoFiltro} />
+                        )
+                    }) :
+                    <h2>Cargando</h2>
+            }
         </div>
     )
 }

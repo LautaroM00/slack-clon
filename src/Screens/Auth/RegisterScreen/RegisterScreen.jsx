@@ -59,7 +59,7 @@ const RegisterScreen = () => {
 
     const registerAction = async (formState) => {
 
-        if(formState.password !== formState.passwordRepeat){
+        if (formState.password !== formState.passwordRepeat) {
             alert('Las contraseñas no coinciden')
             return
         }
@@ -83,8 +83,10 @@ const RegisterScreen = () => {
 
     return (
         <Form formData={formData} initialFormState={initialFormState} action={registerAction}>
-            <button>Registrarme</button>
-            <NavLink to={'/login'}>Ya tengo cuenta</NavLink>
+            <div className='childrenDiv'>
+                <button>Registrarme</button>
+                <NavLink to={'/login'}>Ya tengo cuenta</NavLink>
+            </div>
         </Form>
     )
 }

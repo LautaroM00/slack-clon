@@ -41,9 +41,11 @@ const ForgotPasswordScreen = () => {
 
     return (
         <Form formData={formData} initialFormState={initialFormState} action={forgotPasswordAction}>
-            <button>Enviar email de recuperación</button>
-            <NavLink to={'/login'}>Recordé mi contraseña</NavLink>
-            <NavLink to={'/register'}>No tengo cuenta</NavLink>
+            <div className='childrenDiv'>
+                <button>Enviar email de recuperación</button>
+                <NavLink to={'/login'}>Recordé mi contraseña</NavLink>
+                <NavLink to={'/register'}>No tengo cuenta</NavLink>
+            </div>
         </Form>
     )
 }

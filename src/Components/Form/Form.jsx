@@ -13,27 +13,25 @@ export const Form = ({ formData, initialFormState, action, children }) => {
 
     const { formState, handleChange } = useForm(initialFormState)
 
-    const { title, divs } = formData
+    const { title, divs, formClass, containerClass } = formData
     return (
-        <div className='formContainer'>
-            <form onSubmit={handleSubmit}>
+        <div className={containerClass ? containerClass : 'formContainer'}>
+            <form onSubmit={handleSubmit} className={formClass ? formClass : ''}>
                 <h1>{title}</h1>
                 {
                     divs.map((div, index) => {
 
-                        const { labelProps, inputProps, labelText } = div
+                        const { labelProps, inputProps, labelText, divClass } = div
 
                         return (
-                            <div key={index} className='block'>
+                            <div key={index} className={divClass ? divClass : 'block'}>
                                 <label {...labelProps}>{labelText}</label>
-                                <input onChange={handleChange} {...inputProps} autoComplete='off'/>
+                                <input onChange={handleChange} {...inputProps} autoComplete='off' />
                             </div>
                         )
                     })
                 }
-                <div className='childrenDiv'>
-                    {children}
-                </div>
+                {children}
             </form>
         </div>
     )

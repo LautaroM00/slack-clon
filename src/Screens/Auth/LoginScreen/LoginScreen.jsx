@@ -56,9 +56,11 @@ const LoginScreen = () => {
 
     return (
         <Form formData={formData} initialFormState={initialFormState} action={loginAction}>
-            <button>Iniciar sesión</button>
-            <NavLink to={'/register'}>Aún no tengo cuenta</NavLink>
-            <NavLink to={'/forgot-password'}>Olvidé mi contraseña</NavLink>
+            <div className='childrenDiv'>
+                <button>Iniciar sesión</button>
+                <NavLink to={'/register'}>Aún no tengo cuenta</NavLink>
+                <NavLink to={'/forgot-password'}>Olvidé mi contraseña</NavLink>
+            </div>
         </Form>
     )
 }

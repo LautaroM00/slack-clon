@@ -19,6 +19,20 @@
     top: 15px;
 }
 
+.navCanales .delete {
+    color: rgba(255, 0, 0, 0.116);
+    padding: 0 5px;
+    font-size: 30px;
+}
+
+.navCanales .delete:hover {
+    color: rgb(255, 0, 0);
+    cursor: pointer;
+    text-shadow: 
+    -1px -1px 0 #000,  
+    1px -1px 0 #000,
+}
+
 .navCanales h2 {
     width: 200px;
     background-color: #2710373e;
@@ -51,25 +65,31 @@
 }
 
 .navCanales .canal {
+    position: relative;
+    z-index: 10;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 10px;
     overflow: hidden;
     letter-spacing: 1px;
     font-weight: 600;
     font-size: 22px;
-    background-color: #e2e2b6;
     border-radius: 7px;
 }
 
-.canalNotFound{
+.navCanales .canal:hover {
+    background-color: #bebe90;
+}
+
+.canalNotFound {
     color: white;
     font-weight: 600;
-    text-shadow: 
-    1px 1px 0 #000, 
-    -1px -1px 0 #000,  
-    1px -1px 0 #000, 
-    -1px 1px 0 #000;
+    text-shadow:
+        1px 1px 0 #000,
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000;
 }
 
 
@@ -81,7 +101,7 @@
 
     .navCanales {
         padding-top: 40px;
-        gap:10px;
+        gap: 10px;
         position: relative;
         z-index: 20;
         box-shadow: 0 0 0 0;
@@ -97,7 +117,7 @@
     }
 }
 
-@media (min-width: 1300px){
+@media (min-width: 1300px) {
     .navCanales {
 
         width: 30%;

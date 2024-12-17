@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 
-import { Workspace, SelectorWorkspace, CrearWorkSpace } from './index.js'
+import { Workspace, SelectorWorkspace, ModalWorkSpace } from './index.js'
 import ProtectedRoutes from './Components/ProtectedRoutes/ProtectedRoutes.jsx'
 import { ForgotPasswordScreen, LoginScreen, RegisterScreen, ResetPasswordScreen, VerifyEmailScreen } from './Screens/index.js'
 
@@ -15,8 +15,8 @@ function App() {
             <Route path='/forgot-password' element={<ForgotPasswordScreen />} />
             <Route element={<ProtectedRoutes />} >
                 <Route path='/' element={<SelectorWorkspace />} />
-                <Route path='/workspace/:idWorkspace/:idCanalParams' element={<Workspace />} />
-                <Route path='/workspace/new' element={<CrearWorkSpace />} />
+                <Route path='/workspace/:workspaceName/:idCanal' element={<Workspace />} />
+                <Route path='/workspace/:type' element={<ModalWorkSpace />} />
             </Route>
         </Routes >
     )

@@ -4,7 +4,7 @@ import { NavLink, useNavigate, useParams } from 'react-router-dom'
 import { Form } from '../../../Components/Form/Form'
 
 const ResetPasswordScreen = () => {
-    const {customFetch} = useFetch()
+    const { customFetch } = useFetch()
     const { validationToken } = useParams()
     const navigate = useNavigate()
 
@@ -43,7 +43,7 @@ const ResetPasswordScreen = () => {
         if (serverResponse.ok) {
             alert('Contraseña modificada con éxito.')
             return navigate('/login')
-        }else{
+        } else {
             alert('Error.')
         }
     }
@@ -56,8 +56,10 @@ const ResetPasswordScreen = () => {
 
     return (
         <Form formData={formData} initialFormState={initialFormState} action={resetPasswordAction}>
-            <button>Cambiar contraseña</button>
-            <NavLink to={'/register'}>Aún no tengo cuenta</NavLink>
+            <div className='childrenDiv'>
+                <button>Cambiar contraseña</button>
+                <NavLink to={'/register'}>Aún no tengo cuenta</NavLink>
+            </div>
         </Form>
     )
 }

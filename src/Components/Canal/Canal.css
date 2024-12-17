@@ -29,6 +29,7 @@
 .mensajes-mensajeForm{
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 @media (min-width:700px){

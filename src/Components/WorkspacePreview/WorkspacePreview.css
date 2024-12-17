@@ -1,4 +1,4 @@
-.WorkspacePreview{
+.WorkspacePreview {
     width: 80vw;
     max-width: 1000px;
     padding: 20px;
@@ -7,63 +7,102 @@
     justify-content: space-between;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
     background-color: #FFF5E1;
     border-radius: 5px;
     box-shadow: 0 0 7px 1px rgba(0, 0, 0, 0.671);
 }
 
-.WorkspacePreview .izquierda{
+.WorkspacePreview .izquierda {
+    padding-top: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     overflow-x: scroll;
 }
 
-.WorkspacePreview .izquierda h2{
+.WorkspacePreview .izquierda h2 {
     margin-left: 10px;
     font-size: 22px;
 }
 
-.WorkspacePreview .izquierda img{
+.WorkspacePreview .izquierda img {
     width: 50px
 }
 
-.WorkspacePreview .navLink{
-    padding: 5px;
-    background-color: #B43F3F;
-    border-radius: 5px;
+.WorkspacePreview .button {
+    width: 16%;
+    padding-block: 10px;
+    font-size: 20px;
+    text-align: center;
     color: white;
+    border-radius: 7px;
+    border: 2px solid black;
+    cursor: pointer;
 }
 
-@media (min-width: 600px){
-    .iconoEntrar{
+.WorkspacePreview .addMemberForm{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:20px;
+}
+
+.WorkspacePreview .block{
+    display: flex;
+    align-items: center;
+    gap:10px;
+
+    & label{
+        font-size: 20px;
+    }
+
+    & input{
+        background-color: wheat;
+        padding: 4px;
+        border-radius: 3px;
+    }
+}
+
+@media (max-width: 400px) {
+    .WorkspacePreview {
+        flex-direction: column;
+    }
+
+    .WorkspacePreview .navLink {
+        padding: 10px;
+    }
+}
+
+@media (min-width: 600px) {
+    .iconoEntrar {
         width: 40px;
         height: 40px;
     }
 
-    .WorkspacePreview .navLink{
+    .WorkspacePreview .navLink {
         padding: 15px 25px;
     }
 }
 
-@media (min-width: 1000px){
-    .WorkspacePreview .izquierda h2{
+@media (min-width: 1000px) {
+    .WorkspacePreview .izquierda h2 {
         font-size: 30px;
     }
 
-    .WorkspacePreview .izquierda img{
+    .WorkspacePreview .izquierda img {
         width: 70px;
     }
 
-    .WorkspacePreview .navLink{
+    .WorkspacePreview .navLink {
         padding: 15px 50px;
     }
 
-    .WorkspacePreview button{
+    .WorkspacePreview button {
         width: 90px;
     }
-    
-    .iconoEntrar{
+
+    .iconoEntrar {
         width: 50px;
         height: 50px;
     }

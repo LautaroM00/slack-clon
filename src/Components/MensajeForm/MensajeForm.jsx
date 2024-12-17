@@ -1,35 +1,27 @@
 import React from 'react'
 import { VscSend } from "react-icons/vsc";
-import { horas, minutos } from './tiempo';
 
 
 import './MensajeForm.css'
+import useFetch from '../../Hooks/useFetch';
+import { useParams } from 'react-router-dom';
 
-const MensajeForm = ({ mensajesAcumulados, agregarMensaje, indexCanal, indexWorkspace }) => {
+const MensajeForm = () => {
 
-    const handleSubmit = (e) => {
+    const {customFetch} = useFetch()
+    const { idCanal } = useParams()
+
+    const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const textoMensaje = e.target[0].value
-
+        const textoMensaje = e.target[0].value.trim()
+        
         if (textoMensaje && textoMensaje.length < 2000) {
-            agregarMensaje([...mensajesAcumulados,
-            {
-                autor: 'Tú',
-                texto: textoMensaje,
-                hora: `${horas}:${minutos}`,
-                id: mensajesAcumulados.length + 1
-            }]
-            )
 
-            agregarMensajeLS(indexWorkspace, indexCanal, {
-                autor: 'Tú',
-                texto: textoMensaje,
-                hora: `${horas}:${minutos}`,
-                id: mensajesAcumulados.length + 1
-            })
+            const serverResponse = await customFetch(`/api/message/${idCanal}`, 'POST', { content: textoMensaje })
 
-            e.target[0].value = ''
+            return e.target[0].value = ''
+
         }
     }
 

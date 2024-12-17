@@ -5,8 +5,20 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
     background-color: #B43F3F;
+}
+
+.SW_main .filtro{
+    display: flex;
+    width: calc(80vw + 40px);
+    max-width: 1030px;
+
+    & .input{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 }
 
 .SW_main h1{
@@ -34,15 +46,14 @@
 }
 
 .SW_footer{
-    height: 20vh;
+    height: 15vh;
     display: flex;
-    flex-direction: column;
     gap:20px;
     align-items: center;
     background-color: #B43F3F;
 }
 
-.SW_footer .nuevoWS{
+.SW_footer .buttonWS{
     font-size: 25px;
     padding: 15px 25px;
     background-color: #333ba8a5;
@@ -60,21 +71,11 @@
     background-color: #0f475e;
 }
 
-.reiniciar{
-    position: absolute;
-    top: 95vh;
-    padding: 5px;
+.SW_nav .loading{
     display: flex;
-    align-items: end;
-    justify-content: end;
-    width: 100vw;
-    height: 5%
-}
-
-.reiniciar .boton{
-    display: flex;
-    background-color: transparent;
-    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }
 
 .workspaceNotFound{

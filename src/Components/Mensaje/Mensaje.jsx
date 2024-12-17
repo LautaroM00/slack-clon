@@ -3,25 +3,25 @@ import React from 'react'
 import './Mensaje.css'
 import ResaltarTexto from '../Funcionalidades/ResaltarTexto/ResaltarTexto'
 
-const Mensaje = ({ autor, texto, hora, thumbnail, textoFiltro }) => {
+const Mensaje = ({ name, content, sent_at, textoFiltro }) => {
     return (
         <div className='mensajeContenedor'>
             <div className='arriba'>
-                <img src={thumbnail} />
+                <img src={'/thumbnails/pepe.png'} />
                 <div className='nombre-hora'>
                     <h3>
-                        {autor}
+                        {name}
                     </h3>
                     <span>
-                        {hora}
+                        {sent_at}
                     </span>
                 </div>
             </div>
             <p className='texto'>
                 {
                     textoFiltro ?
-                        <ResaltarTexto texto={texto} textoFiltro={textoFiltro} /> :
-                        texto
+                        <ResaltarTexto texto={content} textoFiltro={textoFiltro} /> :
+                        content
                 }
             </p>
         </div>

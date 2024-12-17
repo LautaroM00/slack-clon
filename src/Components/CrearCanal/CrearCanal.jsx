@@ -5,8 +5,10 @@ import { GrAdd } from "react-icons/gr";
 
 import './CrearCanal.css'
 import ListaCondiciones from '../ListaCondiciones/ListaCondiciones.jsx';
+import { useWorkspaceContext } from '../../Context/WorkspaceContext.jsx';
+import useFetch from '../../Hooks/useFetch.jsx';
 
-const CrearCanal = ({ setDisplay, setCanalesState }) => {
+const CrearCanal = ({ setDisplay }) => {
     const [mostrarInput, setMostrarInput] = useState('none')
     const [mostrarLabel, setMostrarLabel] = useState('')
     const [bordeInput, setBordeInput] = useState('')
@@ -14,44 +16,31 @@ const CrearCanal = ({ setDisplay, setCanalesState }) => {
     const [errorNombreRepetido, setErrorNombreRepetido] = useState('')
     const [errorLongitudNombre, setErrorLongitudNombre] = useState('')
 
+    const {channels, setChannels} = useWorkspaceContext()
 
-    const { idWorkspace } = useParams()
+    const {customFetch} = useFetch()
 
-    const handleSubmit = (e) => {
+    const { workspaceName } = useParams()
+
+
+    const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const WORKSPACES = traerLS()
+        let nombreCanalNuevo = e.target[0].value.trim()
 
-        let nombreCanalNuevo = e.target[0].value
-
-        let estaRepetido = WORKSPACES[Number(idWorkspace - 1)].canales.find((canal) => {
-            return (nombreCanalNuevo === canal.titulo)
+        let estaRepetido = channels.find((canal) => {
+            return (nombreCanalNuevo === canal.name)
         })
 
         if (nombreCanalNuevo &&
             nombreCanalNuevo.length < 24 &&
             nombreCanalNuevo.length > 2 && !estaRepetido) {
 
-            WORKSPACES[Number(idWorkspace - 1)].canales.push(
-                {
-                    titulo: nombreCanalNuevo,
-                    miembros: [
-                        {
-                            nombre: 'Tú',
-                            thumbnail: '/thumbnails/chad.png',
-                            mensajesCanal: [],
-                            id: 1
-                        }
-                    ],
-                    mensajes: [
-                    ],
-                    id_canal: WORKSPACES[Number(idWorkspace - 1)].canales.length + 1
-                }
-            )
+            const serverResponse = await customFetch(`/api/channel/${workspaceName}`, 'POST', { channelName: nombreCanalNuevo})
 
-            actualizarLS(WORKSPACES)
-            setCanalesState(WORKSPACES[Number(idWorkspace - 1)].canales)
-            e.target[0].value = ''
+            if(serverResponse.ok){
+                setChannels(undefined)
+            }
 
             setDisplay('none')
             setMostrarInput('none')
@@ -69,7 +58,7 @@ const CrearCanal = ({ setDisplay, setCanalesState }) => {
                 setErrorNombreRepetido('')
             }
             if (estaRepetido) {
-                setErrorNombreRepetido('EL NOMBRE INGRESADO PERTENECE A UN CANAL EXISTENTE')
+                setErrorNombreRepetido('El nombre ingresado pertenece a un canal existente.')
                 setErrorLongitudNombre('')
             }
         }
@@ -95,7 +84,7 @@ const CrearCanal = ({ setDisplay, setCanalesState }) => {
             <div className='especial' onClick={handleMostrarInput} style={mostrarInput ? { cursor: 'pointer' } : { cursor: '' }}>
                 <form className='formCrearCanal' onSubmit={handleSubmit}>
                     <label style={{ display: mostrarLabel, cursor: 'pointer' }} htmlFor='nuevoCanal'>Crear canal</label>
-                    <input type='text' placeholder='#nuevo-canal' style={{ display: mostrarInput, border: bordeInput }} id='nuevoCanal' name='nuevoCanal'/>
+                    <input type='text' placeholder='nuevo-canal' style={{ display: mostrarInput, border: bordeInput }} id='nuevoCanal' name='nuevoCanal'/>
                     <button type='submit' style={{ display: mostrarInput, cursor: 'pointer' }}><GrAdd style={{ width: '20px', height: '20px' }} /></button>
                 </form>
                 {!mostrarInput && <IoMdClose style={{ width: '20px', height: '20px', cursor: 'pointer' }} onClick={handleCerrarInput} />}

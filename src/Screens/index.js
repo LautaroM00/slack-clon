@@ -9,4 +9,4 @@ import ResetPasswordScreen from "./Auth/ResetPasswordScreen/ResetPasswordScreen.
 
 
 
-export { CanalList, WorkspacePreview, Canal, LoginScreen, RegisterScreen, VerifyEmailScreen, ForgotPasswordScreen, ResetPasswordScreen}
+export { CanalList, WorkspacePreview, Canal, LoginScreen, RegisterScreen, VerifyEmailScreen, ForgotPasswordScreen, ResetPasswordScreen }

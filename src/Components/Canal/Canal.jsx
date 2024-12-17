@@ -7,48 +7,57 @@ import ListaMensajes from '../ListaMensajes/ListaMensajes'
 import './Canal.css'
 import CanalList from '../CanalList/CanalList'
 import InputFiltroTexto from '../InputFiltroTexto/InputFiltroTexto';
+import { useWorkspaceContext } from '../../Context/WorkspaceContext'
 
 const Canal = () => {
-    let { idWorkspace, idCanalParams } = useParams()
 
-    let WORKSPACES = traerLS()
-    let WORKSPACE = WORKSPACES[idWorkspace - 1]
-    let canal = WORKSPACE.canales[idCanalParams - 1]
-    let { titulo, miembros } = canal
+    const { getChannels, channels, setChannels, actualChannel, setActualChannel } = useWorkspaceContext()
 
-
-    const [idCanalState, setIdCanalState] = useState(idCanalParams)
-    const [canalesState, setCanalesState] = useState(WORKSPACE.canales)
-    const [mensajesAcumulados, agregarMensaje] = useState([])
-    const [indexCanal, setIndexCanal] = useState('')
+    let { workspaceName, idCanal } = useParams()
     const [textoFiltro, setTextoFiltro] = useState('')
 
 
     useEffect(() => {
-        setIdCanalState(idCanalParams)
-        agregarMensaje(canal.mensajes)
-        setIndexCanal(Number(idCanalParams))
+        if (!channels) {
+            getChannels(workspaceName)
+                .then((channels) => {
+                    setChannels(channels)
+
+                })
+        }
     },
-        [idCanalParams]
+        [channels]
     )
 
+    useEffect(() => {
+        if (channels) {
+            setActualChannel(() => {
+                return channels.find((channel) => channel.id === Number(idCanal))
+            })
+        }
+    },
+        [channels, idCanal]
+    )
+
+
+
     return (
-        <>
-            {
-                idCanalState == idCanalParams ?
-                    <div className='contenedorWorkspace'>
-                        <CanalList canales={canalesState} setCanalesState={setCanalesState} setTextoFiltro={setTextoFiltro}/>
-                        <div className='mensajes-mensajeForm'>
-                            <h2 className='canalTitulo'>{titulo}</h2>
-                            <ListaMensajes mensajesAcumulados={mensajesAcumulados} miembros={miembros} textoFiltro={textoFiltro}/>
-                            <InputFiltroTexto setTextoFiltro={setTextoFiltro} textoFiltro={textoFiltro} id={'filtroTextoMensajes'}/>
-                            <MensajeForm mensajesAcumulados={mensajesAcumulados} agregarMensaje={agregarMensaje} indexCanal={indexCanal - 1} indexWorkspace={idWorkspace - 1} />
-                        </div>
-                    </div> :
+        <div className='contenedorWorkspace'>
+            <CanalList channels={channels} setChannels={setChannels} setTextoFiltro={setTextoFiltro} />
+            <div className='mensajes-mensajeForm'>
+                {actualChannel ?
                     <>
-                    </>
-            }
-        </>
+                        <h2 className='canalTitulo'>{actualChannel.name}</h2>
+                        <ListaMensajes idCanal={idCanal} textoFiltro={textoFiltro} setTextoFiltro={setTextoFiltro} />
+                        <InputFiltroTexto setTextoFiltro={setTextoFiltro} textoFiltro={textoFiltro} id={'filtroTextoMensajes'} />
+                        <MensajeForm />
+                    </> :
+                    <h2 className='canalTitulo'>Seleccione un canal</h2>
+                }
+
+            </div>
+        </div>
+
     )
 }
 
