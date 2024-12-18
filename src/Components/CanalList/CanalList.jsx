@@ -87,7 +87,7 @@ const CanalMap = ({ channels }) => {
 
     const { workspaceName, idCanal } = useParams()
     const { customFetch } = useFetch()
-    const { setChannels } = useWorkspaceContext()
+    const { setChannels, setShow, setModalData } = useWorkspaceContext()
 
     const handleDeleteChannel = async (name, id) => {
         if (confirm(`¿Realmente quiere eliminar el canal '${name.toUpperCase()}?'`)) {
@@ -96,9 +96,19 @@ const CanalMap = ({ channels }) => {
 
             if (serverResponse.ok) {
                 setChannels((prevChannels) => prevChannels.filter((channel) => channel.id !== id))
-                return alert(serverResponse.message)
+                setShow(true)
+                setModalData({
+                    message: serverResponse.message,
+                    type: 'success'
+                })
+                return
             } else {
-                return alert(serverResponse.message)
+                setShow(true)
+                setModalData({
+                    message: serverResponse.message,
+                    type: 'error'
+                })
+                return
             }
         }
     }
@@ -108,7 +118,7 @@ const CanalMap = ({ channels }) => {
         channels.map((canal, index) => {
             const { name, id } = canal
             return (
-                <li key={index} className='canal' style={{ backgroundColor: Number(idCanal) === canal.id ? '#dfdf72' : '#e2e2b6' }} >
+                <li key={index} className='canalLi' style={{ backgroundColor: Number(idCanal) === canal.id ? '#dfdf72' : '#e2e2b6' }} >
                     <NavLink to={`/workspace/${workspaceName}/${id}`}>
                         {`#${name}`}
                     </NavLink>

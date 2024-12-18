@@ -26,6 +26,7 @@
 }
 
 .navCanales .delete:hover {
+
     color: rgb(255, 0, 0);
     cursor: pointer;
     text-shadow: 
@@ -60,25 +61,30 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    overflow-y: auto;
-    max-height: 600px;
+    overflow-y: scroll;
+    max-height: 400px;
 }
 
-.navCanales .canal {
+.navCanales .canalLi {
     position: relative;
     z-index: 10;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 10px;
-    overflow: hidden;
     letter-spacing: 1px;
     font-weight: 600;
     font-size: 22px;
     border-radius: 7px;
+
+    & a{
+        display: flex;
+        align-items: center;
+        overflow-x: auto;
+    }
 }
 
-.navCanales .canal:hover {
+.navCanales .canalLi:hover {
     background-color: #bebe90;
 }
 
@@ -111,7 +117,7 @@
         box-shadow: inset 0 0 5px 1px black;
     }
 
-    .navCanales .canal {
+    .navCanales .canalLi {
         height: 100%;
         font-size: 30px;
     }

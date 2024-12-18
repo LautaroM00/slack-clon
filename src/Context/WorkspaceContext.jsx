@@ -22,8 +22,8 @@ const WorkspaceProvider = ({ children }) => {
         return serverResponse.payload.workspaces
     }
 
-    const getChannels = async (workspaceName) => {
-        const serverResponse = await customFetch('/api/channel/' + workspaceName, 'GET')
+    const getChannels = async (workspaceName, amount) => {
+        const serverResponse = await customFetch(`/api/channel/${amount}/${workspaceName}`, 'GET')
 
         return serverResponse.payload.channels
     }

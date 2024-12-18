@@ -9,13 +9,12 @@ import { useWorkspaceContext } from '../../Context/WorkspaceContext'
 import useFetch from '../../Hooks/useFetch'
 import { Form } from '../../Components/Form/Form'
 import ListaWorkspacesPreview from '../../Components/ListaWorkspacesPreview/ListaWorkspacesPreview'
+import validateInputsCreateWorkspace from '../../Utils/validations'
 
 const ModalWorkSpace = () => {
     const [displayCondiciones, setDisplayCondiciones] = useState('none')
     const [inputInvalido, setInputInvalido] = useState('')
-    const [errorNombreRepetido, setErrorNombreRepetido] = useState('')
-    const [errorLongitudNombreWorkspace, setErrorLongitudNombreWorkspace] = useState('')
-    const [errorLongitudNombreCanal, setErrorLongitudNombreCanal] = useState('')
+    const [conditions, setConditions] = useState([])
 
     const navigate = useNavigate()
 
@@ -24,7 +23,7 @@ const ModalWorkSpace = () => {
         channelName: ''
     }
 
-    const { workspaces, setWorkspaces, adminWorkspaces, setAdminWorkspaces } = useWorkspaceContext()
+    const { workspaces, setWorkspaces, adminWorkspaces, setAdminWorkspaces, setShow, setModalData } = useWorkspaceContext()
     const { customFetch } = useFetch()
     const { type } = useParams()
 
@@ -64,17 +63,8 @@ const ModalWorkSpace = () => {
     const handleSubmit = async (formState) => {
 
         const { workspaceName, channelName } = formState
-        let estaRepetido = workspaces.find((workspace) => {
-            return (workspace.name === workspaceName)
-        })
-
-        if (workspaceName !== '' &&
-            channelName !== '' &&
-            workspaceName.length <= 20 &&
-            workspaceName.length >= 5 &&
-            channelName.length <= 23 &&
-            channelName.length >= 3 &&
-            !estaRepetido) {
+        const errors = validateInputsCreateWorkspace(workspaceName, channelName, workspaces)
+        if (errors.length === 0) {
 
             setInputInvalido('')
             setDisplayCondiciones('none')
@@ -85,35 +75,30 @@ const ModalWorkSpace = () => {
             if (serverResponse.ok) {
                 setWorkspaces([...workspaces, { name: workspaceName, role: 'admin' }])
                 setAdminWorkspaces([...adminWorkspaces, { name: workspaceName, role: 'admin' }])
-                return navigate('/')
-            }else{
-                return alert(serverResponse.message)
+                setShow(true)
+                setModalData({
+                    message: serverResponse.message,
+                    type: 'success',
+                    navigate: navigate('/')
+                })
+                return
+            } else {
+                setShow(true)
+                setModalData({
+                    message: serverResponse.message,
+                    type: 'error'
+                })
+                return
             }
 
         } else {
             setInputInvalido('4px solid red')
             setDisplayCondiciones('')
-            if (workspaceName.length > 20 ||
-                workspaceName.length < 5) {
-                setErrorLongitudNombreWorkspace('El nombre del WORKSPACE debe tener entre 5 y 20 caracteres inclusive.')
-            } else {
-                setErrorLongitudNombreWorkspace('')
-            }
 
-            if (channelName.length > 23 ||
-                channelName.length < 3) {
-                setErrorLongitudNombreCanal('El nombre del CANAL debe tener entre 3 y 23 caracteres inclusive.')
-            } else {
-                setErrorLongitudNombreCanal('')
-            }
-
-            if (estaRepetido) {
-                setErrorNombreRepetido('Ya existe un workspace con el nombre que intenta ingresar.')
-            } else {
-                setErrorNombreRepetido('')
-            }
+            setConditions(errors)
         }
     }
+
 
     return (
         <>
@@ -128,20 +113,14 @@ const ModalWorkSpace = () => {
                                 </NavLink>
                                 <InformacionInput setCondiciones={setDisplayCondiciones} displayCondiciones={displayCondiciones} />
                             </div>
-                            <ListaCondiciones displayCondiciones={displayCondiciones}
-                                condiciones={(errorLongitudNombreCanal || errorLongitudNombreWorkspace || errorNombreRepetido) ?
-                                    [
-                                        errorNombreRepetido,
-                                        errorLongitudNombreWorkspace,
-                                        errorLongitudNombreCanal
-                                    ] :
-                                    ['El nombre del WORKSPACE debe tener entre 5 y 20 caracteres inclusive.',
-                                        'El nombre del CANAL debe tener entre 3 y 23 caracteres inclusive.'
-                                    ]
-                                } />
+                            <ListaCondiciones
+                                displayCondiciones={displayCondiciones}
+                                condiciones={conditions} 
+                                type={'workspace'}
+                                />
                         </Form> :
                         <>
-                            <ListaWorkspacesPreview workspaces={adminWorkspaces}/>
+                            <ListaWorkspacesPreview workspaces={adminWorkspaces} />
                             <button className='return' onClick={() => navigate('/')} >Volver</button>
                         </>
                 }

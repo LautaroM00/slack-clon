@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { IoMdClose } from "react-icons/io";
 import { GrAdd } from "react-icons/gr";
@@ -9,17 +9,18 @@ import { useWorkspaceContext } from '../../Context/WorkspaceContext.jsx';
 import useFetch from '../../Hooks/useFetch.jsx';
 
 const CrearCanal = ({ setDisplay }) => {
-    const [mostrarInput, setMostrarInput] = useState('none')
-    const [mostrarLabel, setMostrarLabel] = useState('')
-    const [bordeInput, setBordeInput] = useState('')
-    const [displayCondiciones, setDisplayCondiciones] = useState('none')
-    const [errorNombreRepetido, setErrorNombreRepetido] = useState('')
-    const [errorLongitudNombre, setErrorLongitudNombre] = useState('')
 
-    const {channels, setChannels} = useWorkspaceContext()
+    const [config, setConfig] = useState({
+        showInput: 'none',
+        showLabel: '',
+        inputBorder: '',
+        displayConditions: 'none',
+        repeatedName: '',
+        tooLargeName: ''
+    })
 
-    const {customFetch} = useFetch()
-
+    const { channels, setChannels, setModalData, setShow } = useWorkspaceContext()
+    const { customFetch } = useFetch()
     const { workspaceName } = useParams()
 
 
@@ -36,62 +37,92 @@ const CrearCanal = ({ setDisplay }) => {
             nombreCanalNuevo.length < 24 &&
             nombreCanalNuevo.length > 2 && !estaRepetido) {
 
-            const serverResponse = await customFetch(`/api/channel/${workspaceName}`, 'POST', { channelName: nombreCanalNuevo})
+            const serverResponse = await customFetch(`/api/channel/${workspaceName}`, 'POST', { channelName: nombreCanalNuevo })
+            const canalAgregado = await customFetch(`/api/channel/last/${workspaceName}`, 'GET')
 
-            if(serverResponse.ok){
-                setChannels(undefined)
+            if (serverResponse.ok) {
+                e.target[0].value = ''
+                setConfig({
+                    display: 'none',
+                    showInput: 'none',
+                    showLabel: '',
+                    inputBorder: '',
+                    displayConditions: 'none',
+                    repeatedName: '',
+                    tooLargeName: ''
+                })
+                setShow(true)
+                setModalData({
+                    message: serverResponse.message,
+                    type: 'success'
+                })
+                setChannels((prevChannels) => [...prevChannels, canalAgregado.payload.channels[0]])
+                return
             } else {
-                return alert(serverResponse.message)
+                setShow(true)
+                setModalData({
+                    message: serverResponse.message,
+                    type: 'error'
+                })
             }
-
-            setDisplay('none')
-            setMostrarInput('none')
-            setMostrarLabel('');
-            setBordeInput('')
-            setDisplayCondiciones('none')
-            setErrorNombreRepetido('')
-            setErrorLongitudNombre('')
         } else {
-            setBordeInput('3px solid red')
-            setDisplayCondiciones('')
             if (nombreCanalNuevo.length > 23 ||
                 nombreCanalNuevo.length < 3) {
-                setErrorLongitudNombre('El nombre ingresado debe tener entre 3 y 23 (inclusive) caracteres.')
-                setErrorNombreRepetido('')
+                setConfig({
+                    ...config,
+                    ['tooLargeName']: 'El nombre ingresado debe tener entre 3 y 23 (inclusive) caracteres.',
+                    ['repeatedName']: ''
+                })
             }
             if (estaRepetido) {
-                setErrorNombreRepetido('El nombre ingresado pertenece a un canal existente.')
-                setErrorLongitudNombre('')
+                setConfig({
+                    ...config,
+                    ['tooLargeName']: 'El nombre ingresado pertenece a un canal existente.',
+                    ['repeatedName']: ''
+                })
             }
+            setConfig((prevConfig) => {
+                return {
+                    ...prevConfig,
+                    ['inputBorder']: '3px solid red',
+                    ['displayConditions']: ''
+                }
+            })
         }
     }
-
+    console.clear()
+    console.log(config)
     const handleMostrarInput = () => {
-        if (mostrarInput) {
-            setMostrarInput('')
-            setMostrarLabel('none')
+        if (config.showInput) {
+            setConfig({
+                ...config,
+                ['showInput']: '',
+                ['showLabel']: 'none'
+            })
         }
-
     }
 
     const handleCerrarInput = () => {
-        setMostrarInput('none')
-        setMostrarLabel('')
-        setDisplayCondiciones('none')
-        setBordeInput('')
+        setConfig({
+            ...config,
+            ['showInput']: 'none',
+            ['showLabel']: '',
+            ['displayConditions']: 'none',
+            ['inputBorder']: ''
+        })
     }
 
     return (
         <>
-            <div className='especial' onClick={handleMostrarInput} style={mostrarInput ? { cursor: 'pointer' } : { cursor: '' }}>
+            <div className='especial' onClick={handleMostrarInput} style={config.showInput ? { cursor: 'pointer' } : { cursor: '' }}>
                 <form className='formCrearCanal' onSubmit={handleSubmit}>
-                    <label style={{ display: mostrarLabel, cursor: 'pointer' }} htmlFor='nuevoCanal'>Crear canal</label>
-                    <input type='text' placeholder='nuevo-canal' style={{ display: mostrarInput, border: bordeInput }} id='nuevoCanal' name='nuevoCanal'/>
-                    <button type='submit' style={{ display: mostrarInput, cursor: 'pointer' }}><GrAdd style={{ width: '20px', height: '20px' }} /></button>
+                    <label style={{ display: config.showLabel, cursor: 'pointer' }} htmlFor='nuevoCanal'>Crear canal</label>
+                    <input type='text' placeholder='nuevo-canal' style={{ display: config.showInput, border: config.inputBorder }} id='nuevoCanal' name='nuevoCanal' />
+                    <button type='submit' style={{ display: config.showInput, cursor: 'pointer' }}><GrAdd style={{ width: '20px', height: '20px' }} /></button>
                 </form>
-                {!mostrarInput && <IoMdClose style={{ width: '20px', height: '20px', cursor: 'pointer' }} onClick={handleCerrarInput} />}
+                {!config.showInput && <IoMdClose style={{ width: '20px', height: '20px', cursor: 'pointer' }} onClick={handleCerrarInput} />}
             </div>
-            <ListaCondiciones displayCondiciones={displayCondiciones} condiciones={[errorLongitudNombre, errorNombreRepetido]} />
+            <ListaCondiciones displayCondiciones={config.displayConditions} condiciones={[config.tooLargeName, config.repeatedName]} />
         </>
     )
 }

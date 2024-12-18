@@ -8,6 +8,7 @@ import './Canal.css'
 import CanalList from '../CanalList/CanalList'
 import InputFiltroTexto from '../InputFiltroTexto/InputFiltroTexto';
 import { useWorkspaceContext } from '../../Context/WorkspaceContext'
+import ModalMensaje from '../../Screens/ModalMensaje/ModalMensaje'
 
 const Canal = () => {
 
@@ -18,15 +19,15 @@ const Canal = () => {
 
 
     useEffect(() => {
-        if (!channels) {
-            getChannels(workspaceName)
+
+            getChannels(workspaceName, 'all')
                 .then((channels) => {
                     setChannels(channels)
 
                 })
-        }
+
     },
-        [channels]
+        [idCanal]
     )
 
     useEffect(() => {
@@ -58,7 +59,6 @@ const Canal = () => {
                         :
                         <h2 className='canalTitulo'>Seleccione un canal</h2>
                 }
-
             </div>
         </div>
 

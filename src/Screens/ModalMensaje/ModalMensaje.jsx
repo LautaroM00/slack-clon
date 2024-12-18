@@ -3,7 +3,7 @@ import './ModalMensaje.css'
 
 const ModalMensaje = ({ modalData, setShow }) => {
 
-    const {message, type} = modalData
+    const {message, type, execute} = modalData
 
     const [movement, setMovement] = useState('show')
     const [display, setDisplay] = useState('none')
@@ -21,6 +21,7 @@ const ModalMensaje = ({ modalData, setShow }) => {
         setTimeout(() => {
             setDisplay('none')
             setShow(false)
+            execute ? execute() : ''
         },
             3000
         )

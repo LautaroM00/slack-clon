@@ -9,7 +9,7 @@ import { useWorkspaceContext } from '../../Context/WorkspaceContext';
 const WorkspacePreview = ({ name, thumbnail }) => {
     const navigate = useNavigate()
 
-    const { workspaces, setWorkspaces,setShow, setModalData, setAdminWorkspaces } = useWorkspaceContext()
+    const { workspaces, setWorkspaces, setShow, setModalData, setAdminWorkspaces } = useWorkspaceContext()
     const { type } = useParams()
     const { customFetch } = useFetch()
     const { formState, handleChange } = useForm({
@@ -21,17 +21,29 @@ const WorkspacePreview = ({ name, thumbnail }) => {
             e.preventDefault()
 
             const serverResponse = await customFetch(`/api/workspace/delete/${name}`, 'PUT')
-            console.log(serverResponse)
 
             if (serverResponse.ok) {
                 const newWorkspaces = workspaces.filter((workspace) => workspace.name !== name)
                 setWorkspaces(newWorkspaces)
                 setAdminWorkspaces(newWorkspaces)
-                alert('Workspace eliminado con éxito.')
-                newWorkspaces.length === 0 ? navigate('/') : ''
+                setShow(true)
+                newWorkspaces.length === 0 ?
+                    setModalData({
+                        message: serverResponse.message,
+                        type: 'success',
+                        execute: navigate('/')
+                    }) :
+                    setModalData({
+                        message: serverResponse.message,
+                        type: 'success'
+                    })
                 return
-            }else{
-                return alert(serverResponse.message)
+            } else {
+                setShow(true)
+                return setModalData({
+                    message: serverResponse.message,
+                    type: 'success'
+                })
             }
         }
         return
