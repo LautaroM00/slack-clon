@@ -6,19 +6,19 @@ import { NavLink } from 'react-router-dom'
 import FiltrarArray from '../../Components/FiltrarArray/FiltrarArray'
 import ListaWorkspacesPreview from '../../Components/ListaWorkspacesPreview/ListaWorkspacesPreview'
 import { useWorkspaceContext } from '../../Context/WorkspaceContext'
+import ModalMensaje from '../ModalMensaje/ModalMensaje'
 
 
 const SelectorWorkspace = () => {
-    const { workspaces, adminWorkspaces } = useWorkspaceContext()
+    const { workspaces, adminWorkspaces, show, setShow, modalData } = useWorkspaceContext()
     const [workspacesFiltrados, setWorkspacesFiltrados] = useState(workspaces)
+
 
     useEffect(() => {
         setWorkspacesFiltrados(workspaces)
     },
         [workspaces]
     )
-
-    console.log(workspaces)
 
     return (
         <>
@@ -56,6 +56,9 @@ const SelectorWorkspace = () => {
 
                     }
                 </div>
+                {
+                    show ? <ModalMensaje modalData={modalData} setShow={setShow}/> : ''
+                }
             </main>
         </>
     )

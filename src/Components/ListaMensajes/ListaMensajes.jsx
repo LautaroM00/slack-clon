@@ -1,25 +1,24 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import Mensaje from '../Mensaje/Mensaje'
 
 import './ListaMensajes.css'
 import { useWorkspaceContext } from '../../Context/WorkspaceContext'
 
 const ListaMensajes = ({ idCanal, textoFiltro }) => {
-
-    const { getMessages } = useWorkspaceContext()
-    const [messages, setMessages] = useState()
+    const { messages, setMessages, getMessages } = useWorkspaceContext()
 
     useEffect(() => {
-
-
-        getMessages(idCanal)
+        Number(idCanal) && getMessages('all', idCanal)
             .then((messages) => {
-                setMessages(() => messages)
+                setMessages(messages)
             });
-
+        console.log('render')
+        
     },
         [idCanal]
     )
+
+
 
     return (
         <div className='contenedorMensajes'>

@@ -24,9 +24,8 @@ const ModalWorkSpace = () => {
         channelName: ''
     }
 
-    const { workspaces, setWorkspaces, adminWorkspaces } = useWorkspaceContext()
+    const { workspaces, setWorkspaces, adminWorkspaces, setAdminWorkspaces } = useWorkspaceContext()
     const { customFetch } = useFetch()
-
     const { type } = useParams()
 
     const formData = {
@@ -65,8 +64,6 @@ const ModalWorkSpace = () => {
     const handleSubmit = async (formState) => {
 
         const { workspaceName, channelName } = formState
-
-        console.log(formState)
         let estaRepetido = workspaces.find((workspace) => {
             return (workspace.name === workspaceName)
         })
@@ -85,11 +82,12 @@ const ModalWorkSpace = () => {
 
             const serverResponse = await customFetch('/api/workspace/', 'POST', { formState })
 
-            console.log(serverResponse)
-
             if (serverResponse.ok) {
-                setWorkspaces(undefined)
+                setWorkspaces([...workspaces, { name: workspaceName, role: 'admin' }])
+                setAdminWorkspaces([...adminWorkspaces, { name: workspaceName, role: 'admin' }])
                 return navigate('/')
+            }else{
+                return alert(serverResponse.message)
             }
 
         } else {

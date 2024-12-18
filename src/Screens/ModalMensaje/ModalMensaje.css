@@ -1,0 +1,105 @@
+.modal {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 20000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(19, 17, 17, 0.815);
+}
+
+.modal .container.show {
+    position: absolute;
+    z-index: 20000;
+    top: 30px;
+    transform: translateY(-130%);
+    animation: slideIn 1s forwards;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    gap: 10px;
+    height: 100px;
+    border-radius: 10px;
+
+    & p {
+        margin-top: 4px;
+        color: white;
+        background-color: rgba(0, 0, 0, 0.322);
+        border-radius: 10px;
+        padding: 5px;
+        text-shadow:
+            1px 1px 0px rgba(0, 0, 0, 0.75),
+            -1px -1px 0px rgba(0, 0, 0, 0.75),
+            1px -1px 0px rgba(0, 0, 0, 0.75),
+            -1px 1px 0px rgba(0, 0, 0, 0.75);
+
+    }
+
+    & h2 {
+        color: rgb(230, 212, 212);
+        text-shadow:
+            1px 1px 0px rgba(0, 0, 0, 0.75),
+            -1px -1px 0px rgba(0, 0, 0, 0.75),
+            1px -1px 0px rgba(0, 0, 0, 0.75),
+            -1px 1px 0px rgba(0, 0, 0, 0.75)
+    }
+}
+
+.modal .container.hide {
+    position: absolute;
+    top: 30px;
+    transform: translateY(0%);
+    animation: slideOut 1s forwards;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    gap: 10px;
+    background-color: rgb(197, 62, 62);
+    height: 100px;
+    border-radius: 10px;
+
+    & p {
+        margin-top: 4px;
+        color: white;
+        background-color: rgba(0, 0, 0, 0.322);
+        border-radius: 10px;
+        padding: 5px;
+        text-shadow:
+            1px 1px 0px rgba(0, 0, 0, 0.75),
+            -1px -1px 0px rgba(0, 0, 0, 0.75),
+            1px -1px 0px rgba(0, 0, 0, 0.75),
+            -1px 1px 0px rgba(0, 0, 0, 0.75);
+
+    }
+
+    & h2 {
+        color: rgb(230, 212, 212);
+        text-shadow:
+            1px 1px 0px rgba(0, 0, 0, 0.75),
+            -1px -1px 0px rgba(0, 0, 0, 0.75),
+            1px -1px 0px rgba(0, 0, 0, 0.75),
+            -1px 1px 0px rgba(0, 0, 0, 0.75)
+    }
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateY(-130%);
+    }
+
+    100% {
+        transform: translateY(0%);
+    }
+}
+
+@keyframes slideOut {
+    0% {
+        transform: translateY(0%);
+    }
+
+    100% {
+        transform: translateY(-130%);
+    }
+    
+}

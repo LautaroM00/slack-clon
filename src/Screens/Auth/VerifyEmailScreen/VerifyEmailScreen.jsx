@@ -20,9 +20,9 @@ const VerifyEmailScreen = () => {
         verifyEmail()
             .then((serverResponse) => {
                 if (serverResponse.ok) {
-                    setVerificationResult('Verificación exitosa')
+                    return setVerificationResult('Verificación exitosa')
                 } else {
-                    alert('Error al verificar el email')
+                    return alert(serverResponse.message)
                 }
             })
     },
@@ -35,7 +35,7 @@ const VerifyEmailScreen = () => {
             <div className='verification'>
                 <h1>{verificationResult}</h1>
                 <span>Será redirigido al <strong>LOGIN</strong> en:</span>
-                <strong style={{fontSize: '19px'}}>{countdown}</strong>
+                <strong style={{ fontSize: '19px' }}>{countdown}</strong>
             </div>
         </div>
     )

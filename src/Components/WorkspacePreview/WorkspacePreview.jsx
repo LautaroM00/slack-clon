@@ -1,13 +1,15 @@
 import React from 'react';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 
 import './WorkspacePreview.css'
 import useFetch from '../../Hooks/useFetch';
-import { Form } from '../Form/Form';
 import useForm from '../../Hooks/useForm';
+import { useWorkspaceContext } from '../../Context/WorkspaceContext';
 
 const WorkspacePreview = ({ name, thumbnail }) => {
+    const navigate = useNavigate()
 
+    const { workspaces, setWorkspaces,setShow, setModalData, setAdminWorkspaces } = useWorkspaceContext()
     const { type } = useParams()
     const { customFetch } = useFetch()
     const { formState, handleChange } = useForm({
@@ -19,9 +21,17 @@ const WorkspacePreview = ({ name, thumbnail }) => {
             e.preventDefault()
 
             const serverResponse = await customFetch(`/api/workspace/delete/${name}`, 'PUT')
+            console.log(serverResponse)
 
             if (serverResponse.ok) {
-                return alert('Workspace eliminado con éxito.')
+                const newWorkspaces = workspaces.filter((workspace) => workspace.name !== name)
+                setWorkspaces(newWorkspaces)
+                setAdminWorkspaces(newWorkspaces)
+                alert('Workspace eliminado con éxito.')
+                newWorkspaces.length === 0 ? navigate('/') : ''
+                return
+            }else{
+                return alert(serverResponse.message)
             }
         }
         return
@@ -33,10 +43,19 @@ const WorkspacePreview = ({ name, thumbnail }) => {
         const serverResponse = await customFetch(`/api/workspace/member/${name}`, 'POST', formState)
 
         if (serverResponse.ok) {
-            e.target[0].value = ''
-            return alert(serverResponse.message)
+            setShow(true)
+            setModalData({
+                message: serverResponse.message,
+                type: 'success'
+            })
+            return
         } else {
-            return alert(serverResponse.message)
+            setShow(true)
+            setModalData({
+                message: serverResponse.message,
+                type: 'error'
+            })
+            return
         }
     }
 

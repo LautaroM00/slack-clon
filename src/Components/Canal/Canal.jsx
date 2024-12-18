@@ -45,14 +45,18 @@ const Canal = () => {
         <div className='contenedorWorkspace'>
             <CanalList channels={channels} setChannels={setChannels} setTextoFiltro={setTextoFiltro} />
             <div className='mensajes-mensajeForm'>
-                {actualChannel ?
-                    <>
-                        <h2 className='canalTitulo'>{actualChannel.name}</h2>
-                        <ListaMensajes idCanal={idCanal} textoFiltro={textoFiltro} setTextoFiltro={setTextoFiltro} />
-                        <InputFiltroTexto setTextoFiltro={setTextoFiltro} textoFiltro={textoFiltro} id={'filtroTextoMensajes'} />
-                        <MensajeForm />
-                    </> :
-                    <h2 className='canalTitulo'>Seleccione un canal</h2>
+                {
+                    channels ?
+                        actualChannel ?
+                            <>
+                                <h2 className='canalTitulo'>{actualChannel.name}</h2>
+                                <ListaMensajes idCanal={idCanal} textoFiltro={textoFiltro} setTextoFiltro={setTextoFiltro} />
+                                <InputFiltroTexto setTextoFiltro={setTextoFiltro} textoFiltro={textoFiltro} id={'filtroTextoMensajes'} />
+                                <MensajeForm />
+                            </> :
+                            <h2 className='canalTitulo'>Seleccione un canal</h2>
+                        :
+                        <h2 className='canalTitulo'>Seleccione un canal</h2>
                 }
 
             </div>

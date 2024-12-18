@@ -40,6 +40,8 @@ const CrearCanal = ({ setDisplay }) => {
 
             if(serverResponse.ok){
                 setChannels(undefined)
+            } else {
+                return alert(serverResponse.message)
             }
 
             setDisplay('none')

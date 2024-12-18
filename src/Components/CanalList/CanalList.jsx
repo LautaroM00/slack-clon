@@ -8,6 +8,7 @@ import CrearCanal from '../CrearCanal/CrearCanal'
 import FiltrarArray from '../FiltrarArray/FiltrarArray';
 import Pepe from '../Pepe/Pepe';
 import useFetch from '../../Hooks/useFetch';
+import { useWorkspaceContext } from '../../Context/WorkspaceContext';
 
 const CanalList = ({ channels, setChannels }) => {
     const [mostrarCanales, setMostrarCanales] = useState('none')
@@ -85,16 +86,20 @@ export default CanalList
 const CanalMap = ({ channels }) => {
 
     const { workspaceName, idCanal } = useParams()
-    const {customFetch} = useFetch()
+    const { customFetch } = useFetch()
+    const { setChannels } = useWorkspaceContext()
 
     const handleDeleteChannel = async (name, id) => {
-        if(confirm(`¿Realmente quiere eliminar el canal '${name.toUpperCase()}?'`)){
+        if (confirm(`¿Realmente quiere eliminar el canal '${name.toUpperCase()}?'`)) {
 
-        const serverResponse = await customFetch(`/api/channel/delete/${workspaceName}/${id}`, 'PUT')
+            const serverResponse = await customFetch(`/api/channel/delete/${workspaceName}/${id}`, 'PUT')
 
-        if(serverResponse.ok){
-            return alert(serverResponse.message)
-        }
+            if (serverResponse.ok) {
+                setChannels((prevChannels) => prevChannels.filter((channel) => channel.id !== id))
+                return alert(serverResponse.message)
+            } else {
+                return alert(serverResponse.message)
+            }
         }
     }
 
@@ -103,7 +108,7 @@ const CanalMap = ({ channels }) => {
         channels.map((canal, index) => {
             const { name, id } = canal
             return (
-                <li  key={index} className='canal' style={{ backgroundColor: Number(idCanal) === canal.id ? '#dfdf72' : '#e2e2b6' }} >
+                <li key={index} className='canal' style={{ backgroundColor: Number(idCanal) === canal.id ? '#dfdf72' : '#e2e2b6' }} >
                     <NavLink to={`/workspace/${workspaceName}/${id}`}>
                         {`#${name}`}
                     </NavLink>

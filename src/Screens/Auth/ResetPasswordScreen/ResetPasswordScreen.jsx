@@ -44,7 +44,7 @@ const ResetPasswordScreen = () => {
             alert('Contraseña modificada con éxito.')
             return navigate('/login')
         } else {
-            alert('Error.')
+            alert(serverResponse.message)
         }
     }
 
