@@ -5,6 +5,7 @@ import { Form } from '../../../Components/Form/Form'
 
 const ForgotPasswordScreen = () => {
     const { customFetch } = useFetch()
+    const { showModal } = useModalContext()
 
     const formData = {
         title: 'Olvidé mi contraseña',
@@ -28,9 +29,15 @@ const ForgotPasswordScreen = () => {
         const serverResponse = await customFetch('/api/auth/forgot-password', 'POST', formState)
 
         if (serverResponse.ok) {
-            return alert('Se ha enviado un correo de recuperación de contraseña.')
+            return showModal({
+                message: serverResponse.message,
+                type: 'success'
+            })
         } else {
-            return alert('Error en solicitud')
+            return showModal({
+                message: serverResponse.message,
+                type: 'error'
+            })
         }
     }
 

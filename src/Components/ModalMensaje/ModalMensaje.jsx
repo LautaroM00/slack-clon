@@ -7,6 +7,10 @@ const ModalMensaje = ({ modalData, setShow }) => {
 
     const [movement, setMovement] = useState('show')
     const [display, setDisplay] = useState('none')
+    const style = {
+        'error': {backgroundColor: '#c53e3e'},
+        'success': {backgroundColor: 'green'}
+    }
 
     useEffect(() => {
 
@@ -31,7 +35,7 @@ const ModalMensaje = ({ modalData, setShow }) => {
 
     return (
         <div className='modal' style={{ display: display }}>
-            <div className={'container ' + movement} style={{backgroundColor: type === 'error' ? '#c53e3e' : 'green'}}>
+            <div className={'container ' + movement} style={style[type]}>
                 {
                     type === 'error' ?
                     <h2>Error: </h2> :

@@ -4,30 +4,40 @@ import { VscSend } from "react-icons/vsc";
 
 import './MensajeForm.css'
 import useFetch from '../../Hooks/useFetch';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useWorkspaceContext } from '../../Context/WorkspaceContext';
+import { useModalContext } from '../../Context/ModalContext';
 
 const MensajeForm = () => {
-    const { messages, setMessages, getMessages } = useWorkspaceContext()
-    const {customFetch} = useFetch()
+    const { messages, setMessages, getMessages, setChannels, channels } = useWorkspaceContext()
+    const { customFetch } = useFetch()
     const { idCanal } = useParams()
+    const { showModal } = useModalContext()
+    const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
         const textoMensaje = e.target[0].value.trim()
-        
+
         if (textoMensaje && textoMensaje.length < 2000) {
 
-            await customFetch(`/api/message/${idCanal}`, 'POST', { content: textoMensaje })
+            const serverResponse = await customFetch(`/api/message/${idCanal}`, 'POST', { content: textoMensaje })
 
-            const lastMessage = await getMessages('last', idCanal)
+            if (serverResponse.ok) {
+                const lastMessage = await getMessages('last', idCanal)
 
-            setMessages([...messages, lastMessage[0]])
+                setMessages([...messages, lastMessage[0]])
 
-            console.log(messages)
-
-            return e.target[0].value = ''
+                return e.target[0].value = ''
+            }else{
+                showModal({
+                    message: serverResponse.message,
+                    type: 'error'
+                })
+                const filteredChannels = channels.filter((channel) => channel.id != idCanal)
+                setChannels(filteredChannels)
+            }
         }
     }
 

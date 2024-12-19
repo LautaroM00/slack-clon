@@ -7,7 +7,7 @@ const VerifyEmailScreen = () => {
     const [verificationResult, setVerificationResult] = useState('Cargando...')
     const { verificationToken } = useParams()
     const { customFetch } = useFetch()
-    const { countdown } = useCountdown(3)
+    const { countdown } = useCountdown(5)
 
 
     const verifyEmail = async (formState) => {
@@ -20,9 +20,9 @@ const VerifyEmailScreen = () => {
         verifyEmail()
             .then((serverResponse) => {
                 if (serverResponse.ok) {
-                    return setVerificationResult('Verificación exitosa')
+                    return setVerificationResult(serverResponse.message)
                 } else {
-                    return alert(serverResponse.message)
+                    return setVerificationResult(serverResponse.message)
                 }
             })
     },

@@ -3,9 +3,11 @@ import useFetch from '../../../Hooks/useFetch'
 import { useAuthContext } from '../../../Context/AuthenticationContext'
 import { NavLink } from 'react-router-dom'
 import { Form } from '../../../Components/Form/Form'
+import { useModalContext } from '../../../Context/ModalContext'
 
 const LoginScreen = () => {
     const { customFetch } = useFetch()
+    const { showModal } = useModalContext()
 
     const { login } = useAuthContext()
 
@@ -42,9 +44,16 @@ const LoginScreen = () => {
         const serverResponse = await customFetch('/api/auth/login', 'POST', formState)
 
         if (serverResponse.ok) {
-            login(serverResponse.payload.accessToken)
+            return showModal({
+                message: serverResponse.message,
+                type: 'success',
+                execute: () => login(serverResponse.payload.accessToken)
+            })
         } else {
-            alert(serverResponse.message)
+            return showModal({
+                message: serverResponse.message,
+                type: 'error'
+            })
         }
     }
 

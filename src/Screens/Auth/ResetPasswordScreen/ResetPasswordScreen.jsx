@@ -2,10 +2,12 @@ import React from 'react'
 import useFetch from '../../../Hooks/useFetch'
 import { NavLink, useNavigate, useParams } from 'react-router-dom'
 import { Form } from '../../../Components/Form/Form'
+import { useModalContext } from '../../../Context/ModalContext'
 
 const ResetPasswordScreen = () => {
     const { customFetch } = useFetch()
     const { validationToken } = useParams()
+    const { showModal } = useModalContext()
     const navigate = useNavigate()
 
     const formData = {
@@ -41,10 +43,16 @@ const ResetPasswordScreen = () => {
         const serverResponse = await customFetch('/api/auth/reset-password/' + validationToken, 'PUT', formState)
 
         if (serverResponse.ok) {
-            alert('Contraseña modificada con éxito.')
-            return navigate('/login')
+            return showModal({
+                message: serverResponse.message,
+                type: 'error',
+                execute: () => navigate('/login')
+            })
         } else {
-            alert(serverResponse.message)
+            return showModal({
+                message: serverResponse.message,
+                type: 'error'
+            })
         }
     }
 

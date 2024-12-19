@@ -8,55 +8,49 @@ import './Canal.css'
 import CanalList from '../CanalList/CanalList'
 import InputFiltroTexto from '../InputFiltroTexto/InputFiltroTexto';
 import { useWorkspaceContext } from '../../Context/WorkspaceContext'
-import ModalMensaje from '../../Screens/ModalMensaje/ModalMensaje'
 
 const Canal = () => {
-
-    const { getChannels, channels, setChannels, actualChannel, setActualChannel } = useWorkspaceContext()
+    const { getChannels, channels, setChannels } = useWorkspaceContext()
+    const [textoFiltro, setTextoFiltro] = useState('')
+    const [thisChannels, setThisChannels] = useState([])
 
     let { workspaceName, idCanal } = useParams()
-    const [textoFiltro, setTextoFiltro] = useState('')
-
 
     useEffect(() => {
+        channels.some((channel) => channel.belongs_to === workspaceName) ?
 
+            setThisChannels(() => {
+                return channels.filter((channel) => channel.belongs_to === workspaceName)
+            }) :
             getChannels(workspaceName, 'all')
-                .then((channels) => {
-                    setChannels(channels)
-
-                })
-
+                .then((channelsGotten) => {
+                    setChannels((prevChannels) => {
+                        channelsGotten.forEach((channel) => prevChannels.push(channel))
+                        return [...prevChannels]
+                    })
+                    setThisChannels(() => {
+                        return channels.filter((channel) => channel.belongs_to === workspaceName)
+                    })
+                });
+        console.log('render')
     },
-        [idCanal]
-    )
-
-    useEffect(() => {
-        if (channels) {
-            setActualChannel(() => {
-                return channels.find((channel) => channel.id === Number(idCanal))
-            })
-        }
-    },
-        [channels, idCanal]
+        [workspaceName, idCanal]
     )
 
 
 
     return (
         <div className='contenedorWorkspace'>
-            <CanalList channels={channels} setChannels={setChannels} setTextoFiltro={setTextoFiltro} />
+            <CanalList channels={thisChannels} setChannels={setChannels} setTextoFiltro={setTextoFiltro} />
             <div className='mensajes-mensajeForm'>
                 {
-                    channels ?
-                        actualChannel ?
-                            <>
-                                <h2 className='canalTitulo'>{actualChannel.name}</h2>
-                                <ListaMensajes idCanal={idCanal} textoFiltro={textoFiltro} setTextoFiltro={setTextoFiltro} />
-                                <InputFiltroTexto setTextoFiltro={setTextoFiltro} textoFiltro={textoFiltro} id={'filtroTextoMensajes'} />
-                                <MensajeForm />
-                            </> :
-                            <h2 className='canalTitulo'>Seleccione un canal</h2>
-                        :
+                    thisChannels.some((channel) => channel.id === Number(idCanal)) ?
+                        <>
+                            <h2 className='canalTitulo'>{'hola'}</h2>
+                            <ListaMensajes idCanal={idCanal} textoFiltro={textoFiltro} setTextoFiltro={setTextoFiltro} />
+                            <InputFiltroTexto setTextoFiltro={setTextoFiltro} textoFiltro={textoFiltro} id={'filtroTextoMensajes'} />
+                            <MensajeForm />
+                        </> :
                         <h2 className='canalTitulo'>Seleccione un canal</h2>
                 }
             </div>

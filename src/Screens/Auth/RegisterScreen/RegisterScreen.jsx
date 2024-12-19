@@ -2,9 +2,11 @@ import React from 'react'
 import useFetch from '../../../Hooks/useFetch'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { Form } from '../../../Components/Form/Form'
+import { useModalContext } from '../../../Context/ModalContext'
 
 const RegisterScreen = () => {
     const { customFetch } = useFetch()
+    const { showModal } = useModalContext()
 
     const navigate = useNavigate()
 
@@ -60,17 +62,25 @@ const RegisterScreen = () => {
     const registerAction = async (formState) => {
 
         if (formState.password !== formState.passwordRepeat) {
-            alert('Las contraseñas no coinciden')
-            return
+            return showModal({
+                message: 'Las contraseñas no coinciden.',
+                type: 'error'
+            })
         }
 
         const serverResponse = await customFetch('/api/auth/register', 'POST', formState)
 
         if (serverResponse.ok) {
-            alert('Se ha enviado un email de validación de usuario.')
-            navigate('/login')
+            return showModal({
+                message: serverResponse.message,
+                type: 'success',
+                execute: () => navigate('/login')
+            })
         } else {
-            alert(serverResponse.message)
+            return showModal({
+                message: serverResponse.message,
+                type: 'error'
+            })
         }
     }
 

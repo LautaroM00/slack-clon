@@ -1,20 +1,27 @@
 import React, { useState } from 'react'
-
-import './ModalWorkSpace.css'
-import SelectorWorkspace from '../SelectorWorkspace/SelectorWorkspace'
 import { NavLink, useNavigate, useParams } from 'react-router-dom'
+
+import SelectorWorkspace from '../SelectorWorkspace/SelectorWorkspace'
 import InformacionInput from '../../Components/InformacionInput/InformacionInput'
 import ListaCondiciones from '../../Components/ListaCondiciones/ListaCondiciones'
-import { useWorkspaceContext } from '../../Context/WorkspaceContext'
+import ListaWorkspacesPreview from '../../Components/ListaWorkspacesPreview/ListaWorkspacesPreview'
+
 import useFetch from '../../Hooks/useFetch'
 import { Form } from '../../Components/Form/Form'
-import ListaWorkspacesPreview from '../../Components/ListaWorkspacesPreview/ListaWorkspacesPreview'
+import { useModalContext } from '../../Context/ModalContext'
+import { useWorkspaceContext } from '../../Context/WorkspaceContext'
 import validateInputsCreateWorkspace from '../../Utils/validations'
+import './ModalWorkSpace.css'
+
 
 const ModalWorkSpace = () => {
     const [displayCondiciones, setDisplayCondiciones] = useState('none')
     const [inputInvalido, setInputInvalido] = useState('')
     const [conditions, setConditions] = useState([])
+    const {showModal} = useModalContext()
+    const { workspaces, setWorkspaces, adminWorkspaces, setAdminWorkspaces } = useWorkspaceContext()
+    const { customFetch } = useFetch()
+    const { type } = useParams()
 
     const navigate = useNavigate()
 
@@ -23,9 +30,7 @@ const ModalWorkSpace = () => {
         channelName: ''
     }
 
-    const { workspaces, setWorkspaces, adminWorkspaces, setAdminWorkspaces, setShow, setModalData } = useWorkspaceContext()
-    const { customFetch } = useFetch()
-    const { type } = useParams()
+
 
     const formData = {
         title: '',
@@ -71,22 +76,21 @@ const ModalWorkSpace = () => {
 
 
             const serverResponse = await customFetch('/api/workspace/', 'POST', { formState })
-
+            console.log(serverResponse)
             if (serverResponse.ok) {
-                setWorkspaces([...workspaces, { name: workspaceName, role: 'admin' }])
-                setAdminWorkspaces([...adminWorkspaces, { name: workspaceName, role: 'admin' }])
-                setShow(true)
-                setModalData({
+                setWorkspaces([...workspaces, serverResponse.payload.workspace])
+                setAdminWorkspaces([...adminWorkspaces, serverResponse.payload.workspace])
+                showModal({
                     message: serverResponse.message,
                     type: 'success',
-                    navigate: navigate('/')
+                    execute: () => navigate('/')
                 })
                 return
             } else {
-                setShow(true)
-                setModalData({
+                showModal({
                     message: serverResponse.message,
-                    type: 'error'
+                    type: 'success',
+                    execute: () => navigate('/')
                 })
                 return
             }

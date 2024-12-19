@@ -6,11 +6,10 @@ import { NavLink } from 'react-router-dom'
 import FiltrarArray from '../../Components/FiltrarArray/FiltrarArray'
 import ListaWorkspacesPreview from '../../Components/ListaWorkspacesPreview/ListaWorkspacesPreview'
 import { useWorkspaceContext } from '../../Context/WorkspaceContext'
-import ModalMensaje from '../ModalMensaje/ModalMensaje'
 
 
 const SelectorWorkspace = () => {
-    const { workspaces, adminWorkspaces, show, setShow, modalData } = useWorkspaceContext()
+    const { workspaces, adminWorkspaces} = useWorkspaceContext()
     const [workspacesFiltrados, setWorkspacesFiltrados] = useState(workspaces)
 
 
@@ -36,8 +35,8 @@ const SelectorWorkspace = () => {
                             Nuevo Workspace
                         </div>
                     </NavLink>
-                    {adminWorkspaces ?
-                        adminWorkspaces.length > 0 ?
+                    {
+                        adminWorkspaces && adminWorkspaces.length > 0 ?
                             <>
                                 <NavLink to={'/workspace/delete'}>
                                     <div className='buttonWS' style={{backgroundColor: '#cc2e2ea4'}}>
@@ -50,15 +49,10 @@ const SelectorWorkspace = () => {
                                     </div>
                                 </NavLink>
                             </> :
-                            <></>
-                        :
-                        <></>
-
+                            <>
+                            </>
                     }
                 </div>
-                {
-                    show ? <ModalMensaje modalData={modalData} setShow={setShow}/> : ''
-                }
             </main>
         </>
     )

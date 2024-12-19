@@ -12,7 +12,6 @@ const ListaMensajes = ({ idCanal, textoFiltro }) => {
             .then((messages) => {
                 setMessages(messages)
             });
-        console.log('render')
         
     },
         [idCanal]

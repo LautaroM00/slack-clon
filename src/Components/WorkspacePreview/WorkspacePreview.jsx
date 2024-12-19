@@ -5,11 +5,12 @@ import './WorkspacePreview.css'
 import useFetch from '../../Hooks/useFetch';
 import useForm from '../../Hooks/useForm';
 import { useWorkspaceContext } from '../../Context/WorkspaceContext';
+import { useModalContext } from '../../Context/ModalContext';
 
 const WorkspacePreview = ({ name, thumbnail }) => {
     const navigate = useNavigate()
-
-    const { workspaces, setWorkspaces, setShow, setModalData, setAdminWorkspaces } = useWorkspaceContext()
+    const {setModalData, setShow} = useModalContext()
+    const { workspaces, setWorkspaces, setAdminWorkspaces } = useWorkspaceContext()
     const { type } = useParams()
     const { customFetch } = useFetch()
     const { formState, handleChange } = useForm({
@@ -60,6 +61,7 @@ const WorkspacePreview = ({ name, thumbnail }) => {
                 message: serverResponse.message,
                 type: 'success'
             })
+            e.target[0].value = ''
             return
         } else {
             setShow(true)
@@ -67,6 +69,7 @@ const WorkspacePreview = ({ name, thumbnail }) => {
                 message: serverResponse.message,
                 type: 'error'
             })
+            e.target[0].value = ''
             return
         }
     }

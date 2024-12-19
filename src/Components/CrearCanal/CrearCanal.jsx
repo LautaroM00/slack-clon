@@ -7,6 +7,7 @@ import './CrearCanal.css'
 import ListaCondiciones from '../ListaCondiciones/ListaCondiciones.jsx';
 import { useWorkspaceContext } from '../../Context/WorkspaceContext.jsx';
 import useFetch from '../../Hooks/useFetch.jsx';
+import { useModalContext } from '../../Context/ModalContext.jsx';
 
 const CrearCanal = ({ setDisplay }) => {
 
@@ -19,7 +20,9 @@ const CrearCanal = ({ setDisplay }) => {
         tooLargeName: ''
     })
 
-    const { channels, setChannels, setModalData, setShow } = useWorkspaceContext()
+    const { setModalData, setShow } = useModalContext()
+
+    const { channels, setChannels } = useWorkspaceContext()
     const { customFetch } = useFetch()
     const { workspaceName } = useParams()
 
@@ -38,9 +41,9 @@ const CrearCanal = ({ setDisplay }) => {
             nombreCanalNuevo.length > 2 && !estaRepetido) {
 
             const serverResponse = await customFetch(`/api/channel/${workspaceName}`, 'POST', { channelName: nombreCanalNuevo })
-            const canalAgregado = await customFetch(`/api/channel/last/${workspaceName}`, 'GET')
 
             if (serverResponse.ok) {
+                const canalAgregado = await customFetch(`/api/channel/last/${workspaceName}`, 'GET')
                 e.target[0].value = ''
                 setConfig({
                     display: 'none',
@@ -56,7 +59,9 @@ const CrearCanal = ({ setDisplay }) => {
                     message: serverResponse.message,
                     type: 'success'
                 })
-                setChannels((prevChannels) => [...prevChannels, canalAgregado.payload.channels[0]])
+                const newChannel = canalAgregado.payload.channels
+                channels.length > 0 ? setChannels((prevChannels) => [...prevChannels, newChannel[0]]) :
+                    setChannels(newChannel)
                 return
             } else {
                 setShow(true)
@@ -90,8 +95,6 @@ const CrearCanal = ({ setDisplay }) => {
             })
         }
     }
-    console.clear()
-    console.log(config)
     const handleMostrarInput = () => {
         if (config.showInput) {
             setConfig({
