@@ -6,6 +6,7 @@ import { TfiViewListAlt } from "react-icons/tfi";
 import { Canal } from '../index.js'
 
 import './WorkSpace.css'
+import ChannelProvider from '../../Context/ChannelContext.jsx';
 
 const WorkSpace = () => {
     return (
@@ -16,7 +17,9 @@ const WorkSpace = () => {
                     <TfiViewListAlt className='workspaceImg' />
                 </NavLink>
             </div>
-            <Canal />
+            <ChannelProvider>
+                <Canal />
+            </ChannelProvider>
         </div>
     )
 }

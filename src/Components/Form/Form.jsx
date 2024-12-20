@@ -16,7 +16,7 @@ export const Form = ({ formData, initialFormState, action, children }) => {
     const { title, divs, formClass, containerClass } = formData
     return (
         <div className={containerClass ? containerClass : 'formContainer'}>
-            <form onSubmit={handleSubmit} className={formClass ? formClass : ''}>
+            <form onSubmit={handleSubmit} className={formClass && formClass}>
                 <h1>{title}</h1>
                 {
                     divs.map((div, index) => {

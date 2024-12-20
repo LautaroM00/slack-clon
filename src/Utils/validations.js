@@ -14,7 +14,7 @@ const validateInputsCreateWorkspace = (workspaceName, channelName, workspaces) =
 
     channelName && channelName.length >= 3 && channelName.length <= 23 ? '' : errors.push('El nombre del CANAL debe tener entre 3 y 23 caracteres inclusive.')
 
-    workspaces.some(workspace => workspace.name === workspaceName) ? errors.push('Ya existe un workspace con el nombre que intenta ingresar.') : ''
+    workspaces.some(workspace => workspace.name === workspaceName) && errors.push('Ya existe un workspace con el nombre que intenta ingresar.')
 
     return errors
 

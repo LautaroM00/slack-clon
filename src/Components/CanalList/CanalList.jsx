@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { NavLink, useNavigate, useParams } from 'react-router-dom'
+import { NavLink, useParams } from 'react-router-dom'
 import { SlLayers } from "react-icons/sl";
 import { IoMdClose } from "react-icons/io";
 
@@ -8,44 +8,28 @@ import CrearCanal from '../CrearCanal/CrearCanal'
 import FiltrarArray from '../FiltrarArray/FiltrarArray';
 import Pepe from '../Pepe/Pepe';
 import useFetch from '../../Hooks/useFetch';
-import { useWorkspaceContext } from '../../Context/WorkspaceContext';
 import { useModalContext } from '../../Context/ModalContext';
+import { useChannelContext } from '../../Context/ChannelContext';
 
-const CanalList = ({ channels, setChannels }) => {
+const CanalList = ({ channels }) => {
     const [mostrarCanales, setMostrarCanales] = useState('none')
     const [display, setDisplay] = useState('')
     const [filteredChannels, setCanalesFiltrados] = useState()
-    const [isAdmin, setIsAdmin] = useState(false)
-    const { workspaces } = useWorkspaceContext()
-    const { workspaceName, idCanal } = useParams()
-    const navigate = useNavigate()
+    const { isAdmin } = useChannelContext()
 
     useEffect(() => {
-        window.innerWidth >= 700 ?
-            setMostrarCanales('') :
-            ''
+        window.innerWidth >= 700 && setMostrarCanales('')
     },
         [mostrarCanales])
 
-    useEffect(() => {
-        if (workspaces) {
-            const actualWorkspace = workspaces.find((workspace) => workspace.name == workspaceName)
-            if(!actualWorkspace){
-                return navigate('/')
-            }
-            actualWorkspace.role === 'admin' ? setIsAdmin(true) : ''
-            
-        }
-
-    },
-        [workspaces]
-    )
     const handleDisplayCanales = () => {
-        if (mostrarCanales === '') {
-            setMostrarCanales('none')
-        } else {
-            setMostrarCanales('')
-        }
+        mostrarCanales === '' ? setMostrarCanales('none') : setMostrarCanales('')
+    }
+
+    const buttonProps = {
+        onClick: handleDisplayCanales,
+        style: { width: '30px', height: '30px', color: 'whitesmoke' },
+        className: 'botones'
     }
 
     return (
@@ -54,41 +38,39 @@ const CanalList = ({ channels, setChannels }) => {
                 <h2>
                     Canales
                 </h2>
-                <div className='contenedorFilter'>
-                    <FiltrarArray setArrayFiltrado={setCanalesFiltrados} array={channels} />
-                </div>
+                <FiltrarArray setArrayFiltrado={setCanalesFiltrados} array={channels} className={'contenedorFilter'} />
                 {
-                    !channels ?
-                        <ul className='canalNotFound'>
-                            Cargando...
-                        </ul> :
+                    channels ?
                         <ul>
                             {
                                 channels.length > 0 ?
                                     filteredChannels ?
                                         filteredChannels.length > 0 ?
-                                            <CanalMap channels={filteredChannels} isAdmin={isAdmin} /> :
+                                            <CanalMap channels={filteredChannels} /> :
                                             <span className='canalNotFound'>
                                                 No se encontraron resultados.
                                             </span> :
-                                        <CanalMap channels={channels} isAdmin={isAdmin} /> :
+                                        <CanalMap channels={channels} /> :
                                     <span className='canalNotFound'>
                                         Este workspace no contiene canales.
                                     </span>
                             }
-                        </ul>}
+                        </ul> :
+                        <ul className='canalNotFound'>
+                            Cargando...
+                        </ul>
+                }
                 {
-                    isAdmin ? <CrearCanal display={display} setDisplay={setDisplay} setChannels={setChannels} /> : ''
+                    isAdmin && <CrearCanal display={display} setDisplay={setDisplay} />
                 }
             </nav >
             {
                 mostrarCanales ?
                     <div className='displayCanales'>
-                        < SlLayers onClick={handleDisplayCanales} style={{ width: '30px', height: '30px', color: 'whitesmoke' }
-                        } className='botones' />
+                        < SlLayers {...buttonProps}/>
                     </div > :
                     <div className='displayCanales'>
-                        <IoMdClose onClick={handleDisplayCanales} style={{ width: '30px', height: '30px', color: 'whitesmoke' }} className='botones' />
+                        <IoMdClose {...buttonProps} />
                     </div>
             }
             <Pepe display={mostrarCanales} setMostrarCanales={setMostrarCanales} />
@@ -102,10 +84,10 @@ export default CanalList
 
 
 
-const CanalMap = ({ channels, isAdmin }) => {
-    const { workspaceName, idCanal } = useParams()
+const CanalMap = ({ channels }) => {
     const { customFetch } = useFetch()
-    const { setChannels } = useWorkspaceContext()
+    const { workspaceName, idCanal } = useParams()
+    const { setChannels, isAdmin } = useChannelContext()
     const { showModal } = useModalContext()
 
 
@@ -141,10 +123,10 @@ const CanalMap = ({ channels, isAdmin }) => {
                         {`#${name}`}
                     </NavLink>
                     {
-                        isAdmin ?
-                            <span className='delete' onClick={() => handleDeleteChannel(name, id)}>
-                                x
-                            </span> : ''
+                        isAdmin &&
+                        <span className='delete' onClick={() => handleDeleteChannel(name, id)}>
+                            x
+                        </span>
                     }
                 </li>
             )

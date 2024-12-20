@@ -1,8 +1,9 @@
 import React from 'react'
-import useFetch from '../../../Hooks/useFetch'
+import useFetch from '../../Hooks/useFetch'
 import { NavLink, useNavigate, useParams } from 'react-router-dom'
-import { Form } from '../../../Components/Form/Form'
-import { useModalContext } from '../../../Context/ModalContext'
+import { Form } from '../../Components/Form/Form'
+import { useModalContext } from '../../Context/ModalContext'
+import FormDivProps from '../../Utils/CustomFormData'
 
 const ResetPasswordScreen = () => {
     const { customFetch } = useFetch()
@@ -13,28 +14,8 @@ const ResetPasswordScreen = () => {
     const formData = {
         title: 'Recuperar contraseña',
         divs: [
-            {
-                labelProps: {
-                    htmlFor: 'password'
-                },
-                labelText: 'Contraseña:',
-                inputProps: {
-                    id: 'password',
-                    name: 'password',
-                    type: 'password'
-                }
-            },
-            {
-                labelProps: {
-                    htmlFor: 'passwordRepeat'
-                },
-                labelText: 'Repita su contraseña:',
-                inputProps: {
-                    id: 'passwordRepeat',
-                    name: 'passwordRepeat',
-                    type: 'password'
-                }
-            }
+            new FormDivProps('password', 'Contraseña:', 'password').build(),
+            new FormDivProps('passwordRepeat', 'Repita su contraseña:', 'password').build()
         ]
     }
 
@@ -42,18 +23,17 @@ const ResetPasswordScreen = () => {
 
         const serverResponse = await customFetch('/api/auth/reset-password/' + validationToken, 'PUT', formState)
 
-        if (serverResponse.ok) {
-            return showModal({
+        serverResponse.ok ?
+            showModal({
                 message: serverResponse.message,
-                type: 'error',
+                type: 'success',
                 execute: () => navigate('/login')
-            })
-        } else {
-            return showModal({
+            }) :
+            showModal({
                 message: serverResponse.message,
                 type: 'error'
             })
-        }
+        return
     }
 
     const initialFormState = {

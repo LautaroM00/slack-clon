@@ -5,11 +5,11 @@ import { GrAdd } from "react-icons/gr";
 
 import './CrearCanal.css'
 import ListaCondiciones from '../ListaCondiciones/ListaCondiciones.jsx';
-import { useWorkspaceContext } from '../../Context/WorkspaceContext.jsx';
 import useFetch from '../../Hooks/useFetch.jsx';
 import { useModalContext } from '../../Context/ModalContext.jsx';
+import { useChannelContext } from '../../Context/ChannelContext.jsx';
 
-const CrearCanal = ({ setDisplay }) => {
+const CrearCanal = () => {
 
     const [config, setConfig] = useState({
         showInput: 'none',
@@ -20,9 +20,9 @@ const CrearCanal = ({ setDisplay }) => {
         tooLargeName: ''
     })
 
-    const { setModalData, setShow } = useModalContext()
+    const { showModal } = useModalContext()
 
-    const { channels, setChannels } = useWorkspaceContext()
+    const { channels, setChannels } = useChannelContext()
     const { customFetch } = useFetch()
     const { workspaceName } = useParams()
 
@@ -30,20 +30,20 @@ const CrearCanal = ({ setDisplay }) => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        let nombreCanalNuevo = e.target[0].value.trim()
+        let channelName = e.target[0].value.trim()
 
         let estaRepetido = channels.find((canal) => {
-            return (nombreCanalNuevo === canal.name)
+            return (channelName === canal.name)
         })
 
-        if (nombreCanalNuevo &&
-            nombreCanalNuevo.length < 24 &&
-            nombreCanalNuevo.length > 2 && !estaRepetido) {
+        if (channelName &&
+            channelName.length < 24 &&
+            channelName.length > 2 && !estaRepetido) {
 
-            const serverResponse = await customFetch(`/api/channel/${workspaceName}`, 'POST', { channelName: nombreCanalNuevo })
+            const serverResponse = await customFetch(`/api/channel/${workspaceName}`, 'POST', { channelName: channelName })
 
             if (serverResponse.ok) {
-                const canalAgregado = await customFetch(`/api/channel/last/${workspaceName}`, 'GET')
+                const canalAgregado = await customFetch(`/api/channel/last/${workspaceName}/${channelName}`, 'GET')
                 e.target[0].value = ''
                 setConfig({
                     display: 'none',
@@ -54,25 +54,27 @@ const CrearCanal = ({ setDisplay }) => {
                     repeatedName: '',
                     tooLargeName: ''
                 })
-                setShow(true)
-                setModalData({
+                showModal({
                     message: serverResponse.message,
                     type: 'success'
                 })
                 const newChannel = canalAgregado.payload.channels
-                channels.length > 0 ? setChannels((prevChannels) => [...prevChannels, newChannel[0]]) :
-                    setChannels(newChannel)
-                return
+                setChannels((prevChannels) => {
+                    if (prevChannels.length > 0) {
+                        return [...prevChannels, newChannel[0]]
+                    } else {
+                        return newChannel
+                    }
+                })
             } else {
-                setShow(true)
-                setModalData({
+                showModal({
                     message: serverResponse.message,
                     type: 'error'
                 })
             }
         } else {
-            if (nombreCanalNuevo.length > 23 ||
-                nombreCanalNuevo.length < 3) {
+            if (channelName.length > 23 ||
+                channelName.length < 3) {
                 setConfig({
                     ...config,
                     ['tooLargeName']: 'El nombre ingresado debe tener entre 3 y 23 (inclusive) caracteres.',

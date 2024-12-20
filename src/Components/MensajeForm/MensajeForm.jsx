@@ -5,11 +5,13 @@ import { VscSend } from "react-icons/vsc";
 import './MensajeForm.css'
 import useFetch from '../../Hooks/useFetch';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useWorkspaceContext } from '../../Context/WorkspaceContext';
 import { useModalContext } from '../../Context/ModalContext';
+import { useChannelContext } from '../../Context/ChannelContext';
+import { useMessagesContext } from '../../Context/MessageContext';
 
 const MensajeForm = () => {
-    const { messages, setMessages, getMessages, setChannels, channels } = useWorkspaceContext()
+    const { channels, setChannels } = useChannelContext()
+    const { messages, setMessages, getMessages } = useMessagesContext()
     const { customFetch } = useFetch()
     const { idCanal } = useParams()
     const { showModal } = useModalContext()
@@ -30,7 +32,7 @@ const MensajeForm = () => {
                 setMessages([...messages, lastMessage[0]])
 
                 return e.target[0].value = ''
-            }else{
+            } else {
                 showModal({
                     message: serverResponse.message,
                     type: 'error'

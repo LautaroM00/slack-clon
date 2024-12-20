@@ -16,12 +16,10 @@ const ModalProvider = ({ children }) => {
 
     return (
         <ModalContext.Provider value={{
-            setModalData,
-            setShow,
             showModal
         }}>
             {
-                show ? <ModalMensaje modalData={modalData} setShow={setShow} /> : <></>
+                show && <ModalMensaje modalData={modalData} setShow={setShow} />
             }
             {children}
         </ModalContext.Provider>

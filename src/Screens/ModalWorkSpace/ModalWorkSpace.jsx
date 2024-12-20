@@ -76,7 +76,7 @@ const ModalWorkSpace = () => {
 
 
             const serverResponse = await customFetch('/api/workspace/', 'POST', { formState })
-            console.log(serverResponse)
+            
             if (serverResponse.ok) {
                 setWorkspaces([...workspaces, serverResponse.payload.workspace])
                 setAdminWorkspaces([...adminWorkspaces, serverResponse.payload.workspace])
@@ -89,8 +89,7 @@ const ModalWorkSpace = () => {
             } else {
                 showModal({
                     message: serverResponse.message,
-                    type: 'success',
-                    execute: () => navigate('/')
+                    type: 'error'
                 })
                 return
             }

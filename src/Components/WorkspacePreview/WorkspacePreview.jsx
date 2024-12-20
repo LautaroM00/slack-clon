@@ -9,7 +9,7 @@ import { useModalContext } from '../../Context/ModalContext';
 
 const WorkspacePreview = ({ name, thumbnail }) => {
     const navigate = useNavigate()
-    const {setModalData, setShow} = useModalContext()
+    const { showModal } = useModalContext()
     const { workspaces, setWorkspaces, setAdminWorkspaces } = useWorkspaceContext()
     const { type } = useParams()
     const { customFetch } = useFetch()
@@ -27,23 +27,21 @@ const WorkspacePreview = ({ name, thumbnail }) => {
                 const newWorkspaces = workspaces.filter((workspace) => workspace.name !== name)
                 setWorkspaces(newWorkspaces)
                 setAdminWorkspaces(newWorkspaces)
-                setShow(true)
                 newWorkspaces.length === 0 ?
-                    setModalData({
+                    showModal({
                         message: serverResponse.message,
                         type: 'success',
                         execute: navigate('/')
                     }) :
-                    setModalData({
+                    showModal({
                         message: serverResponse.message,
                         type: 'success'
                     })
                 return
             } else {
-                setShow(true)
-                return setModalData({
+                return showModal({
                     message: serverResponse.message,
-                    type: 'success'
+                    type: 'error'
                 })
             }
         }
@@ -55,23 +53,19 @@ const WorkspacePreview = ({ name, thumbnail }) => {
 
         const serverResponse = await customFetch(`/api/workspace/member/${name}`, 'POST', formState)
 
-        if (serverResponse.ok) {
-            setShow(true)
-            setModalData({
+        serverResponse.ok ?
+            showModal({
                 message: serverResponse.message,
                 type: 'success'
-            })
-            e.target[0].value = ''
-            return
-        } else {
-            setShow(true)
-            setModalData({
+            }) :
+            showModal({
                 message: serverResponse.message,
                 type: 'error'
             })
-            e.target[0].value = ''
-            return
-        }
+
+        e.target.value = ''
+        return
+
     }
 
 
@@ -80,33 +74,18 @@ const WorkspacePreview = ({ name, thumbnail }) => {
             Eliminar
         </button>,
         'addMember':
-            <>
-                <form onSubmit={handleAddMember} className='addMemberForm' >
-                    <div className='block'>
-                        <label htmlFor='email'>
-                            Email:
-                        </label>
-                        <input id='email' name='email' type='email' onChange={handleChange} />
-                    </div>
-                    <button className={'button'} style={{ backgroundColor: '#0fca0f', width: '100px' }}>
-                        Agregar
-                    </button>
-                </form>
-            </>
+            <form onSubmit={handleAddMember} className='addMemberForm' >
+                <div className='block'>
+                    <label htmlFor='email'>
+                        Email:
+                    </label>
+                    <input id='email' name='email' type='email' onChange={handleChange} />
+                </div>
+                <button className={'button'} style={{ backgroundColor: '#0fca0f', width: '100px' }}>
+                    Agregar
+                </button>
+            </form>
     }
-
-
-
-
-    /*     const handleAddMemberWorkspace = async () => {
-            e.preventDefault()
-    
-            const serverResponse = await customFetch('/api/workspace/delete/') 
-    
-            if(serverResponse.ok){
-                return alert('Miembro agregado con éxito')
-            }
-        } */
 
     return (
         <>

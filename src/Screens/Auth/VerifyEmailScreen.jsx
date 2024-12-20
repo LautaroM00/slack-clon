@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import useFetch from '../../../Hooks/useFetch'
+import useFetch from '../../Hooks/useFetch'
 import { useParams } from 'react-router-dom'
-import useCountdown from '../../../Hooks/useCountdown'
+import useCountdown from '../../Hooks/useCountdown'
 
 const VerifyEmailScreen = () => {
     const [verificationResult, setVerificationResult] = useState('Cargando...')
@@ -19,11 +19,7 @@ const VerifyEmailScreen = () => {
     useEffect(() => {
         verifyEmail()
             .then((serverResponse) => {
-                if (serverResponse.ok) {
-                    return setVerificationResult(serverResponse.message)
-                } else {
-                    return setVerificationResult(serverResponse.message)
-                }
+                setVerificationResult(serverResponse.message)
             })
     },
         []
@@ -35,7 +31,7 @@ const VerifyEmailScreen = () => {
             <div className='verification'>
                 <h1>{verificationResult}</h1>
                 <span>Será redirigido al <strong>LOGIN</strong> en:</span>
-                <strong style={{ fontSize: '19px' }}>{countdown}</strong>
+                <strong style={{ fontSize: '19px' }}>{countdown}</strong><span>segundos</span>
             </div>
         </div>
     )

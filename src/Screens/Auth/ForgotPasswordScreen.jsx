@@ -1,7 +1,9 @@
 import React from 'react'
-import useFetch from '../../../Hooks/useFetch'
+import useFetch from '../../Hooks/useFetch'
 import { NavLink } from 'react-router-dom'
-import { Form } from '../../../Components/Form/Form'
+import { Form } from '../../Components/Form/Form'
+import FormDivProps from '../../Utils/CustomFormData'
+import { useModalContext } from '../../Context/ModalContext'
 
 const ForgotPasswordScreen = () => {
     const { customFetch } = useFetch()
@@ -10,35 +12,26 @@ const ForgotPasswordScreen = () => {
     const formData = {
         title: 'Olvidé mi contraseña',
         divs: [
-            {
-                labelProps: {
-                    htmlFor: 'email'
-                },
-                labelText: 'Email',
-                inputProps: {
-                    id: 'email',
-                    name: 'email',
-                    type: 'email'
-                }
-            }
+            new FormDivProps('email', 'Email', 'email').build()
         ]
     }
+
+
 
     const forgotPasswordAction = async (formState) => {
 
         const serverResponse = await customFetch('/api/auth/forgot-password', 'POST', formState)
 
-        if (serverResponse.ok) {
-            return showModal({
+        serverResponse.ok ?
+            showModal({
                 message: serverResponse.message,
                 type: 'success'
-            })
-        } else {
-            return showModal({
+            }) :
+            showModal({
                 message: serverResponse.message,
                 type: 'error'
             })
-        }
+        return
     }
 
     const initialFormState = {
