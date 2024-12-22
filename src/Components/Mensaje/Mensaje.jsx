@@ -1,6 +1,7 @@
 import React from 'react'
 
 import './Mensaje.css'
+import ResaltarTexto from '../Funcionalidades/ResaltarTexto/ResaltarTexto'
 
 const Mensaje = ({ mensaje, textoFiltro, handleDeleteMessage }) => {
 
