@@ -6,11 +6,15 @@ import { NavLink } from 'react-router-dom'
 import FiltrarArray from '../../Components/FiltrarArray/FiltrarArray'
 import ListaWorkspacesPreview from '../../Components/ListaWorkspacesPreview/ListaWorkspacesPreview'
 import { useWorkspaceContext } from '../../Context/WorkspaceContext'
+import { useAuthContext } from '../../Context/AuthenticationContext'
+import useMovement from '../../Hooks/useMovement'
 
 
-const SelectorWorkspace = () => {
+const SelectorWorkspace = ({ ws }) => {
     const { workspaces, adminWorkspaces } = useWorkspaceContext()
+    const { logout } = useAuthContext()
     const [workspacesFiltrados, setWorkspacesFiltrados] = useState(workspaces)
+    const { movement, displayButton, handleMovement } = useMovement()
 
 
     useEffect(() => {
@@ -19,15 +23,25 @@ const SelectorWorkspace = () => {
         [workspaces]
     )
 
+
+    const handleLogout = () => {
+        if (confirm('¿Desea cerrar sesión?')) {
+            logout()
+        }
+    }
+
     return (
         <>
             <main className='SW_main'>
                 <h1>
                     Bienvenido a Slack!
                 </h1>
-                <ListaWorkspacesPreview workspacesFiltrados={workspacesFiltrados} workspaces={workspaces} />
                 <FiltrarArray setArrayFiltrado={setWorkspacesFiltrados} array={workspaces} className={'filtro'} />
-                <footer className='SW_footer'>
+                <ListaWorkspacesPreview workspacesFiltrados={workspacesFiltrados} workspaces={ws ? ws : workspaces} />
+                <footer className={'SW_footer ' + movement}>
+                    <button onClick={handleMovement} className='desplazar' style={{ display: displayButton }}>
+                        Menu
+                    </button>
                     <NavLink to={'/workspace/new'}>
                         <div className='buttonWS'>
                             Nuevo Workspace
@@ -46,6 +60,14 @@ const SelectorWorkspace = () => {
                                     Agregar Miembros
                                 </div>
                             </NavLink>
+                            <NavLink to={'/workspace/deleteMember'} >
+                                <div className='buttonWS' style={{ backgroundColor: 'red' }}>
+                                    Eliminar miembros
+                                </div>
+                            </NavLink>
+                            <span onClick={handleLogout} className='buttonWS logout' >
+                                Cerrar Sesión
+                            </span>
                         </>
                     }
                 </footer>

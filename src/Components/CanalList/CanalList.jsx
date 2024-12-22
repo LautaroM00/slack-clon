@@ -10,6 +10,7 @@ import Pepe from '../Pepe/Pepe';
 import useFetch from '../../Hooks/useFetch';
 import { useModalContext } from '../../Context/ModalContext';
 import { useChannelContext } from '../../Context/ChannelContext';
+import { ProgressBar } from 'primereact/progressbar';
 
 const CanalList = ({ channels }) => {
     const [mostrarCanales, setMostrarCanales] = useState('none')
@@ -57,7 +58,7 @@ const CanalList = ({ channels }) => {
                             }
                         </ul> :
                         <ul className='canalNotFound'>
-                            Cargando...
+                            <ProgressBar mode="indeterminate" style={{ height: '20px' }} color='green'></ProgressBar>
                         </ul>
                 }
                 {

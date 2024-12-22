@@ -5,11 +5,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+
+    gap: 30px;
     background-color: #B43F3F;
 }
 
-.SW_main .filtro{
+.filtro{
     display: flex;
     width: calc(80vw + 40px);
     max-width: 1030px;
@@ -54,6 +55,8 @@
 }
 
 .SW_footer .buttonWS{
+    width: 280px;
+    text-align: center;
     font-size: 25px;
     padding: 15px 25px;
     background-color: #333ba8a5;
@@ -65,6 +68,11 @@
     -1px -1px 0 #000,  
     1px -1px 0 #000, 
     -1px 1px 0 #000;
+}
+
+.SW_footer .buttonWS.logout{
+    border: 2px solid rgb(255, 255, 255);
+    background-color: red;
 }
 
 .SW_footer .nuevoWS:hover{
@@ -95,8 +103,145 @@
     -1px 1px 0 #000;
 }
 
+.desplazar{
+    padding: 5px;
+}
+
+
+
+@keyframes salir {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes entrar {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(0%);
+    }
+    
+}
+
+@media (min-width: 1600px){
+    .SW_footer .buttonWS.logout{
+        border: 2px solid black;
+        position: absolute;
+        top: 40px;
+        right: 40px;
+    }
+
+    .desplazar{
+        width: 0;
+        border: 0;
+        background-color: transparent;
+        color: transparent;
+    }
+
+}
+
+@media (max-width: 1600px){
+    .SW_footer {
+        padding: 70px 30px 30px 30px;
+        height: 100vh;
+        flex-direction: column;
+        position: absolute;
+        left: 0px;
+        background-color: rgba(0, 0, 0, 0.954);
+        border-radius: 0 30px 30px 0;
+
+        &.salir{
+            transform: translateX(0%);
+            animation: salir 1s forwards;
+        }
+        &.entrar{
+            transform: translateX(0%);
+            animation: entrar 1s forwards;
+        }
+
+        &.closed{
+            transform: translateX(-100%);
+        }
+    }
+
+    .SW_footer .desplazar{
+        position: absolute;
+        right: -50px;
+    }
+
+    .SW_footer .buttonWS.logout{
+        margin-top: 100px;
+        background-color: red;
+    }
+
+
+}
+
+
+
 @media (min-width: 800px){
     .SW_main h1{
         font-size: 5em;
     }
 }
+
+@media (max-width: 450px){
+
+    .SW_footer {
+        padding: 70px 30px 30px 30px;
+        width: 100%;
+        height: auto;
+        flex-direction: column;
+        position: absolute;
+        left: initial;
+        background-color: rgba(0, 0, 0, 0.954);
+        border-radius: 0 0 30px 30px;
+
+        &.salir{
+            transform: translateY(0%);
+            animation: salir 1s forwards;
+        }
+        &.entrar{
+            transform: translateY(0%);
+            animation: entrar 1s forwards;
+        }
+
+        &.closed{
+            transform: translateY(-100%);
+        }
+    }
+    .SW_footer .desplazar{
+        bottom: -35px;
+        right: 10px;
+    }
+
+
+    @keyframes salir {
+        0% {
+            transform: translateY(0);
+        }
+    
+        100% {
+            transform: translateY(-100%);
+        }
+    }
+    
+    @keyframes entrar {
+        0% {
+            transform: translateY(-100%);
+        }
+    
+        100% {
+            transform: translateY(0%);
+        }
+        
+    }
+
+} 

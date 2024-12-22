@@ -41,7 +41,6 @@ const CrearCanal = () => {
             channelName.length > 2 && !estaRepetido) {
 
             const serverResponse = await customFetch(`/api/channel/${workspaceName}`, 'POST', { channelName: channelName })
-
             if (serverResponse.ok) {
                 const canalAgregado = await customFetch(`/api/channel/last/${workspaceName}/${channelName}`, 'GET')
                 e.target[0].value = ''

@@ -37,7 +37,7 @@ const ModalMensaje = ({ modalData, setShow }) => {
         <div className='modal' style={{ display: display }}>
             <div className={'container ' + movement} style={style[type]}>
                 {
-                    type === 'error' && <h2>Error: </h2>
+                    type === 'error' ? <h2>Error: </h2> : <h2>✅</h2>
                 }
                 <p>{message}</p>
             </div>

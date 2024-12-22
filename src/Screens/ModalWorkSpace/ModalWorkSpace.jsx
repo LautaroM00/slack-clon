@@ -12,14 +12,17 @@ import { useModalContext } from '../../Context/ModalContext'
 import { useWorkspaceContext } from '../../Context/WorkspaceContext'
 import validateInputsCreateWorkspace from '../../Utils/validations'
 import './ModalWorkSpace.css'
+import FiltrarArray from '../../Components/FiltrarArray/FiltrarArray'
 
 
 const ModalWorkSpace = () => {
+    const {showModal} = useModalContext()
+    const { workspaces, setWorkspaces, adminWorkspaces, setAdminWorkspaces } = useWorkspaceContext()
     const [displayCondiciones, setDisplayCondiciones] = useState('none')
     const [inputInvalido, setInputInvalido] = useState('')
     const [conditions, setConditions] = useState([])
-    const {showModal} = useModalContext()
-    const { workspaces, setWorkspaces, adminWorkspaces, setAdminWorkspaces } = useWorkspaceContext()
+    const [workspacesFiltrados, setWorkspacesFiltrados] = useState(adminWorkspaces)
+
     const { customFetch } = useFetch()
     const { type } = useParams()
 
@@ -121,14 +124,16 @@ const ModalWorkSpace = () => {
                                 condiciones={conditions} 
                                 type={'workspace'}
                                 />
-                        </Form> :
+                        </Form> 
+                        :
                         <>
-                            <ListaWorkspacesPreview workspaces={adminWorkspaces} />
+                            <ListaWorkspacesPreview workspacesFiltrados={workspacesFiltrados} workspaces={adminWorkspaces} />
+                            <FiltrarArray setArrayFiltrado={setWorkspacesFiltrados} array={workspaces} className={'filtro'} />
                             <button className='return' onClick={() => navigate('/')} >Volver</button>
                         </>
                 }
             </div>
-            <SelectorWorkspace />
+            <SelectorWorkspace hide={true} />
         </>
     )
 }

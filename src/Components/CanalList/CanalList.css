@@ -7,6 +7,7 @@
     align-items: center;
     gap: 10px;
     position: absolute;
+    z-index: 2000;
     top: 0%;
     background-color: #247cc0;
     box-shadow: 0 3px 11px 3px black;
@@ -15,6 +16,7 @@
 
 .displayCanales {
     position: absolute;
+    z-index: 3000;
     left: 87vw;
     top: 15px;
 }

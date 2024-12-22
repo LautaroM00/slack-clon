@@ -41,7 +41,7 @@
     cursor: pointer;
 }
 
-.WorkspacePreview .addMemberForm{
+.WorkspacePreview .memberForm{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -65,16 +65,27 @@
 }
 
 @media (max-width: 400px) {
-    .WorkspacePreview {
-        flex-direction: column;
-    }
+
 
     .WorkspacePreview .navLink {
         padding: 10px;
     }
 }
 
-@media (min-width: 600px) {
+@media (max-width: 600px) {
+    .WorkspacePreview .memberForm{
+        flex-direction: column;
+    }
+
+    .WorkspacePreview {
+        flex-direction: column;
+    }
+
+    .WorkspacePreview .button{
+        width: auto;
+        padding: 5px;
+    }
+
     .iconoEntrar {
         width: 40px;
         height: 40px;
@@ -98,7 +109,7 @@
         padding: 15px 50px;
     }
 
-    .WorkspacePreview button {
+    .WorkspacePreview .button {
         width: 90px;
     }
 

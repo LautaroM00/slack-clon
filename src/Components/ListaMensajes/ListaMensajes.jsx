@@ -3,9 +3,14 @@ import Mensaje from '../Mensaje/Mensaje'
 
 import './ListaMensajes.css'
 import { useMessagesContext } from '../../Context/MessageContext'
+import useFetch from '../../Hooks/useFetch'
+import { useModalContext } from '../../Context/ModalContext'
+
 
 const ListaMensajes = ({ idCanal, textoFiltro }) => {
     const { messages, setMessages, getMessages } = useMessagesContext()
+    const { customFetch } = useFetch()
+    const { showModal } = useModalContext()
 
     useEffect(() => {
         Number(idCanal) && getMessages('all', idCanal)
@@ -16,14 +21,34 @@ const ListaMensajes = ({ idCanal, textoFiltro }) => {
         [idCanal]
     )
 
+    const handleDeleteMessage = async (idMessage) => {
+        if(confirm('¿Realmente desea eliminar este mensaje?')){
+            const serverResponse = await customFetch('/api/message/' + idMessage, 'PUT')
+
+            if(serverResponse.ok){
+                setMessages(messages.filter((message) => message.id !== idMessage))
+                showModal({
+                    message: serverResponse.message,
+                    type: 'success'
+                })
+                return
+            }else{
+                showModal({
+                    message: serverResponse.message,
+                    type: 'error'
+                })
+            }
+        }
+    }
+
     return (
         <div className='contenedorMensajes'>
             {
                 messages ?
                     messages.map((mensaje, index) => {
-                        const { content, sent_at, name } = mensaje
+                        console.log(mensaje)
                         return (
-                            <Mensaje name={name} content={content} sent_at={sent_at} key={index} textoFiltro={textoFiltro} />
+                            <Mensaje mensaje={mensaje} key={index} textoFiltro={textoFiltro} handleDeleteMessage={handleDeleteMessage} />
                         )
                     }) :
                     <h2>Cargando</h2>

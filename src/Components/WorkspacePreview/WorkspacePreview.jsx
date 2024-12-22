@@ -3,9 +3,9 @@ import { NavLink, useNavigate, useParams } from 'react-router-dom';
 
 import './WorkspacePreview.css'
 import useFetch from '../../Hooks/useFetch';
-import useForm from '../../Hooks/useForm';
 import { useWorkspaceContext } from '../../Context/WorkspaceContext';
 import { useModalContext } from '../../Context/ModalContext';
+import useForm from '../../Hooks/useForm';
 
 const WorkspacePreview = ({ name, thumbnail }) => {
     const navigate = useNavigate()
@@ -13,9 +13,6 @@ const WorkspacePreview = ({ name, thumbnail }) => {
     const { workspaces, setWorkspaces, setAdminWorkspaces } = useWorkspaceContext()
     const { type } = useParams()
     const { customFetch } = useFetch()
-    const { formState, handleChange } = useForm({
-        email: ''
-    })
 
     const handleDeleteWorkspace = async (e) => {
         if (confirm(`¿Realmente desea eliminar el workspace '${name.toUpperCase()}'?`)) {
@@ -48,24 +45,18 @@ const WorkspacePreview = ({ name, thumbnail }) => {
         return
     }
 
-    const handleAddMember = async (e) => {
-        e.preventDefault()
+    const actionAddMember = async (formState) => {
 
         const serverResponse = await customFetch(`/api/workspace/member/${name}`, 'POST', formState)
 
-        serverResponse.ok ?
-            showModal({
-                message: serverResponse.message,
-                type: 'success'
-            }) :
-            showModal({
-                message: serverResponse.message,
-                type: 'error'
-            })
+        return serverResponse
+    }
 
-        e.target.value = ''
-        return
+    const actionDeleteMember = async (formState) => {
 
+        const serverResponse = await customFetch(`/api/workspace/member/${name}/${formState.email}`, 'DELETE' )
+        
+        return serverResponse
     }
 
 
@@ -74,17 +65,9 @@ const WorkspacePreview = ({ name, thumbnail }) => {
             Eliminar
         </button>,
         'addMember':
-            <form onSubmit={handleAddMember} className='addMemberForm' >
-                <div className='block'>
-                    <label htmlFor='email'>
-                        Email:
-                    </label>
-                    <input id='email' name='email' type='email' onChange={handleChange} />
-                </div>
-                <button className={'button'} style={{ backgroundColor: '#0fca0f', width: '100px' }}>
-                    Agregar
-                </button>
-            </form>
+            <WorkspacePreviewForm action={actionAddMember} buttonText={'Agregar'} backgroundColor={'green'} />,
+        'deleteMember':
+            <WorkspacePreviewForm action={actionDeleteMember} backgroundColor={'red'} buttonText={'Eliminar'} />
     }
 
     return (
@@ -107,3 +90,45 @@ const WorkspacePreview = ({ name, thumbnail }) => {
 }
 
 export default WorkspacePreview
+
+
+const WorkspacePreviewForm = ({ action, backgroundColor, buttonText}) => {
+    const {formState, handleChange} = useForm({
+        email: ''
+    })
+    const { showModal } = useModalContext()
+
+
+    const handle = async (e) => {
+        e.preventDefault()
+
+        const serverResponse = await action(formState)
+
+        serverResponse.ok ?
+        showModal({
+            message: serverResponse.message,
+            type: 'success'
+        }) :
+        showModal({
+            message: serverResponse.message,
+            type: 'error'
+        })
+
+    e.target.value = ''
+
+    }
+
+    return (
+        <form onSubmit={handle} className='memberForm' >
+            <div className='block'>
+                <label htmlFor='email'>
+                    Email:
+                </label>
+                <input id='email' name='email' type='email' onChange={handleChange} />
+            </div>
+            <button className={'button'} style={{ backgroundColor: backgroundColor, width: '100px' }}>
+                {buttonText}
+            </button>
+        </form>
+    )
+}

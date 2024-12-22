@@ -4,12 +4,16 @@ import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import AuthenticationProvider from './Context/AuthenticationContext.jsx'
 import ModalProvider from './Context/ModalContext.jsx'
+import { PrimeReactProvider, PrimeReactContext } from 'primereact/api';
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <BrowserRouter>
         <AuthenticationProvider>
             <ModalProvider>
-                <App />
+                <PrimeReactProvider>
+                    <App />
+                </PrimeReactProvider>
             </ModalProvider>
         </AuthenticationProvider>
     </BrowserRouter>

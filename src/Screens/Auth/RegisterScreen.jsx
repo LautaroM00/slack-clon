@@ -17,7 +17,7 @@ const RegisterScreen = () => {
             new FormDivProps('name', 'Nombre:').build(),
             new FormDivProps('email', 'Email:', 'email').build(),
             new FormDivProps('password', 'Contraseña:', 'password').build(),
-            new FormDivProps('passwordRepeat', 'Repita su password:', 'passwordRepeat').build()
+            new FormDivProps('passwordRepeat', 'Repita su password:', 'password').build()
         ]
     }
 
