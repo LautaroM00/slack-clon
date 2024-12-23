@@ -26,6 +26,13 @@ const ResetPasswordScreen = () => {
             return validateFieldsNullish.showModal()
         }
 
+        if(formState.password !== formState.passwordRepeat){
+            return showModal({
+                message: 'Las contraseñas no coinciden.',
+                type: 'error'
+            })
+        }
+
         const serverResponse = await customFetch('/api/auth/reset-password/' + validationToken, 'PUT', formState)
 
         serverResponse.ok ?
