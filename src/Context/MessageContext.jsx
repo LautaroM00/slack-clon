@@ -8,7 +8,6 @@ const MessageProvider = ({ children }) => {
     const [messages, setMessages] = useState()
 
     const getMessages = async (amount, channelId) => {
-        /*         console.log('fetchMessages') */
         const serverResponse = await customFetch(`/api/message/${amount}/${channelId}`, 'GET')
 
         return serverResponse.payload.messages

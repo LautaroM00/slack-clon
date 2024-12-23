@@ -34,32 +34,3 @@ const ResaltarTexto = ({ texto, textoFiltro }) => {
 }
 
 export default ResaltarTexto
-
-
-
-
-
-
-
-
-
-
-
-/*                 {
-                    mensajes.map((mensaje, index) => {
-                        return (
-                            <>
-                                {
-                                    textoFiltro ?
-                                        <div>
-                                            
-                                        </div> :
-                                        <div key={index}>
-                                            {mensaje.texto}
-                                        </div>
-                                }
-                            </>
-                        )
-
-                    })
-                } */

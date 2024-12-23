@@ -1,11 +1,3 @@
-/* workspaceName &&
-            channelName &&
-            workspaceName.length <= 20 &&
-            workspaceName.length >= 5 &&
-            channelName.length <= 23 &&
-            channelName.length >= 3 &&
-            !estaRepetido */
-
 export const validateInputsCreateWorkspace = (workspaceName, channelName, workspaces) => {
 
     const errors = []
