@@ -39,8 +39,8 @@ const RegisterScreen = () => {
         serverResponse.ok ?
             showModal({
                 message: serverResponse.message,
-                type: 'success'/* ,
-            execute: () => navigate('/login') */
+                type: 'success',
+            execute: () => navigate('/login')
             }) :
             showModal({
                 message: serverResponse.message,
