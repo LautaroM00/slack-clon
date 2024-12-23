@@ -21,7 +21,7 @@ const ChannelProvider = ({ children }) => {
     }
     useEffect(() => {
         getChannels(workspaceName, 'all').then((payload) => {
-            setIsAdmin(true)
+            setIsAdmin(payload.isAdmin)
             setChannels(payload.channels)
         });
     },
