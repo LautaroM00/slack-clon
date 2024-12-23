@@ -7,7 +7,7 @@ const useSendValidateMail = () => {
     const { showModal, handleBackground } = useModalContext()
 
     const sendValidationEmail = async () => {
-        if (confirm('Detectamos que su usuario no se encuentra validado, esto lo imposibilita de crear workspaces. ¿Desea re-enviar un correo de activación?')) {
+        if (confirm('Detectamos que su usuario no se encuentra validado, esto le impide crear workspaces. ¿Desea re-enviar un correo de activación?')) {
             handleBackground()
             const serverResponse = await customFetch('/api/auth/send-verification-email', 'GET')
 
