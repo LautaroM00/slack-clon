@@ -8,7 +8,7 @@ import FormDivProps from '../../Utils/CustomFormData'
 
 const LoginScreen = () => {
     const { customFetch } = useFetch()
-    const { showModal } = useModalContext()
+    const { showModal, handleBackground } = useModalContext()
 
     const { login } = useAuthContext()
 
@@ -21,7 +21,7 @@ const LoginScreen = () => {
     }
 
     const loginAction = async (formState) => {
-
+        handleBackground()
         const serverResponse = await customFetch('/api/auth/login', 'POST', formState)
 
         serverResponse.ok ?

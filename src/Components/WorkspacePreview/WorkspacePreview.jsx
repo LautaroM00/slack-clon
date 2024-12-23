@@ -9,7 +9,7 @@ import useForm from '../../Hooks/useForm';
 
 const WorkspacePreview = ({ name, thumbnail }) => {
     const navigate = useNavigate()
-    const { showModal } = useModalContext()
+    const { showModal, handleBackground } = useModalContext()
     const { workspaces, setWorkspaces, setAdminWorkspaces } = useWorkspaceContext()
     const { type } = useParams()
     const { customFetch } = useFetch()
@@ -17,7 +17,7 @@ const WorkspacePreview = ({ name, thumbnail }) => {
     const handleDeleteWorkspace = async (e) => {
         if (confirm(`¿Realmente desea eliminar el workspace '${name.toUpperCase()}'?`)) {
             e.preventDefault()
-
+            handleBackground()
             const serverResponse = await customFetch(`/api/workspace/delete/${name}`, 'PUT')
 
             if (serverResponse.ok) {
@@ -46,17 +46,25 @@ const WorkspacePreview = ({ name, thumbnail }) => {
     }
 
     const actionAddMember = async (formState) => {
-
+        handleBackground()
         const serverResponse = await customFetch(`/api/workspace/member/${name}`, 'POST', formState)
 
         return serverResponse
     }
 
     const actionDeleteMember = async (formState) => {
+        handleBackground()
+        if (formState.email) {
 
-        const serverResponse = await customFetch(`/api/workspace/member/${name}/${formState.email}`, 'DELETE' )
-        
-        return serverResponse
+            const serverResponse = await customFetch(`/api/workspace/member/${name}/${formState.email}`, 'DELETE')
+
+            return serverResponse
+        }else{
+            showModal({
+                message:'Debe ingresar un email válido',
+                type: 'error'
+            })
+        }
     }
 
 
@@ -92,11 +100,11 @@ const WorkspacePreview = ({ name, thumbnail }) => {
 export default WorkspacePreview
 
 
-const WorkspacePreviewForm = ({ action, backgroundColor, buttonText}) => {
-    const {formState, handleChange} = useForm({
+const WorkspacePreviewForm = ({ action, backgroundColor, buttonText }) => {
+    const { formState, handleChange } = useForm({
         email: ''
     })
-    const { showModal } = useModalContext()
+    const { showModal, handleBackground } = useModalContext()
 
 
     const handle = async (e) => {
@@ -105,16 +113,16 @@ const WorkspacePreviewForm = ({ action, backgroundColor, buttonText}) => {
         const serverResponse = await action(formState)
 
         serverResponse.ok ?
-        showModal({
-            message: serverResponse.message,
-            type: 'success'
-        }) :
-        showModal({
-            message: serverResponse.message,
-            type: 'error'
-        })
+            showModal({
+                message: serverResponse.message,
+                type: 'success'
+            }) :
+            showModal({
+                message: serverResponse.message,
+                type: 'error'
+            })
 
-    e.target.value = ''
+        e.target.value = ''
 
     }
 

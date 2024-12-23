@@ -7,7 +7,7 @@ import { useModalContext } from '../../Context/ModalContext'
 
 const ForgotPasswordScreen = () => {
     const { customFetch } = useFetch()
-    const { showModal } = useModalContext()
+    const { showModal, handleBackground } = useModalContext()
 
     const formData = {
         title: 'Olvidé mi contraseña',
@@ -19,7 +19,7 @@ const ForgotPasswordScreen = () => {
 
 
     const forgotPasswordAction = async (formState) => {
-
+        handleBackground()
         const serverResponse = await customFetch('/api/auth/forgot-password', 'POST', formState)
 
         serverResponse.ok ?

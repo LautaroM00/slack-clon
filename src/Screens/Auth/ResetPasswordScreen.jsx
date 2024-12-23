@@ -8,7 +8,7 @@ import FormDivProps from '../../Utils/CustomFormData'
 const ResetPasswordScreen = () => {
     const { customFetch } = useFetch()
     const { validationToken } = useParams()
-    const { showModal } = useModalContext()
+    const { showModal, handleBackground } = useModalContext()
     const navigate = useNavigate()
 
     const formData = {
@@ -20,7 +20,7 @@ const ResetPasswordScreen = () => {
     }
 
     const resetPasswordAction = async (formState) => {
-
+        handleBackground()
         const serverResponse = await customFetch('/api/auth/reset-password/' + validationToken, 'PUT', formState)
 
         serverResponse.ok ?

@@ -10,7 +10,7 @@ import { useModalContext } from '../../Context/ModalContext'
 const ListaMensajes = ({ idCanal, textoFiltro }) => {
     const { messages, setMessages, getMessages } = useMessagesContext()
     const { customFetch } = useFetch()
-    const { showModal } = useModalContext()
+    const { showModal, handleBackground } = useModalContext()
 
     useEffect(() => {
         Number(idCanal) && getMessages('all', idCanal)
@@ -23,6 +23,7 @@ const ListaMensajes = ({ idCanal, textoFiltro }) => {
 
     const handleDeleteMessage = async (idMessage) => {
         if(confirm('¿Realmente desea eliminar este mensaje?')){
+            handleBackground()
             const serverResponse = await customFetch('/api/message/' + idMessage, 'PUT')
 
             if(serverResponse.ok){

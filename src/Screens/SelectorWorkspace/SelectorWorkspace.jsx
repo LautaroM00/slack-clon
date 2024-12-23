@@ -65,11 +65,12 @@ const SelectorWorkspace = ({ ws }) => {
                                     Eliminar miembros
                                 </div>
                             </NavLink>
-                            <span onClick={handleLogout} className='buttonWS logout' >
-                                Cerrar Sesión
-                            </span>
+
                         </>
                     }
+                    <span onClick={handleLogout} className='buttonWS logout' >
+                        Cerrar Sesión
+                    </span>
                 </footer>
             </main>
         </>

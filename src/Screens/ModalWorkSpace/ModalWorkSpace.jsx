@@ -16,7 +16,7 @@ import FiltrarArray from '../../Components/FiltrarArray/FiltrarArray'
 
 
 const ModalWorkSpace = () => {
-    const {showModal} = useModalContext()
+    const {showModal, handleBackground} = useModalContext()
     const { workspaces, setWorkspaces, adminWorkspaces, setAdminWorkspaces } = useWorkspaceContext()
     const [displayCondiciones, setDisplayCondiciones] = useState('none')
     const [inputInvalido, setInputInvalido] = useState('')
@@ -77,6 +77,7 @@ const ModalWorkSpace = () => {
             setInputInvalido('')
             setDisplayCondiciones('none')
 
+            handleBackground()
 
             const serverResponse = await customFetch('/api/workspace/', 'POST', { formState })
             

@@ -20,7 +20,7 @@ const CrearCanal = () => {
         tooLargeName: ''
     })
 
-    const { showModal } = useModalContext()
+    const { showModal, handleBackground } = useModalContext()
 
     const { channels, setChannels } = useChannelContext()
     const { customFetch } = useFetch()
@@ -39,7 +39,7 @@ const CrearCanal = () => {
         if (channelName &&
             channelName.length < 24 &&
             channelName.length > 2 && !estaRepetido) {
-
+                handleBackground()
             const serverResponse = await customFetch(`/api/channel/${workspaceName}`, 'POST', { channelName: channelName })
             if (serverResponse.ok) {
                 const canalAgregado = await customFetch(`/api/channel/last/${workspaceName}/${channelName}`, 'GET')

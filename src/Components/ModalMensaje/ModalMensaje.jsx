@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import './ModalMensaje.css'
 
-const ModalMensaje = ({ modalData, setShow }) => {
+const ModalMensaje = ({ modalData, setShow, displayBackground, setDisplayBackground, setShowBackground }) => {
 
     const {message, type, execute} = modalData
 
     const [movement, setMovement] = useState('show')
-    const [display, setDisplay] = useState('none')
+
+
     const style = {
         'error': {backgroundColor: '#c53e3e'},
         'success': {backgroundColor: 'green'}
     }
 
     useEffect(() => {
-
-        setDisplay('')
 
         setTimeout(() => {
             setMovement('hide')
@@ -23,7 +22,8 @@ const ModalMensaje = ({ modalData, setShow }) => {
         )
 
         setTimeout(() => {
-            setDisplay('none')
+            setShowBackground('none')
+            setDisplayBackground('none')
             setShow(false)
             execute && execute()
         },
@@ -34,7 +34,7 @@ const ModalMensaje = ({ modalData, setShow }) => {
     )
 
     return (
-        <div className='modal' style={{ display: display }}>
+        <div className='modalBackground' style={{display: displayBackground}}>
             <div className={'container ' + movement} style={style[type]}>
                 {
                     type === 'error' ? <h2>Error: </h2> : <h2>✅</h2>

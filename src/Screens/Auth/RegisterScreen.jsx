@@ -7,7 +7,7 @@ import FormDivProps from '../../Utils/CustomFormData'
 
 const RegisterScreen = () => {
     const { customFetch } = useFetch()
-    const { showModal } = useModalContext()
+    const { showModal, handleBackground } = useModalContext()
 
     const navigate = useNavigate()
 
@@ -29,7 +29,7 @@ const registerAction = async (formState) => {
             type: 'error'
         })
     }
-
+    handleBackground()
     const serverResponse = await customFetch('/api/auth/register', 'POST', formState)
 
     serverResponse.ok ?

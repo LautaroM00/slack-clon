@@ -1,4 +1,4 @@
-.modal {
+.modalBackground {
     width: 100vw;
     height: 100vh;
     position: absolute;
@@ -6,10 +6,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(19, 17, 17, 0.815);
 }
 
-.modal .container.show {
+.modalBackground .container.show {
     position: absolute;
     z-index: 20000;
     top: 30px;
@@ -46,7 +45,18 @@
     }
 }
 
-.modal .container.hide {
+.shadow{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(19, 17, 17, 0.973);
+    position: absolute;
+    z-index: 1900;
+    width: 100vw;
+    height: 100vh;
+}
+
+.modalBackground .container.hide {
     position: absolute;
     top: 30px;
     transform: translateY(0%);

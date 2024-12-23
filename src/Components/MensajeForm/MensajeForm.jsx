@@ -14,7 +14,7 @@ const MensajeForm = () => {
     const { messages, setMessages, getMessages } = useMessagesContext()
     const { customFetch } = useFetch()
     const { idCanal } = useParams()
-    const { showModal } = useModalContext()
+    const { showModal, handleBackground } = useModalContext()
     const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
@@ -23,7 +23,7 @@ const MensajeForm = () => {
         const textoMensaje = e.target[0].value.trim()
 
         if (textoMensaje && textoMensaje.length < 2000) {
-
+            handleBackground()
             const serverResponse = await customFetch(`/api/message/${idCanal}`, 'POST', { content: textoMensaje })
 
             if (serverResponse.ok) {

@@ -89,12 +89,12 @@ const CanalMap = ({ channels }) => {
     const { customFetch } = useFetch()
     const { workspaceName, idCanal } = useParams()
     const { setChannels, isAdmin } = useChannelContext()
-    const { showModal } = useModalContext()
+    const { showModal,handleBackground } = useModalContext()
 
 
     const handleDeleteChannel = async (name, id) => {
         if (confirm(`¿Realmente quiere eliminar el canal '${name.toUpperCase()}?'`)) {
-
+            handleBackground()
             const serverResponse = await customFetch(`/api/channel/delete/${workspaceName}/${id}`, 'PUT')
 
             if (serverResponse.ok) {

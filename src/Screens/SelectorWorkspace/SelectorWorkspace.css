@@ -154,7 +154,7 @@
         flex-direction: column;
         position: absolute;
         left: 0px;
-        background-color: rgba(0, 0, 0, 0.954);
+        background-color: rgba(0, 0, 0, 0.974);
         border-radius: 0 30px 30px 0;
 
         &.salir{
