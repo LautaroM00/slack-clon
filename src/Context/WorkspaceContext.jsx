@@ -1,10 +1,13 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import useFetch from '../Hooks/useFetch'
+import { useAuthContext } from './AuthenticationContext'
+import useSendValidateMail from '../Hooks/useSendValidateMail'
 
 const WorkspaceContext = createContext()
 
 const WorkspaceProvider = ({ children }) => {
     const { customFetch } = useFetch()
+    const { sendValidationEmail } = useSendValidateMail()
     const [workspaces, setWorkspaces] = useState()
     const [adminWorkspaces, setAdminWorkspaces] = useState()
 
@@ -18,6 +21,7 @@ const WorkspaceProvider = ({ children }) => {
             .then((workspaces) => {
                 setWorkspaces(workspaces)
                 setAdminWorkspaces(workspaces.filter((workspace) => workspace.role === 'admin'))
+                !sessionStorage.getItem('isValidated') && sendValidationEmail()
             })
     },
         []

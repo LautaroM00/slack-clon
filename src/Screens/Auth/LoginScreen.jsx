@@ -23,22 +23,26 @@ const LoginScreen = () => {
     const loginAction = async (formState) => {
         handleBackground()
         const validateFields = checkFields(formState)
-        if(validateFields?.error){
+        if (validateFields?.error) {
             return validateFields.showModal()
         }
-        
+
         const serverResponse = await customFetch('/api/auth/login', 'POST', formState)
 
-        serverResponse.ok ?
+        if (serverResponse.ok) {
+            serverResponse.payload.isValidated && sessionStorage.setItem('isValidated', 'true')
             showModal({
                 message: serverResponse.message,
                 type: 'success',
                 execute: () => login(serverResponse.payload.accessToken)
-            }) :
+            })
+        }
+        else {
             showModal({
                 message: serverResponse.message,
                 type: 'error'
             })
+        }
         return
     }
 
