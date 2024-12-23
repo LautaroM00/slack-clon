@@ -23,7 +23,6 @@ const MensajeForm = () => {
         const textoMensaje = e.target[0].value.trim()
 
         if (textoMensaje && textoMensaje.length < 2000) {
-            handleBackground()
             const serverResponse = await customFetch(`/api/message/${idCanal}`, 'POST', { content: textoMensaje })
 
             if (serverResponse.ok) {
