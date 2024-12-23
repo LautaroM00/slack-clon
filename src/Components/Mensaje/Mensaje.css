@@ -23,6 +23,7 @@
 
 .mensajeContenedor .texto{
     overflow-wrap: break-word;
+    width: 87%;
 }
 
 .mensajeContenedor .nombre-hora{

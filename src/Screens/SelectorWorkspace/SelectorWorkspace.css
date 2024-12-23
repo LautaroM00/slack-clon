@@ -73,6 +73,7 @@
 .SW_footer .buttonWS.logout{
     border: 2px solid rgb(255, 255, 255);
     background-color: red;
+    cursor: pointer;
 }
 
 .SW_footer .nuevoWS:hover{
