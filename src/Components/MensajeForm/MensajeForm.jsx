@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { VscSend } from "react-icons/vsc";
 
 
 import './MensajeForm.css'
 import useFetch from '../../Hooks/useFetch';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useModalContext } from '../../Context/ModalContext';
 import { useChannelContext } from '../../Context/ChannelContext';
 import { useMessagesContext } from '../../Context/MessageContext';
@@ -14,23 +14,21 @@ const MensajeForm = () => {
     const { messages, setMessages, getMessages } = useMessagesContext()
     const { customFetch } = useFetch()
     const { idCanal } = useParams()
-    const { showModal, handleBackground } = useModalContext()
-    const navigate = useNavigate()
+    const { showModal } = useModalContext()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
         const textoMensaje = e.target[0].value.trim()
-
+        e.target[0].value = ''
         if (textoMensaje && textoMensaje.length < 2000) {
             const serverResponse = await customFetch(`/api/message/${idCanal}`, 'POST', { content: textoMensaje })
 
             if (serverResponse.ok) {
                 const lastMessage = await getMessages('last', idCanal)
-
                 setMessages([...messages, lastMessage[0]])
 
-                return e.target[0].value = ''
+                return
             } else {
                 showModal({
                     message: serverResponse.message,
