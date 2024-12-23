@@ -58,8 +58,8 @@ const LoginScreen = () => {
                 <button>Iniciar sesión</button>
                 <span>
                     Si quiere probar la aplicación sin loguearse use las siguientes credenciales:
-                    <p>Email: xd</p>
-                    <p>Contraseña: XDDDDDDDD</p>
+                    <p>Email: usuario@test.com</p>
+                    <p>Contraseña: invitado</p>
                 </span>
                 <NavLink to={'/register'}>Aún no tengo cuenta</NavLink>
                 <NavLink to={'/forgot-password'}>Olvidé mi contraseña</NavLink>
