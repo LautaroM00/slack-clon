@@ -42,6 +42,7 @@ const ModalProvider = ({ children }) => {
                 }
             }
             if (['name', 'password'].includes(key)) {
+                console.log(key, formState[key])
                 const validationResult = validateLength(key, formState[key])
                 validationResult && errors.push(validationResult)
             }
