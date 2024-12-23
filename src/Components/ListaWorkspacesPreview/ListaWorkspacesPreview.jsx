@@ -1,5 +1,6 @@
 import React from 'react'
 import WorkspacePreview from '../WorkspacePreview/WorkspacePreview'
+import { ProgressSpinner } from 'primereact/progressspinner'
 
 const ListaWorkspacesPreview = ({ workspacesFiltrados, workspaces }) => {
     return (
@@ -15,9 +16,9 @@ const ListaWorkspacesPreview = ({ workspacesFiltrados, workspaces }) => {
                         <WorkspacesMap workspaces={workspaces} />}
                 </nav> :
                 <nav className='SW_nav' style={{ width: '80vw', color: 'white' }}>
-                    <h1 className='loading'>
-                        Cargando...
-                    </h1>
+                    <div className='loaderMessages'>
+                        <ProgressSpinner style={{ width: '200px', height: '200px' }} strokeWidth="2" />
+                    </div>
                 </nav>
             }
         </>

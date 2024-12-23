@@ -5,6 +5,7 @@ import './ListaMensajes.css'
 import { useMessagesContext } from '../../Context/MessageContext'
 import useFetch from '../../Hooks/useFetch'
 import { useModalContext } from '../../Context/ModalContext'
+import { ProgressSpinner } from 'primereact/progressspinner'
 
 
 const ListaMensajes = ({ idCanal, textoFiltro }) => {
@@ -22,18 +23,18 @@ const ListaMensajes = ({ idCanal, textoFiltro }) => {
     )
 
     const handleDeleteMessage = async (idMessage) => {
-        if(confirm('¿Realmente desea eliminar este mensaje?')){
+        if (confirm('¿Realmente desea eliminar este mensaje?')) {
             handleBackground()
             const serverResponse = await customFetch('/api/message/' + idMessage, 'PUT')
 
-            if(serverResponse.ok){
+            if (serverResponse.ok) {
                 setMessages(messages.filter((message) => message.id !== idMessage))
                 showModal({
                     message: serverResponse.message,
                     type: 'success'
                 })
                 return
-            }else{
+            } else {
                 showModal({
                     message: serverResponse.message,
                     type: 'error'
@@ -51,7 +52,9 @@ const ListaMensajes = ({ idCanal, textoFiltro }) => {
                             <Mensaje mensaje={mensaje} key={index} textoFiltro={textoFiltro} handleDeleteMessage={handleDeleteMessage} />
                         )
                     }) :
-                    <h2>Cargando</h2>
+                    <div className='loaderMessages'>
+                        <ProgressSpinner style={{ width: '200px', height: '200px' }} strokeWidth="2" />
+                    </div>
             }
         </div>
     )
