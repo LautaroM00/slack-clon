@@ -14,7 +14,7 @@ const ResetPasswordScreen = () => {
     const formData = {
         title: 'Recuperar contraseña',
         divs: [
-            new FormDivProps('password', 'Contraseña:', 'password').build(),
+            new FormDivProps('password', <span>Contraseña: <i className='italic'>(mayor a 7 caracteres)</i></span>, 'password').build(),
             new FormDivProps('passwordRepeat', 'Repita su contraseña:', 'password').build()
         ]
     }

@@ -14,9 +14,9 @@ const RegisterScreen = () => {
     const formData = {
         title: 'Registrarme',
         divs: [
-            new FormDivProps('name', 'Nombre:').build(),
+            new FormDivProps('name', <span>Nombre: <i className='italic'>(mayor a 5 caracteres)</i></span>).build(),
             new FormDivProps('email', 'Email:', 'email').build(),
-            new FormDivProps('password', 'Contraseña:', 'password').build(),
+            new FormDivProps('password', <span>Contraseña: <i className='italic'>(mayor a 7 caracteres)</i></span>, 'password').build(),
             new FormDivProps('passwordRepeat', 'Repita su password:', 'password').build()
         ]
     }
@@ -24,6 +24,7 @@ const RegisterScreen = () => {
 const registerAction = async (formState) => {
 
     if (formState.password !== formState.passwordRepeat) {
+        handleBackground()
         return showModal({
             message: 'Las contraseñas no coinciden.',
             type: 'error'
@@ -35,8 +36,8 @@ const registerAction = async (formState) => {
     serverResponse.ok ?
         showModal({
             message: serverResponse.message,
-            type: 'success',
-            execute: () => navigate('/login')
+            type: 'success'/* ,
+            execute: () => navigate('/login') */
         }) :
         showModal({
             message: serverResponse.message,

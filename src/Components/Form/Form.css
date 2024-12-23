@@ -73,6 +73,10 @@
     }
 }
 
+.italic{
+    color: rgba(0, 0, 0, 0.426);
+}
+
 .formContainer button {
     background-color: #2493ee;
     width: 70%;
