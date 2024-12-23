@@ -61,7 +61,7 @@ const LoginScreen = () => {
                     <p>Email: <i>usuario@test.com</i></p>
                     <p>Contraseña: <i>invitado</i></p> */}
                 </span>
-                <NavLink to={'/register'}>Aún no tengo cuenta</NavLink>
+                <NavLink to={'/register'}>Registrarme</NavLink>
                 <NavLink to={'/forgot-password'}>Olvidé mi contraseña</NavLink>
             </div>
         </Form>
