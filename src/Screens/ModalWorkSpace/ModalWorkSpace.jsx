@@ -10,13 +10,13 @@ import useFetch from '../../Hooks/useFetch'
 import { Form } from '../../Components/Form/Form'
 import { useModalContext } from '../../Context/ModalContext'
 import { useWorkspaceContext } from '../../Context/WorkspaceContext'
-import validateInputsCreateWorkspace from '../../Utils/validations'
+import { validateInputsCreateWorkspace } from '../../Utils/validations.js'
 import './ModalWorkSpace.css'
 import FiltrarArray from '../../Components/FiltrarArray/FiltrarArray'
 
 
 const ModalWorkSpace = () => {
-    const {showModal, handleBackground} = useModalContext()
+    const { showModal, handleBackground } = useModalContext()
     const { workspaces, setWorkspaces, adminWorkspaces, setAdminWorkspaces } = useWorkspaceContext()
     const [displayCondiciones, setDisplayCondiciones] = useState('none')
     const [inputInvalido, setInputInvalido] = useState('')
@@ -80,7 +80,7 @@ const ModalWorkSpace = () => {
             handleBackground()
 
             const serverResponse = await customFetch('/api/workspace/', 'POST', { formState })
-            
+
             if (serverResponse.ok) {
                 setWorkspaces([...workspaces, serverResponse.payload.workspace])
                 setAdminWorkspaces([...adminWorkspaces, serverResponse.payload.workspace])
@@ -122,10 +122,10 @@ const ModalWorkSpace = () => {
                             </div>
                             <ListaCondiciones
                                 displayCondiciones={displayCondiciones}
-                                condiciones={conditions} 
+                                condiciones={conditions}
                                 type={'workspace'}
-                                />
-                        </Form> 
+                            />
+                        </Form>
                         :
                         <>
                             <ListaWorkspacesPreview workspacesFiltrados={workspacesFiltrados} workspaces={adminWorkspaces} />

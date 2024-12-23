@@ -7,7 +7,7 @@ const useForm = (initialFormState) => {
     const handleChange = (e) => {
 
         const field_name = e.target.name
-        const field_value = e.target.value
+        const field_value = e.target.value.trim()
 
         setFormState((prevFormState) => {
             return ({ ...prevFormState, [field_name]: field_value })

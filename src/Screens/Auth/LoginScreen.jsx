@@ -8,7 +8,7 @@ import FormDivProps from '../../Utils/CustomFormData'
 
 const LoginScreen = () => {
     const { customFetch } = useFetch()
-    const { showModal, handleBackground } = useModalContext()
+    const { showModal, handleBackground, checkFields } = useModalContext()
 
     const { login } = useAuthContext()
 
@@ -22,6 +22,11 @@ const LoginScreen = () => {
 
     const loginAction = async (formState) => {
         handleBackground()
+        const validateFields = checkFields(formState)
+        if(validateFields?.error){
+            return validateFields.showModal()
+        }
+        
         const serverResponse = await customFetch('/api/auth/login', 'POST', formState)
 
         serverResponse.ok ?
@@ -47,6 +52,11 @@ const LoginScreen = () => {
         <Form formData={formData} initialFormState={initialFormState} action={loginAction}>
             <div className='childrenDiv'>
                 <button>Iniciar sesión</button>
+                <span>
+                    Si quiere probar la aplicación sin loguearse use las siguientes credenciales:
+                    <p>Email: xd</p>
+                    <p>Contraseña: XDDDDDDDD</p>
+                </span>
                 <NavLink to={'/register'}>Aún no tengo cuenta</NavLink>
                 <NavLink to={'/forgot-password'}>Olvidé mi contraseña</NavLink>
             </div>

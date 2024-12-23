@@ -3,14 +3,15 @@ import './ModalMensaje.css'
 
 const ModalMensaje = ({ modalData, setShow, displayBackground, setDisplayBackground, setShowBackground }) => {
 
-    const {message, type, execute} = modalData
+    const { message, type, execute } = modalData
 
     const [movement, setMovement] = useState('show')
 
 
     const style = {
-        'error': {backgroundColor: '#c53e3e'},
-        'success': {backgroundColor: 'green'}
+        'error': { backgroundColor: '#c53e3e' },
+        'success': { backgroundColor: 'green' },
+        'validation': { backgroundColor: '#c53e3e' }
     }
 
     useEffect(() => {
@@ -34,12 +35,19 @@ const ModalMensaje = ({ modalData, setShow, displayBackground, setDisplayBackgro
     )
 
     return (
-        <div className='modalBackground' style={{display: displayBackground}}>
+        <div className='modalBackground' style={{ display: displayBackground }}>
             <div className={'container ' + movement} style={style[type]}>
                 {
-                    type === 'error' ? <h2>Error: </h2> : <h2>✅</h2>
+                    type === 'success' ? <h2>✅</h2> : <h2>Error: </h2>
                 }
-                <p>{message}</p>
+                {
+                    type === 'validation' ?
+                        message.map((errorMessage, index) => {
+                            return (
+                                message && <p style={{ color: 'white' }} className='message' key={index}>{errorMessage}</p>
+                            )
+                        }) :
+                        <p className='message'>{message}</p>}
             </div>
         </div>
     )

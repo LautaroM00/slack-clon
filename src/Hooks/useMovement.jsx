@@ -10,7 +10,6 @@ const useMovement = () => {
         if (window.innerWidth > 1600) {
             setDisplayButton('none')
         }
-        console.log(displayButton)
     },
     []
 )

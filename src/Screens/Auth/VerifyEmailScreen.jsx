@@ -10,9 +10,9 @@ const VerifyEmailScreen = () => {
     const { countdown } = useCountdown(5)
 
 
-    const verifyEmail = async (formState) => {
+    const verifyEmail = async () => {
 
-        const serverResponse = await customFetch('/api/auth/verification/' + verificationToken, 'GET', formState)
+        const serverResponse = await customFetch('/api/auth/verification/' + verificationToken, 'GET')
         return serverResponse
     }
 

@@ -23,6 +23,7 @@
 
 .formContainer form{
     width: 80%;
+    max-width: 600px;
     background-color: wheat;
     border-radius: 10px;
     padding: 20px 10px;

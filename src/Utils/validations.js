@@ -6,7 +6,7 @@
             channelName.length >= 3 &&
             !estaRepetido */
 
-const validateInputsCreateWorkspace = (workspaceName, channelName, workspaces) => {
+export const validateInputsCreateWorkspace = (workspaceName, channelName, workspaces) => {
 
     const errors = []
 
@@ -20,4 +20,16 @@ const validateInputsCreateWorkspace = (workspaceName, channelName, workspaces) =
 
 }
 
-export default validateInputsCreateWorkspace
+export const validateLength = (field_name, value) => {
+
+    if (field_name === 'name') {
+
+        return String(value).length >= 5 && String(value).length <= 20 ? '' : `El nombre debe tener entre 5 y 20 caracteres inclusive.`
+
+    }
+    if (field_name === 'password') {
+
+        return String(value).length >= 7 && String(value).length <= 20 ? '' : `El password debe tener entre 7 y 20 caracteres inclusive.`
+    }
+}
+

@@ -8,7 +8,7 @@ import FormDivProps from '../../Utils/CustomFormData'
 const ResetPasswordScreen = () => {
     const { customFetch } = useFetch()
     const { validationToken } = useParams()
-    const { showModal, handleBackground } = useModalContext()
+    const { showModal, handleBackground, checkFields } = useModalContext()
     const navigate = useNavigate()
 
     const formData = {
@@ -21,6 +21,11 @@ const ResetPasswordScreen = () => {
 
     const resetPasswordAction = async (formState) => {
         handleBackground()
+        const validateFieldsNullish = checkFields(formState)
+        if(validateFieldsNullish?.error){
+            return validateFieldsNullish.showModal()
+        }
+
         const serverResponse = await customFetch('/api/auth/reset-password/' + validationToken, 'PUT', formState)
 
         serverResponse.ok ?
@@ -47,6 +52,7 @@ const ResetPasswordScreen = () => {
             <div className='childrenDiv'>
                 <button>Cambiar contraseña</button>
                 <NavLink to={'/register'}>Aún no tengo cuenta</NavLink>
+                <NavLink to={'/forgot-password'}>Solicitar re-envio de enlace de recuperación</NavLink>
             </div>
         </Form>
     )

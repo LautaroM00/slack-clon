@@ -10,7 +10,7 @@ import { useAuthContext } from '../../Context/AuthenticationContext'
 import useMovement from '../../Hooks/useMovement'
 
 
-const SelectorWorkspace = ({ ws }) => {
+const SelectorWorkspace = ({ hide }) => {
     const { workspaces, adminWorkspaces } = useWorkspaceContext()
     const { logout } = useAuthContext()
     const [workspacesFiltrados, setWorkspacesFiltrados] = useState(workspaces)
@@ -37,7 +37,10 @@ const SelectorWorkspace = ({ ws }) => {
                     Bienvenido a Slack!
                 </h1>
                 <FiltrarArray setArrayFiltrado={setWorkspacesFiltrados} array={workspaces} className={'filtro'} />
-                <ListaWorkspacesPreview workspacesFiltrados={workspacesFiltrados} workspaces={ws ? ws : workspaces} />
+                {
+                    hide ? <ListaWorkspacesPreview workspacesFiltrados={[]} workspaces={[]} /> :
+                        <ListaWorkspacesPreview workspacesFiltrados={workspacesFiltrados} workspaces={workspaces} />
+                }
                 <footer className={'SW_footer ' + movement}>
                     <button onClick={handleMovement} className='desplazar' style={{ display: displayButton }}>
                         Menu

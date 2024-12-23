@@ -7,7 +7,7 @@ import FormDivProps from '../../Utils/CustomFormData'
 
 const RegisterScreen = () => {
     const { customFetch } = useFetch()
-    const { showModal, handleBackground } = useModalContext()
+    const { showModal, handleBackground, checkFields } = useModalContext()
 
     const navigate = useNavigate()
 
@@ -17,50 +17,54 @@ const RegisterScreen = () => {
             new FormDivProps('name', <span>Nombre: <i className='italic'>(mayor a 5 caracteres)</i></span>).build(),
             new FormDivProps('email', 'Email:', 'email').build(),
             new FormDivProps('password', <span>Contraseña: <i className='italic'>(mayor a 7 caracteres)</i></span>, 'password').build(),
-            new FormDivProps('passwordRepeat', 'Repita su password:', 'password').build()
+            new FormDivProps('passwordRepeat', 'Repita su contraseña:', 'password').build()
         ]
     }
 
-const registerAction = async (formState) => {
-
-    if (formState.password !== formState.passwordRepeat) {
+    const registerAction = async (formState) => {
         handleBackground()
-        return showModal({
-            message: 'Las contraseñas no coinciden.',
-            type: 'error'
-        })
-    }
-    handleBackground()
-    const serverResponse = await customFetch('/api/auth/register', 'POST', formState)
+        const validateFields = checkFields(formState)
+        if (validateFields?.error) {
+            return validateFields.showModal()
+        }
 
-    serverResponse.ok ?
-        showModal({
-            message: serverResponse.message,
-            type: 'success'/* ,
+        if (formState.password !== formState.passwordRepeat) {
+            return showModal({
+                message: 'Las contraseñas no coinciden.',
+                type: 'error'
+            })
+        }
+        const serverResponse = await customFetch('/api/auth/register', 'POST', formState)
+
+        serverResponse.ok ?
+            showModal({
+                message: serverResponse.message,
+                type: 'success'/* ,
             execute: () => navigate('/login') */
-        }) :
-        showModal({
-            message: serverResponse.message,
-            type: 'error'
-        })
-    return
-}
+            }) :
+            showModal({
+                message: serverResponse.message,
+                type: 'error'
+            })
+        return
+    }
 
-const initialFormState = {
-    email: '',
-    password: '',
-    passwordRepeat: ''
-}
+    const initialFormState = {
+        name: '',
+        email: '',
+        password: '',
+        passwordRepeat: ''
+    }
 
 
-return (
-    <Form formData={formData} initialFormState={initialFormState} action={registerAction}>
-        <div className='childrenDiv'>
-            <button>Registrarme</button>
-            <NavLink to={'/login'}>Ya tengo cuenta</NavLink>
-        </div>
-    </Form>
-)
+    return (
+        <Form formData={formData} initialFormState={initialFormState} action={registerAction}>
+            <div className='childrenDiv'>
+                <button>Registrarme</button>
+                <NavLink to={'/login'}>Ya tengo cuenta</NavLink>
+            </div>
+        </Form>
+    )
 }
 
 export default RegisterScreen
