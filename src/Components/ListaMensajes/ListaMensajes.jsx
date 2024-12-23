@@ -47,7 +47,6 @@ const ListaMensajes = ({ idCanal, textoFiltro }) => {
             {
                 messages ?
                     messages.map((mensaje, index) => {
-                        console.log(mensaje)
                         return (
                             <Mensaje mensaje={mensaje} key={index} textoFiltro={textoFiltro} handleDeleteMessage={handleDeleteMessage} />
                         )
