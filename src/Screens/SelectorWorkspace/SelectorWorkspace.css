@@ -105,7 +105,11 @@
 }
 
 .SW_footer .desplazar{
+    border: 2px solid black;
     padding: 5px;
+    background-color: burlywood;
+    border-radius: 70px;
+    box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.582);
 }
 
 
