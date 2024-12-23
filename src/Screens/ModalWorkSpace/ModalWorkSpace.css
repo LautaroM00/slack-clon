@@ -1,9 +1,9 @@
 .contenedorCW {
-    background-color: rgba(0, 0, 0, 0.941);
+    background-color: rgba(0, 0, 0, 0.901);
     width: 100vw;
     height: 100vh;
     position: absolute;
-    z-index: 1000;
+    z-index: 0;
     flex-direction: column;
     display: flex;
     align-items: center;

@@ -13,7 +13,7 @@ const MensajeForm = () => {
     const { channels, setChannels } = useChannelContext()
     const { messages, setMessages, getMessages } = useMessagesContext()
     const { customFetch } = useFetch()
-    const { idCanal } = useParams()
+    const { idCanal, workspaceName } = useParams()
     const { showModal } = useModalContext()
 
     const handleSubmit = async (e) => {
@@ -22,7 +22,7 @@ const MensajeForm = () => {
         const textoMensaje = e.target[0].value.trim()
         e.target[0].value = ''
         if (textoMensaje && textoMensaje.length < 2000) {
-            const serverResponse = await customFetch(`/api/message/${idCanal}`, 'POST', { content: textoMensaje })
+            const serverResponse = await customFetch(`/api/message/${workspaceName}/${idCanal}`, 'POST', { content: textoMensaje })
 
             if (serverResponse.ok) {
                 const lastMessage = await getMessages('last', idCanal)

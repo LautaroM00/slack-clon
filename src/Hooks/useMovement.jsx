@@ -5,15 +5,6 @@ const useMovement = () => {
     const [movement, setMovement] = useState(' closed')
     const [displayButton, setDisplayButton] = useState('')
 
-    
-    useEffect(() => {
-        if (window.innerWidth > 1600) {
-            setDisplayButton('none')
-        }
-    },
-    []
-)
-
     const handleMovement = () => {
         
         movement === ' closed' && setMovement(' entrar')

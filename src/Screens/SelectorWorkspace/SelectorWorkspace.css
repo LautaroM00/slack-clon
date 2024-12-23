@@ -103,7 +103,7 @@
     -1px 1px 0 #000;
 }
 
-.desplazar{
+.SW_footer .desplazar{
     padding: 5px;
 }
 
@@ -139,6 +139,9 @@
     }
 
     .desplazar{
+        position: absolute;
+        z-index: -1;
+        user-select: none;
         width: 0;
         border: 0;
         background-color: transparent;
@@ -173,6 +176,7 @@
 
     .SW_footer .desplazar{
         position: absolute;
+        z-index: 2000;
         right: -50px;
     }
 
