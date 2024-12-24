@@ -56,10 +56,10 @@ const LoginScreen = () => {
         <Form formData={formData} initialFormState={initialFormState} action={loginAction}>
             <div className='childrenDiv'>
                 <button>Iniciar sesión</button>
-                <span style={{color: '#00000041'}}>
-{/*                     Si quiere probar la aplicación sin loguearse use las siguientes credenciales:
+                <span style={{ color: '#00000041' }}>
+                    Si quiere probar la aplicación sin loguearse use las siguientes credenciales:
                     <p>Email: <i>usuario@test.com</i></p>
-                    <p>Contraseña: <i>invitado</i></p> */}
+                    <p>Contraseña: <i>invitado</i></p>
                 </span>
                 <NavLink to={'/register'}>Registrarme</NavLink>
                 <NavLink to={'/forgot-password'}>Olvidé mi contraseña</NavLink>
