@@ -13,7 +13,7 @@
     z-index: 20000;
     top: 30px;
     transform: translateY(-130%);
-    animation: slideIn 1s forwards;
+    animation: slideIn 0.2s forwards;
     display: flex;
     align-items: center;
     padding: 20px;

@@ -180,9 +180,19 @@
     }
 
     .SW_footer .desplazar{
+        font-size: 25px;
+        color: white;
+        text-shadow: 
+        1px 1px 0 #000, 
+        -1px -1px 0 #000,  
+        1px -1px 0 #000, 
+        -1px 1px 0 #000;
+        width: 100px;
+        height: 50px;
         position: absolute;
         z-index: 2000;
-        right: -50px;
+        top: 80px;
+        right: -110px;
     }
 
     .SW_footer .buttonWS.logout{
@@ -198,6 +208,16 @@
 @media (min-width: 800px){
     .SW_main h1{
         font-size: 5em;
+    }
+}
+
+@media (max-width: 800px){
+    .SW_footer .desplazar{
+        top: 50px;
+        width: 70px;
+        height: 30px;
+        font-size: 15px;
+        right: -80px;   
     }
 }
 
@@ -227,7 +247,9 @@
         }
     }
     .SW_footer .desplazar{
-        bottom: -35px;
+        top: auto;
+        height: 40px;
+        bottom: -45px;
         right: 10px;
     }
 
