@@ -22,18 +22,14 @@ const WorkspacePreview = ({ name, thumbnail }) => {
 
             if (serverResponse.ok) {
                 const newWorkspaces = workspaces.filter((workspace) => workspace.name !== name)
+                const newAdminWorkspaces = newWorkspaces.filter((workspace) => workspace.role === 'admin')
                 setWorkspaces(newWorkspaces)
-                setAdminWorkspaces(newWorkspaces)
-                newWorkspaces.length === 0 ?
-                    showModal({
-                        message: serverResponse.message,
-                        type: 'success',
-                        execute: navigate('/')
-                    }) :
-                    showModal({
-                        message: serverResponse.message,
-                        type: 'success'
-                    })
+                setAdminWorkspaces(newAdminWorkspaces)
+                showModal({
+                    message: serverResponse.message,
+                    type: 'success'
+                })
+                navigate('/')
                 return
             } else {
                 return showModal({
@@ -59,9 +55,9 @@ const WorkspacePreview = ({ name, thumbnail }) => {
             const serverResponse = await customFetch(`/api/workspace/member/${name}/${formState.email}`, 'DELETE')
 
             return serverResponse
-        }else{
+        } else {
             showModal({
-                message:'Debe ingresar un email válido',
+                message: 'Debe ingresar un email válido',
                 type: 'error'
             })
         }
