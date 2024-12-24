@@ -105,6 +105,7 @@
 }
 
 .SW_footer .desplazar{
+    z-index: -1;
     border: 2px solid black;
     padding: 5px;
     background-color: burlywood;
