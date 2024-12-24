@@ -3,7 +3,7 @@
     width: 100vw;
     height: 100vh;
     position: absolute;
-    z-index: 0;
+    z-index: 1;
     flex-direction: column;
     display: flex;
     align-items: center;

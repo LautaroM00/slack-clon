@@ -145,7 +145,7 @@
 
     .desplazar{
         position: absolute;
-        z-index: -1;
+
         user-select: none;
         width: 0;
         border: 0;
@@ -161,6 +161,7 @@
         height: 100vh;
         flex-direction: column;
         position: absolute;
+        z-index: 20;
         left: 0px;
         background-color: rgba(0, 0, 0, 0.974);
         border-radius: 0 30px 30px 0;
