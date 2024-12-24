@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { NavLink, useNavigate, useParams } from 'react-router-dom'
 
 import SelectorWorkspace from '../SelectorWorkspace/SelectorWorkspace'
@@ -105,10 +105,6 @@ const ModalWorkSpace = () => {
             setConditions(errors)
         }
     }
-
-    useEffect(() => {
-        setWorkspacesFiltrados(adminWorkspaces)
-    },[workspaces])
 
 
     return (
