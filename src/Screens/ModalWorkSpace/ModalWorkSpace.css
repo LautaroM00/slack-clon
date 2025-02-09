@@ -1,7 +1,7 @@
 .contenedorCW {
     background-color: rgba(0, 0, 0, 0.901);
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     position: absolute;
     z-index: 1;
     flex-direction: column;

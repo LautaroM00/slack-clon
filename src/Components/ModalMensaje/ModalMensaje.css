@@ -1,6 +1,6 @@
 .modalBackground {
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     position: absolute;
     z-index: 20000;
     display: flex;
@@ -53,7 +53,7 @@
     position: absolute;
     z-index: 1900;
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
 }
 
 .modalBackground .container.hide {
